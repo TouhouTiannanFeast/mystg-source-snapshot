@@ -65,7 +65,14 @@ local function begin(b,r,k)
   b.active[#b.active+1]={kind=k,age=0,n=r.i,count=r.j,r=resolve(b,r.r),s=r.s>-999 and r.s or b.speed}
  elseif k=='step' then error('step transform is outside selected source')
  elseif k=='boost' then b.active[#b.active+1]={kind=k,age=0,n=16}
- elseif k=='bounce' or k=='bounceNoBottom' or k=='wrap' then b.active[#b.active+1]={kind=k,age=0,count=r.i,mask=r.j,r=r.r}
+ elseif k=='bounce' or k=='bounceNoBottom' or k=='wrap' then
+  if b.laser and b.laser.nativeLine and k~='wrap' then
+   -- Native line-laser templates consume a reflection at activation; reflected
+   -- children copy the reduced template, preventing a second unintended bounce.
+   if r.i<=0 then return end
+   r.i=r.i-1
+   b.active[#b.active+1]={kind=k,age=0,count=1,r=r.r>=0 and r.r or b.speed,nativeLine=true}
+  else b.active[#b.active+1]={kind=k,age=0,count=r.i,mask=r.j,r=r.r} end
  else error('unimplemented transform '..k) end
 end
 function R.projectileStep(b)
@@ -100,6 +107,23 @@ function R.projectileStep(b)
   elseif k=='wait' then keep=s.age<s.n
   elseif k=='boost' then if s.age<=s.n then velocity(b,b.speed+5-s.age*0.3125) else keep=false end
   elseif k=='bounce' or k=='bounceNoBottom' or k=='wrap' then
+   if s.nativeLine then
+    -- TH10 type-0 reflection tests the leading tip, not the moving tail.
+    local hx=b.x+math.cos(b.angle)*b.laser.length
+    local hy=b.y+math.sin(b.angle)*b.laser.length
+    local hitX=hx< -192 or hx>=192
+    local hitY=hy<0 or (k=='bounce' and hy>=448)
+    if hitX or hitY then
+     local function reflect(angle)
+      local l=R.copy(b.laser);l.length=l.initial
+      R.fire({group=b.group,x=hx,y=hy},{typ=b.typ,color=b.color,angle=angle,speed=s.r,speed2=s.r,n=1,layers=1,aim=1,laser=l,ex=b.ex})
+     end
+     if hitX then reflect(R.rad(-b.angle-math.pi)) end
+     if hitY then reflect(-b.angle) end
+     -- The incoming segment retains its direction and exits naturally.
+     keep=false
+    end
+   else
    local hitX=(b.x<=-192 and b.vx<0) or (b.x>=192 and b.vx>0)
    local hitY=(b.y<=0 and b.vy<0) or (k~='bounceNoBottom' and b.y>=448 and b.vy>0)
    if b.group~='th10' then
@@ -109,15 +133,29 @@ function R.projectileStep(b)
    end
    if hitX or hitY then
     if k=='wrap' then if hitX then b.x=-b.x end;if hitY then b.y=448-b.y end
-    else if hitX then b.vx=-b.vx end;if hitY then b.vy=-b.vy end;b.angle=math.atan2(b.vy,b.vx);if s.r and s.r>-990 then b.speed=s.r;velocity(b) end end
+    else
+     -- Native reflection mirrors the distance past the wall as well as velocity.
+     -- Otherwise a circle's needles accumulate different boundary delays.
+     local mirror=not b.laser and (b.group=='th10' or b.group=='dsc')
+     if hitX then if mirror then b.x=(b.x<0 and -384 or 384)-b.x end;b.vx=-b.vx end
+     if hitY then if mirror then b.y=(b.y<0 and 0 or 896)-b.y end;b.vy=-b.vy end
+     b.angle=math.atan2(b.vy,b.vx)
+     if s.r and s.r>-990 then b.speed=s.r;velocity(b) end
+    end
     s.count=s.count-1;if s.count<=0 then keep=false end
+   end
    end
   end
   s.age=s.age+1;if keep then active[#active+1]=s end
  end
  b.active=active
  local scale=b.birth and b.age<b.birth and 0.5 or 1
- b.x,b.y=b.x+b.vx*scale,b.y+b.vy*scale
+ if b.laser and b.laser.nativeLine and b.laser.length<b.laser.max then
+  -- Native0x41D4CF: grow first from the fixed origin; move the tail only
+  -- after maximum length is reached. Growth uses source speed, not its
+  -- temporary deceleration vector (Seven Stones/Woods starts at y=0).
+  b.laser.length=math.min(b.laser.max,b.laser.length+b.speed)
+ else b.x,b.y=b.x+b.vx*scale,b.y+b.vy*scale end
  b.age=b.age+1;b.cull=b.cull-1;b.collidable=not b.birth or b.age>=b.birth
  local w,h=16,16
  if b.group=='th10' and Suwako5Art and Suwako5Art[b.typ] then local v=Suwako5Art[b.typ][b.color] or Suwako5Art[b.typ][0];if v then w,h=v.w/2,v.h/2 end

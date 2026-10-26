@@ -140,6 +140,11 @@ function R.command(a,e,k,v)
   if a.group=='th10' then
    local p={typ=v[1],color=v[2],angle=v[3],speed=v[4],n=1,layers=1,aim=1,ox=0,oy=0,dist=v[5],ex={}}
    p.laser={length=v[6],max=v[6],width=v[8]}
+   -- Type-0 native line semantics are enabled only for the two reported cards.
+   if R.spec.id=='th10-card2' or R.spec.id=='th10-card6' then
+    p.dist=0
+    p.laser={nativeLine=true,initial=v[5],length=v[5],max=v[6],terminal=v[7],width=v[8]}
+   end
    if k=='laserOn3' or k=='laserOnA2' then p.ex=R.copy(pat(a,0).ex) end
    R.fire(a,p)
   else R.fire(a,pat(a,v[1])) end

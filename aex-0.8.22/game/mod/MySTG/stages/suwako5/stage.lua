@@ -3,6 +3,7 @@ local R,P=Suwako5Runtime,Suwako5Pool
 local S={owned={},finished=false,phase=0}
 Suwako5Stage=S
 local prefix='stages/suwako5/'
+Include(prefix..'laser-art.lua')
 local loaded={}
 for _,colors in pairs(Suwako5Art) do for _,v in pairs(colors) do
  if not loaded[v.image] then
@@ -14,6 +15,13 @@ for _,part in ipairs({'core','glow'}) do
  local name='suwako5.ds-bomb-'..part
  LoadTexture(name,prefix..'art/ds-bomb-'..part..'.png');LoadImage(name,name,0,0,254,254)
 end
+-- Load the original beam sprites independently of the engine laser palette.
+for _,types in pairs(Suwako5LaserArt) do for _,colors in pairs(types) do for _,v in pairs(colors) do
+ if not loaded[v.image] then
+  LoadTexture(v.image,prefix..'art/'..v.image:sub(9)..'.png')
+  LoadImage(v.image,v.image,0,0,v.w,v.h);loaded[v.image]=true
+ end
+end end end
 local function own(o)S.owned[o]=true;return o end
 local function clean()
  R.clearHazards(false)
@@ -90,8 +98,22 @@ end
 function NativeLaser:frame()
  local b=self.data;if b.dead then Del(self);return end
  self.x,self.y,self.rot=b.x,224-b.y,-b.angle*180/math.pi
- self.l2=b.laser.length;self.colli=b.collidable~=false
+ self.l2=b.laser.length;self.colli=b.collidable~=false and self.l2>0
  laser.frame(self)
+end
+function NativeLaser:render()
+ local b=self.data
+ local group=b.group=='th10' and 'th10' or b.group:sub(1,2)=='ds' and 'ds' or nil
+ local types=group and Suwako5LaserArt[group]
+ local colors=types and types[b.typ];local art=colors and colors[b.color]
+ assert(art,'unmapped source laser sprite '..tostring(b.group)..'/'..tostring(b.typ)..'/'..tostring(b.color))
+ if self.w>0 then
+  local length=self.l1+self.l2+self.l3
+  local angle=self.rot*math.pi/180
+  SetImageState(art.image,'',Color(self._a*self.alpha,255,255,255))
+  -- The source sprite's long axis is local Y; stretch that axis into the beam.
+  Render(art.image,self.x+length*0.5*math.cos(angle),self.y+length*0.5*math.sin(angle),self.rot-90,self.w/art.w,length/art.h)
+ end
 end
 function NativeLaser:del()S.owned[self]=nil end
 function NativeLaser:kill()self.data.dead=true;S.owned[self]=nil end
@@ -133,29 +155,70 @@ end
 local Suwako=Class(boss)
 function Suwako:init(phases)
  local cards={};for i,spec in ipairs(phases) do cards[i]=card(spec,i) end
- boss.init(self,0,112,'Suwako Moriya',cards,nil,'Normal');self.a,self.b=24,24
+ boss.init(self,0,112,'Suwako Moriya',cards,nil,'Normal');self.a,self.b=24,24;self.sourceModel=Th18Stage5Host.newSuwako()
 end
+function Suwako:frame()boss.frame(self);Th18Stage5Host.stepSuwako(self.sourceModel,self.x)end
 function Suwako:render()
- self._bosssys:render();Render('enemy7_'..(math.floor(self.ani/8)%4+1),self.x,self.y,0,1.3,1.3)
+ self._bosssys:render();Th18Stage5Host.renderSuwako(self.sourceModel,self.x,self.y)
 end
-local stageName='Stage 5 Suwako@Normal'
+local immunePlayer,immuneCollision
+local function restoreCollision()
+ if immunePlayer and IsValid(immunePlayer) then immunePlayer.colli=immuneCollision end
+ immunePlayer=nil
+end
+local stageName='Stage 5 Suwako@Normal' 
 stage.group.AddStage('Normal',stageName,{lifeleft=4,power=400,bomb=3},true)
 stage.group.DefStageFunc(stageName,'init',function(s)
  S.finished=false;S.phase=0
  S.seed=tonumber(setting.suwako5_seed) or ran:Int(1,2147483646)
  local phases
  if setting.suwako5_test_plan then phases={};for _,id in ipairs(setting.suwako5_test_plan) do phases[#phases+1]=P.find(id) end
- elseif setting.suwako5_practice then phases={P.find(setting.suwako5_practice)} else phases=P.draw(S.seed,4) end
+ elseif setting.suwako5_practice then phases=P.practice(setting.suwako5_practice,setting.suwako5_continue) else phases=P.draw(S.seed,4) end
  local ids={};for _,p in ipairs(phases) do ids[#ids+1]=p.id end
  print('SUWAKO5 DRAW seed='..S.seed..' '..table.concat(ids,','))
  stage.group.initTask(s,function()
-  New(default_stage_background);task.Wait(60)
+  local H,T,B=Th18Stage5Host,Th18Stage5Runtime,Th18Stage5Background
+  local bg=New(B.Object)
+  local function protection()
+   if setting.suwako5_invincible and IsValid(player)then
+    if immunePlayer~=player then restoreCollision();immunePlayer=player;immuneCollision=player.colli end
+    player.colli=false
+   end
+   if setting.suwako5_test and IsValid(player)then player.protect=1000 end
+  end
+  local function routeStep()
+   H.step();protection()
+   if setting.th18_stage5_test then
+    for _,a in ipairs(T.actors)do if not a.dead and not a.controller and a.age>=(a.name=='Cir03' and 300 or 120)and not a.midboss then a.hp=0 end end
+    if T.midboss and T.midboss.age>=(setting.th18_stage5_test_midboss or 700)and not T.midboss.ending then T.interrupt(T.midboss,setting.th18_stage5_test_timeout==true)end
+   end
+   task.Wait(1)
+  end
+  if not setting.suwako5_practice and(not setting.suwako5_test_plan or setting.th18_stage5_test)then
+   H.begin(S.seed);S.route=true
+   if setting.th18_stage5_test_skip_front then T.tick=4176;for i=1,4176 do B.step(bg.state)end
+   else T.run('MainFront');while not T.idle()do routeStep()end end
+   T.command(T.controller,{i={},f={}},'enmKillAll',{});T.command(T.controller,{i={},f={}},'etClear',{640})
+   T.command(T.controller,{i={},f={}},'enmCreateA',{'MBoss',-192,-32,40,0,1})
+   for i=1,160 do routeStep()end
+   T.run('MainLatter');while not T.idle()do routeStep()end
+   H.finishRoute();for i=1,120 do routeStep()end;S.route=false
+  else task.Wait(60)end
+  if not setting.th18_stage5_test_scenery then B.interrupt(bg.state,1)end
   local b=New(Suwako,phases)
-  while IsValid(b) do if setting.suwako5_test and IsValid(player) then player.protect=1000 end;task.Wait(1) end
+  while IsValid(b) do
+   if setting.suwako5_invincible and IsValid(player) then
+    if immunePlayer~=player then restoreCollision();immunePlayer=player;immuneCollision=player.colli end
+    player.colli=false
+   end
+   if setting.suwako5_test and IsValid(player) then player.protect=1000 end
+   task.Wait(1)
+  end
+  restoreCollision()
   clean();S.finished=true;print('SUWAKO5 COMPLETE phases='..#phases);task.Wait(120)
  end)
 end)
-stage.group.DefStageFunc(stageName,'del',clean)
+stage.group.DefStageFunc(stageName,'del',function()restoreCollision();clean();Th18Stage5Host.cleanup()end)
 if setting.suwako5_autostart then
  stage_init.frame=function(s)
   if s.timer==30 then
@@ -171,7 +234,23 @@ if setting.suwako5_test then
  local oldRender=RenderFunc;local captured={}
  RenderFunc=function()
   oldRender()
-  if S.current and R.tick>(setting.suwako5_test_progress and 650 or 200) and not captured[S.current] then
+  if setting.th18_stage5_test_scenery and Th18Stage5Background.current then
+   local age=Th18Stage5Background.current.state.age
+   for _,frame in ipairs({180,3100,4300,6000})do local key='scenery-'..frame;if age>=frame and not captured[key]then captured[key]=true;local path='userdata/snapshot/th18s5-'..key..'.jpg';lstg.Snapshot(path);print('TH18S5 SNAPSHOT '..path)end end
+  end
+  if S.route and setting.th18_stage5_test then
+   for _,frame in ipairs(setting.th18_stage5_test_snapshots or {})do
+    local key='route-'..frame;if(not setting.th18_stage5_test_skip_front or frame>=4176)and Th18Stage5Runtime.tick>=frame and not captured[key]then captured[key]=true;local path='userdata/snapshot/th18s5-'..key..'.jpg';lstg.Snapshot(path);print('TH18S5 SNAPSHOT '..path)end
+   end
+  end
+  for _,frame in ipairs(setting.suwako5_test_snapshot_frames or {}) do
+   local key=tostring(S.current)..'-'..frame
+   if S.current and R.tick>=frame and not captured[key] then
+    captured[key]=true;local path='userdata/snapshot/suwako5-'..S.current..'-'..frame..'.jpg'
+    lstg.Snapshot(path);print('SUWAKO5 SNAPSHOT '..path)
+   end
+  end
+  if S.current and R.tick>(tonumber(setting.suwako5_test_snapshot_frame) or (setting.suwako5_test_progress and 650 or 200)) and not captured[S.current] then
    captured[S.current]=true;local path='userdata/snapshot/suwako5-'..S.current..'.jpg';lstg.Snapshot(path);print('SUWAKO5 SNAPSHOT '..path)
   end
  end

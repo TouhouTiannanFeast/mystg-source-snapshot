@@ -66,8 +66,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/root.lua",
-    "bytes": 822,
-    "sha256": "a9cad10495271ad5e75235ff9ed0c16b9d25d9efe8ef35969b6862d1391d46f2"
+    "bytes": 1294,
+    "sha256": "e858a102cb27387b2777547803387a0004a42d79c40a7bb79f6446682429d1a5"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/normal.lua",
@@ -80,9 +80,14 @@
     "sha256": "b4d59b6a36980a69ba114e3c7e485d7893069ebee3fd318d6a8b198f1a8f88c8"
   },
   {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/laser-art.lua",
+    "bytes": 1903,
+    "sha256": "76de9666e3d3bad4fe50c2e7ba3247c7dd66c1cca9440b225a24d20788393670"
+  },
+  {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/pool.lua",
-    "bytes": 2861,
-    "sha256": "ca5efec6454ccb92356a2e395dcb7a61d75683e4576ae81b4cc0824a41524bc3"
+    "bytes": 3332,
+    "sha256": "88b1c5b135ab7017657affd2a6a02f23c23e38f271a0dd6b9c74d45c465c3413"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/programs.lua",
@@ -91,18 +96,23 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/projectiles.lua",
-    "bytes": 7345,
-    "sha256": "7652f2b9c15ae0980f78751007ba4f440360abfcf2cfabff9c84a0721bc8ecd7"
+    "bytes": 9326,
+    "sha256": "2a5ac49790eec9230d1f0f326a0a3254777e073e594ff79d0494423436fde4da"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/README.md",
+    "bytes": 11718,
+    "sha256": "7b60fa1f2c7b7cb8f8955aebea21da7f87b60ad587cc42b4607260fe5c06d68d"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/runtime.lua",
-    "bytes": 11442,
-    "sha256": "0f41f0d867b52f6b169b072f3d32942d22fdf26f923825e70d43c5e65282f5d3"
+    "bytes": 11900,
+    "sha256": "2ab774ad829da6b0dd0e32a83b7a6e8da718e66cf5bad547c91034adf6dd822e"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/stage.lua",
-    "bytes": 8287,
-    "sha256": "ae33982d8735adaf7066bce9385e4c1e554afebdfe3fa0fde0ef8dace3faa6ab"
+    "bytes": 12988,
+    "sha256": "43550346e9561661b465e8f230f8f2be589f519c8b67f237a22679c42cd109e6"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/boss.lua",
@@ -128,6 +138,81 @@
     "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/stage.lua",
     "bytes": 3779,
     "sha256": "5209aa9d8abb93545612390906b1caf24b6a3d2eaead25a58441e0548868d934"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/anm.lua",
+    "bytes": 6549,
+    "sha256": "1cfcc02c4e4479842f9feca504bf72c16c2ade6e467a8b88a2fd8f6a9276fbbf"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/background.lua",
+    "bytes": 5400,
+    "sha256": "7c10033d3dfd3b8fe074b339785c614f9a4a046cdb4355ccaf469da92a5d546b"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/collision-probe.lua",
+    "bytes": 1639,
+    "sha256": "c948e0ec6d8fb36ff3413c2f7672a78949b26bd125a69e865397820ed9e200f6"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/data.lua",
+    "bytes": 61758,
+    "sha256": "d005cc11e27be6b937d165c1b9e865b8afc78bc579554e65387e8fca62691cb3"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/host.lua",
+    "bytes": 8851,
+    "sha256": "941077fe01ff2683258e3bb71568772b5bb8129b2a1c65fbe565051f23c79e45"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/programs.lua",
+    "bytes": 48171,
+    "sha256": "f689b71de9474c110239220bab0dc75aacc0f90de3651bb913c0d2cbdae55e2a"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/projectiles.lua",
+    "bytes": 9530,
+    "sha256": "b25f29523f0047b5f84ad72cc6e9a5379570242cf6ff3456b4347fb3c72f6e1f"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/README.md",
+    "bytes": 5043,
+    "sha256": "562e6c6abfdc68b294893bf38a78ed74ef0afff581596f88301ed7143595babf"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/route.lua",
+    "bytes": 7392,
+    "sha256": "687debf9b913f435e0b6bc9ffb05da96fa07f784e7a31b1ecb8b60279b5115f4"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/runtime.lua",
+    "bytes": 11994,
+    "sha256": "461e06c87610093783ca1f415b2d01c7972794e9650dd2727760f3a028179707"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/systems/README.md",
+    "bytes": 1759,
+    "sha256": "89c79f038459ac3b1c9a3608c571b31df46e3fd5d5c136fbab530816282cc3c9"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/systems/resource-config.lua",
+    "bytes": 328,
+    "sha256": "8a046c5414ac5cd72a3237ed8c169258ae476e3eae8c4effcb8af77f7a2d00f7"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/systems/resource-probe.lua",
+    "bytes": 1167,
+    "sha256": "fdb232109c6f7660bd4177698198b2a2428952b11696803a98383b6f8b98377c"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/systems/resource-ui.lua",
+    "bytes": 7473,
+    "sha256": "7c5f26c180937dc522b969bbd6c74ece29c75092656eb2bc76c7ad058d59a1a2"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/systems/resources.lua",
+    "bytes": 3665,
+    "sha256": "c8fcbda10182f444ad127add48ac7296b165d01225bd282f50ebb9fda7e6314e"
   },
   {
     "path": "aex-0.8.22/game/mod/MystiaAyaNon3/pattern.lua",
@@ -795,6 +880,11 @@
     "sha256": "c7de0623d8fc2e19da496929d4b04c1ddf2da9bb4864101d47882f68f6b50e4d"
   },
   {
+    "path": "scripts/resources/verify.py",
+    "bytes": 2823,
+    "sha256": "c73b2c24ec6a547935dee0570eb1bf26555cec713feb9b522219eb3beb0133fc"
+  },
+  {
     "path": "scripts/royal-flare/import-fire.py",
     "bytes": 1600,
     "sha256": "38b2022b6867b103b80acdb26f22a03241097d1cd6a96eefc1647d51fd50a142"
@@ -945,6 +1035,41 @@
     "sha256": "c3d2730e45fde49a8a60f44be5bf18a3a3b78c26213db92ae7f1f016389036a0"
   },
   {
+    "path": "scripts/stage5/build-assets.py",
+    "bytes": 6044,
+    "sha256": "576131e06c71f72193701ea085d190732ec9e6e06651285b866181ff03421a66"
+  },
+  {
+    "path": "scripts/stage5/build-route.py",
+    "bytes": 2783,
+    "sha256": "b2762fb78184df8d6ca0d82a4e236cbb495d121cfa40f6ee74a46d2f4b926bb2"
+  },
+  {
+    "path": "scripts/stage5/native-items.py",
+    "bytes": 690,
+    "sha256": "0f61048402f97b967b3586dada2b485c95ec5d63808e2ba3457a295f17677a7a"
+  },
+  {
+    "path": "scripts/stage5/verify-collision.ps1",
+    "bytes": 1618,
+    "sha256": "62ee1ff6a29ef51ce80769bb0eb34bf01d045e899058a76161e723d223d56517"
+  },
+  {
+    "path": "scripts/stage5/verify-native.ps1",
+    "bytes": 2268,
+    "sha256": "1b709837613841b6e23f50897e8575a32d7209d536242700c718492266289a92"
+  },
+  {
+    "path": "scripts/stage5/verify-resources.py",
+    "bytes": 3383,
+    "sha256": "0a2222344dae13fa2f8dfb6b5a3bd82abe0784f287c24b4492cf2bd2c8cb1b3d"
+  },
+  {
+    "path": "scripts/stage5/verify-source.py",
+    "bytes": 3265,
+    "sha256": "45cdd2c916177a1f32499f95dd11c6a3b3c61c32802443b9cf7c5ddb5732dc1f"
+  },
+  {
     "path": "scripts/suwako5/assets.py",
     "bytes": 3266,
     "sha256": "b3ae6418dc7471965992b29d7005a6f1cafe671b733abd3509c2ab575a818f20"
@@ -955,14 +1080,34 @@
     "sha256": "0a0b1f033d41daae179f1712903c9f33b5e687403b878f10c6115d2b045b8733"
   },
   {
+    "path": "scripts/suwako5/laser-assets.py",
+    "bytes": 3281,
+    "sha256": "ba64461f3676eef09afdc39297e24f4aee2ae743e90d6d63afc1038e8c3bc9be"
+  },
+  {
     "path": "scripts/suwako5/practice-catalog.json",
-    "bytes": 3311,
-    "sha256": "086f6b87e7bae3fe905e24a10e8b2f6f6f7a07bc4431cc6ae317fd1c923cc703"
+    "bytes": 3234,
+    "sha256": "91cdc2e6c8e05b409cd1bea6e6c3a9fdd7ae0c6b0583fd9b87dbee8c49999899"
   },
   {
     "path": "scripts/suwako5/source_audit.py",
     "bytes": 2099,
     "sha256": "6768d3c5bc1bdd203d3c230c6782964e6d9263e07df8c964c4cb7af839e79c45"
+  },
+  {
+    "path": "scripts/suwako5/trace-card2.py",
+    "bytes": 3915,
+    "sha256": "98d9ea56856061312f6e6a58cdaf672ff399a65238619de919a55c8d4be716bf"
+  },
+  {
+    "path": "scripts/suwako5/verify-bounce-laser.py",
+    "bytes": 4032,
+    "sha256": "134f8c2bf259c894feee2c0b6fb83a4f9cf625d6b26bfd89209c4b232d612dfe"
+  },
+  {
+    "path": "scripts/suwako5/verify-laser-position.py",
+    "bytes": 3569,
+    "sha256": "3231d2f77bce96cc39910c15e026e94ca401a01514293210f992d5c2d6a81b23"
   },
   {
     "path": "scripts/suwako5/verify-native.ps1",
