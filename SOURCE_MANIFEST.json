@@ -1,0 +1,1292 @@
+[
+  {
+    "path": "aex-0.8.22/game/mod/DeepSeekAbyss/geometry.lua",
+    "bytes": 4342,
+    "sha256": "2c659bb9702d36405470e2eb1617c12f5ae60b37503e31e9958a75423bfb72f7"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/DeepSeekAbyss/root.lua",
+    "bytes": 17706,
+    "sha256": "d321e6c80d5fa05b8bfa8808dc35f28ef7cb6c9da36abd456b2479b3fce9b606"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/DeepSeekCoT/root.lua",
+    "bytes": 5903,
+    "sha256": "cb00b08a572c5df0b9f208244d979966a9a8d8523866a9359ed38ec9e6f0453f"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/DeepSeekCoT/rules.lua",
+    "bytes": 347,
+    "sha256": "d4ccdad8c8d240b0e70e8376df8f1be37610982660fcca6eaba38ba7083753a2"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/DragonSneeze/root.lua",
+    "bytes": 5689,
+    "sha256": "6f47199a2c0a52e1b6982f63a9f5dc9bb324f1a045900e129cd7e8dffe512c3f"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MamizouStage2/assets.lua",
+    "bytes": 4062,
+    "sha256": "a70768be079ec7fd7e853950e3e40b868d9924c99fd377a221260b7c574c31ad"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MamizouStage2/pattern.lua",
+    "bytes": 1821,
+    "sha256": "b80fb668b711a6d7a92ba9e25dce057c3e443edc384adf67bcbfd3a21f46dfac"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MamizouStage2/root.lua",
+    "bytes": 12611,
+    "sha256": "3f58a0824ac30adbcda79d17da66a5977ad595bc3fd90c46f01d28cbba7b8cdd"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MilkHoney/nonspell.lua",
+    "bytes": 5267,
+    "sha256": "55e1b4d648f32d3a033fec2e62255e5b68c70469a9dbba5e7e2ece2898f2a439"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MilkHoney/pattern.lua",
+    "bytes": 2120,
+    "sha256": "43f16ff0ccb9d82efda86e1f094dc5ab6ad324325e03da0591ee4d8eeb3ffcd5"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MilkHoney/root.lua",
+    "bytes": 8006,
+    "sha256": "4e1de632f2bd17f04f7e3770bfb54d2be676e2af4037a17a40c3453b5f98eb41"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MomijiNon1/pattern.lua",
+    "bytes": 919,
+    "sha256": "8e55f3e16796b11462bd493291998a53c057a158f1e12160480ead1039befa3e"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MomijiNon1/root.lua",
+    "bytes": 5010,
+    "sha256": "10501cde269cc68814c33810dc3b9ee5d64219b07f0714c5e01ef8d9d04a04a1"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/root.lua",
+    "bytes": 822,
+    "sha256": "a9cad10495271ad5e75235ff9ed0c16b9d25d9efe8ef35969b6862d1391d46f2"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/normal.lua",
+    "bytes": 1921,
+    "sha256": "8bc4307e781da7bb2ed7fa9c503925b4b4a4a9899b4d0450fa3abe25487a2fe0"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/art.lua",
+    "bytes": 24290,
+    "sha256": "b4d59b6a36980a69ba114e3c7e485d7893069ebee3fd318d6a8b198f1a8f88c8"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/pool.lua",
+    "bytes": 2861,
+    "sha256": "ca5efec6454ccb92356a2e395dcb7a61d75683e4576ae81b4cc0824a41524bc3"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/programs.lua",
+    "bytes": 124914,
+    "sha256": "518535aee89f2407bfc5c9f73946a8d89bc84d7ca8fa9e605baf7ed9b96358fd"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/projectiles.lua",
+    "bytes": 7345,
+    "sha256": "7652f2b9c15ae0980f78751007ba4f440360abfcf2cfabff9c84a0721bc8ecd7"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/runtime.lua",
+    "bytes": 11442,
+    "sha256": "0f41f0d867b52f6b169b072f3d32942d22fdf26f923825e70d43c5e65282f5d3"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/stage.lua",
+    "bytes": 8287,
+    "sha256": "ae33982d8735adaf7066bce9385e4c1e554afebdfe3fa0fde0ef8dace3faa6ab"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/boss.lua",
+    "bytes": 12425,
+    "sha256": "45e7810a70d4e06d64c589a63e5e72b7f206cebb2ad5d26ebfcd90b2a03ac340"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/enemies.lua",
+    "bytes": 3583,
+    "sha256": "b3c1259b4dc5f082cb294513c7e57d5cbcb54416ee6d88ee692bd4ef9374460d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/host.lua",
+    "bytes": 6759,
+    "sha256": "060a7c2fe5cd804920737c4bf04f5c509da87cea1106e467e5e62f8f3477aec1"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/schedule.lua",
+    "bytes": 17191,
+    "sha256": "1ff5331067cdaf1135ce074d3d79583a6f83d666467c1076383eb9d97d0a8a16"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/stage.lua",
+    "bytes": 3779,
+    "sha256": "5209aa9d8abb93545612390906b1caf24b6a3d2eaead25a58441e0548868d934"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MystiaAyaNon3/pattern.lua",
+    "bytes": 947,
+    "sha256": "5452bece15cfca8045f3e278c90200fa98f9308e597ef2b887a14148e4179e2e"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MystiaAyaNon3/root.lua",
+    "bytes": 7777,
+    "sha256": "244debb27efe82d9d8cbc8093b6b70fff8a9a07ccb7e3f6f4223b3f73e06fcbb"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MystiaAyaNon3EasyLarge/pattern.lua",
+    "bytes": 616,
+    "sha256": "1963729d6d3cc326841a1a6ddda23fa7688e331595bd6d9cd801a94c2ee48b49"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MystiaAyaNon3EasyLarge/root.lua",
+    "bytes": 7860,
+    "sha256": "5575e94a5336799cfb6f5eacff2433cdc31fca014a9a528159b5ca0019f5ac09"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MystiaAyaNon3Lunatic/pattern.lua",
+    "bytes": 983,
+    "sha256": "c6d9ec3c5b582dc397aa90a7d36d94bbcd7393d6b4799b084079890fca7ea127"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MystiaAyaNon3Lunatic/root.lua",
+    "bytes": 7875,
+    "sha256": "558cdbc33d46874b764253223835ca9a28d1a28ae42e56917326a016c40a2cb0"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MystiaAyaNon3NormalLarge/pattern.lua",
+    "bytes": 947,
+    "sha256": "5452bece15cfca8045f3e278c90200fa98f9308e597ef2b887a14148e4179e2e"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MystiaAyaNon3NormalLarge/root.lua",
+    "bytes": 7881,
+    "sha256": "56dfd0c730c6fce2faff95e2a5001a3530ba89ca13afdd512a7fd9584f56c13a"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/RoyalFlareFollow/root.lua",
+    "bytes": 12006,
+    "sha256": "04a9fe281e66bbf74275fe506bdb5148404f3f5a6e453753f6e56aa4e79fa198"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/RoyalFlareOrbit/root.lua",
+    "bytes": 12007,
+    "sha256": "8e8ef186618903d6ddf5dec37eb2c4431265548577e72775c97f7fd951969bee"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/animation-data.lua",
+    "bytes": 3659,
+    "sha256": "3fddc5510849237d974cdae47a389cca36a29defc028a38d9fcfc52985e68d02"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/assets.lua",
+    "bytes": 9446,
+    "sha256": "a55e7f7237e4968e49ea074f4a537816ca3c37920d3c39de2e83a27f20973b29"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/background-data.lua",
+    "bytes": 32685,
+    "sha256": "dcd5dbeab6dbd686ab1c95c62ea6f6441bd7ce563e8643b578863f99fb644168"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/background-player.lua",
+    "bytes": 8648,
+    "sha256": "8343205a1596aef2a1ccc9863068e5729a05dc4eab6b5473733c620670e56987"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/background-program.lua",
+    "bytes": 9440,
+    "sha256": "eefc085bafbcccf8b01e67deb04a1526b3d3c05b04678d746bfadf1595a09926"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/background-source-state.lua",
+    "bytes": 2427,
+    "sha256": "d6737c6a39c2a5c055ea193a9a9fa838036a5f4469eae2326221aa628370e9d0"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/background.lua",
+    "bytes": 1649,
+    "sha256": "6f69130b49986c0c37a9b449ddfb56fbaa6b6539163c0fddc1c717dda78d8178"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/balance-probe.lua",
+    "bytes": 1177,
+    "sha256": "cf328fb33b97f88f8b3f45104cb093465396e4d1c33264d0cd02db7ff9601faf"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/character-animation.lua",
+    "bytes": 3081,
+    "sha256": "f192a4f6ae5c816aa022e32516b7db97799765d36a852ce9c0709837a10032fd"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/flare/attack.lua",
+    "bytes": 9744,
+    "sha256": "0716f4c8ec307c5718faf9c891fc14d2b4d7a3346c5e33c21373d72a1aa33f9f"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/magic-assets.lua",
+    "bytes": 1114,
+    "sha256": "08cbf8b6c79e5737fdb7f91fb7c3c03e9488d176caf6b6d3873be880680c2eb2"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/magic.lua",
+    "bytes": 2284,
+    "sha256": "6ad01a2831193538d542fedec429adef9550b19387779afb0e4388a2636fd86d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/mamizou/assets.lua",
+    "bytes": 4286,
+    "sha256": "62df2700180e2f30d237067a565a0aa2381aba26c5318309a8cb787f062dd2f3"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/mamizou/attack.lua",
+    "bytes": 11290,
+    "sha256": "dce6ee0940b99a5e3a4a16c4ba6e83c0956effb355626eb77b8f79572aa4b946"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/mamizou/pattern.lua",
+    "bytes": 1858,
+    "sha256": "3ad8704ebceb34e21aab060190d4da9c887d054569435d69eaf59973999c8119"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/music.lua",
+    "bytes": 1403,
+    "sha256": "f2dffe4662a9e5322d21c1609ae6408266e3a60307bd550a32df8816aaac0ccf"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/mystia/attack.lua",
+    "bytes": 6757,
+    "sha256": "3a8b5fa490fb0472ad0341d8cea599eae0c5259dd5a1900324dc1f6469429aa5"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/mystia/pattern.lua",
+    "bytes": 983,
+    "sha256": "15b3e29dbebb3506ff21238c85bdb270a7891c05a142479d44f6c51502f7b406"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/player-config.lua",
+    "bytes": 335,
+    "sha256": "3f5c097c68fade71db07c34b67b3f5de35d6da31622249bb47f3b61ababe1f53"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/player-data.lua",
+    "bytes": 2111,
+    "sha256": "fda806b4fdbe7821ce24b4435227a595bf7409f05c6ee0a9b3d8171d7466b195"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/player-probe.lua",
+    "bytes": 2492,
+    "sha256": "8404bfe2290bbfe798fbe532bf9fa6352316d9437cb86b2c02775a6c9e44a812"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/player-ui.lua",
+    "bytes": 6616,
+    "sha256": "4c2bd388eda7d4ae5a879aa9258911d7dafe820c0d6c867f4b30227fb3f6bbd4"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/player.lua",
+    "bytes": 4519,
+    "sha256": "172683e52da44b49fbaf04704bb521600c225782e1766a87d00835d1b0fec5bb"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/practice.lua",
+    "bytes": 3239,
+    "sha256": "48e8153b2fc40a9cdd751a8f49eeba590d9cb2eec4b3bcb789e5f714890ebaeb"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/root.lua",
+    "bytes": 3841,
+    "sha256": "e6b52dcc5c1fe9057807b6de7030d95f497ce1bc4b8858d3f93794ed83fe6585"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/route.lua",
+    "bytes": 11478,
+    "sha256": "dbd8c35084372ed598887cd74a529a69f1c7ea9623aa5fd2897f458cfc2c61a1"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/schedule.lua",
+    "bytes": 12118,
+    "sha256": "ad14c9f466a5909fd0b7d6867cf359996772259c6e8729f4afd06ad13f3b7fdb"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/anchor-pattern.lua",
+    "bytes": 1750,
+    "sha256": "cb8155603e383c71fb8b1fff2e4a86f9220e8bd934fc2c7a6ee1e3bf64776ad7"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/anchor.lua",
+    "bytes": 9281,
+    "sha256": "10d3d50c9c9c285a1a2cc6fae85a4fee5b8af1ec3ef837643bbe5594261c8812"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/boss.lua",
+    "bytes": 7034,
+    "sha256": "91855ab271b4b22564c029b4596727b498a695b6a232826f30fafbaefd162b8d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/context-geometry.lua",
+    "bytes": 2690,
+    "sha256": "61a0d47fefb0557372ffbf88b8255feb8ecf95c47b86434c6a4e1749501c9b81"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/context.lua",
+    "bytes": 9350,
+    "sha256": "b47a9d6b4b528ccabd4770a4fdfd425bd916deba13327216578c7dedb309c121"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/enemies.lua",
+    "bytes": 6581,
+    "sha256": "9d686d96ed31b3821241738d984121191f4cecff88c86068ea74d4072a7db82d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/geometry.lua",
+    "bytes": 1058,
+    "sha256": "cf34b95f24bd2b1b1a08452c650795b89da991830cae55dc6ede7daf1db548f2"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/host.lua",
+    "bytes": 4680,
+    "sha256": "1a9fe487b3a8dd8e3bc255a8335971d844df06d4cad48844f072c51e74cf3578"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/momiji-config.lua",
+    "bytes": 125,
+    "sha256": "1ab74c638445ef56330a6fd8b0236fa103b3ddce5239b59403f715c555caab5d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/momiji-pattern.lua",
+    "bytes": 2217,
+    "sha256": "ed48e7040858c7dc19ceb22b2c6699a7bf5b7ad7419b2d32f87685fc630616a9"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/momiji.lua",
+    "bytes": 8712,
+    "sha256": "e273064dac5d7c89041e282a6c51c3e93aba48910552f1011bea3a550091b466"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/stage.lua",
+    "bytes": 4497,
+    "sha256": "6e2f8ff8f5c7b4778c93db15aa216d48317f60cd8ce34b09a3c3200205ba02bc"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/stage2-run.lua",
+    "bytes": 4963,
+    "sha256": "220dfef8a8a2b8ea11dcd8843348cbbd231ccb4616129e90360ba8bf77f5d546"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/tail-waves.lua",
+    "bytes": 1242,
+    "sha256": "5b00a568866115bcfff16e1f18033e1a9369d22d21c0b61d7cdb35924f06abc1"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/unified-assets.lua",
+    "bytes": 20286,
+    "sha256": "f1263e90d9b8f50f53d2184c140c806abab57d0cd5984de4dc26790d6252e095"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/unified-bind.lua",
+    "bytes": 739,
+    "sha256": "93adbfcbef64e3dfe169a6a72ce56d2f1622979fd10cf85a4605d560f64de28f"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/assets.lua",
+    "bytes": 9446,
+    "sha256": "a55e7f7237e4968e49ea074f4a537816ca3c37920d3c39de2e83a27f20973b29"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/flare/attack.lua",
+    "bytes": 9397,
+    "sha256": "174cbafc48606407e96a5c4fc567099dee9eb452cbf1199b36b647a4dc3d7b8e"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/magic-assets.lua",
+    "bytes": 1114,
+    "sha256": "08cbf8b6c79e5737fdb7f91fb7c3c03e9488d176caf6b6d3873be880680c2eb2"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/magic.lua",
+    "bytes": 2284,
+    "sha256": "6ad01a2831193538d542fedec429adef9550b19387779afb0e4388a2636fd86d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/mamizou/assets.lua",
+    "bytes": 4286,
+    "sha256": "62df2700180e2f30d237067a565a0aa2381aba26c5318309a8cb787f062dd2f3"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/mamizou/attack.lua",
+    "bytes": 11178,
+    "sha256": "eea8d9a7afdbef4bb624c0d5e7f4220f71c063144b05d41212d9c034d5ebb206"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/mamizou/pattern.lua",
+    "bytes": 1861,
+    "sha256": "c464c3253ad5826f02a7931dd0481667156aef9605c76d7563a42333960cefbf"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/mystia/attack.lua",
+    "bytes": 6332,
+    "sha256": "9e00241c5586b63a4ca7d916ab580761a5844606ec3f608de319830252a5c9d8"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/mystia/pattern.lua",
+    "bytes": 616,
+    "sha256": "1963729d6d3cc326841a1a6ddda23fa7688e331595bd6d9cd801a94c2ee48b49"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/root.lua",
+    "bytes": 5589,
+    "sha256": "49918bd617a5c424c42765324c4adba14858e2bd79d9e00415910920cf25f6be"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/route.lua",
+    "bytes": 11235,
+    "sha256": "d05f1fc8c82aef62b719cf896689b7fe8cdd7116b8b0a6af0c3431e120ec54a5"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/Stage2Full/schedule.lua",
+    "bytes": 12118,
+    "sha256": "ad14c9f466a5909fd0b7d6867cf359996772259c6e8729f4afd06ad13f3b7fdb"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/TH14Stage1Normal/boss.lua",
+    "bytes": 6421,
+    "sha256": "d59d5e6fbf7184b1a75016b78075f282b8e1ce5c15b129c4d479bb3b41ef24e0"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/TH14Stage1Normal/enemies.lua",
+    "bytes": 5177,
+    "sha256": "5053862d53c3ee32f1c649485e0fef8a47ff9d0805e01124adc0db1ff124c19b"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/TH14Stage1Normal/geometry.lua",
+    "bytes": 1058,
+    "sha256": "cf34b95f24bd2b1b1a08452c650795b89da991830cae55dc6ede7daf1db548f2"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/TH14Stage1Normal/host.lua",
+    "bytes": 4353,
+    "sha256": "5ad3e83543bf93631c20fcc4f9285daa8f3962084aa159a3e6a7cc8276fe9574"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/TH14Stage1Normal/root.lua",
+    "bytes": 1921,
+    "sha256": "7f0d0059bb51793002b3012c64b53b0a620f9896cada99cf9fbf81ea73900e45"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/TH14Stage1Normal/stage.lua",
+    "bytes": 3629,
+    "sha256": "c1cb0c6c21bd3eee64904b51f0c1c3e7869ca5400e1df8b94df5c9c86bcbdfb0"
+  },
+  {
+    "path": "scripts/deepseek-abyss/verify-native.ps1",
+    "bytes": 2850,
+    "sha256": "5cd9e01b793ba762e2d731467846500366ac1c0e0d0e0d085bea785e71c5822b"
+  },
+  {
+    "path": "scripts/deepseek-cot/verify-native.ps1",
+    "bytes": 1489,
+    "sha256": "c684452859153c66da3097ebc020b5dd90e3280be7a1489cd4e586287ac455a7"
+  },
+  {
+    "path": "scripts/deepseek-cot/verify.py",
+    "bytes": 3428,
+    "sha256": "398cb60e188ca056b8cbfc9979ded6850c4b771d9a30c70c0ab7f613734e22f8"
+  },
+  {
+    "path": "scripts/dragon-sneeze/verify-native.ps1",
+    "bytes": 1997,
+    "sha256": "8b6ae407e83a24bbd9f9e36cee42c46b9d794668eb42248bb18373154993daaa"
+  },
+  {
+    "path": "scripts/mamizou-stage2/host-harness.lua",
+    "bytes": 3035,
+    "sha256": "8b11ca981658fdb09ef9c558a9d568966bb067f17da735329ea3424618d11f3f"
+  },
+  {
+    "path": "scripts/mamizou-stage2/inspect-binary.py",
+    "bytes": 1139,
+    "sha256": "0ca3bdf7f7c3524acba817958a455a1bb6278f0ee74ecbe4f18ac0b348f961bf"
+  },
+  {
+    "path": "scripts/mamizou-stage2/prepare.py",
+    "bytes": 4553,
+    "sha256": "34667201f963ea1cd099ab131a693ce5bde9a9236c12631b8ea5946f36fb5d37"
+  },
+  {
+    "path": "scripts/mamizou-stage2/verify-native.ps1",
+    "bytes": 3269,
+    "sha256": "e9d73919dcd6e112f47155e7c628cab1c528033975e7e7316d1912f5a4bc0aec"
+  },
+  {
+    "path": "scripts/mamizou-stage2/verify.py",
+    "bytes": 5316,
+    "sha256": "b5effee089cf424f8e2a5abcadf19788f3a8b89fb6bc9a768f640673be743999"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/__init__.py",
+    "bytes": 43853,
+    "sha256": "94571d1314355e261aff0ddfc94985fe8761232ddff6874181fd21efa9fab47f"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/arm.py",
+    "bytes": 2154,
+    "sha256": "00ea7442a1496d84aca469bfa3542290eafe22898b5be0dece9294865b9508ba"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/arm64.py",
+    "bytes": 2428,
+    "sha256": "834979e887315fae9a447698502f6866c246cb99b65c84b8b6fdef8087181284"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/arm64_const.py",
+    "bytes": 81768,
+    "sha256": "f358d461b1f45a8d91d8e308ca82e5b35c5d2e5c135d8ed07d8cdc86456a5418"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/arm_const.py",
+    "bytes": 17295,
+    "sha256": "1b00d7b48be4b72b730272486d4fd2057cb8019e67f1bd145bcabb1b988d1c67"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/bpf.py",
+    "bytes": 1438,
+    "sha256": "f879595fbc413bfa74600b4cbaa7a2cdd7200b2f92e718ad31fb36844e7c0f9d"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/bpf_const.py",
+    "bytes": 2160,
+    "sha256": "070717e28a68ee7e1e8b29cb9a299f5e462be81d9ad6c83dccce5f771fe22e7e"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/evm.py",
+    "bytes": 383,
+    "sha256": "29f35d3953b2eeb976e02af3cdbf3a78066d4d5a750588da0672e48bc5aa0385"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/evm_const.py",
+    "bytes": 3292,
+    "sha256": "b3a60498c0ac455098d884574829875deb83a4176a052480249a9d3e93f42b6d"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/m680x.py",
+    "bytes": 2065,
+    "sha256": "24d56b8f6e9c12d73f830f26de36d02461e4d73a3091943e6c90884181efe41d"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/m680x_const.py",
+    "bytes": 8885,
+    "sha256": "a8ceebe6e6213da834406e7a56c1f808fad554c5ed85a986b0ef8647db3718da"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/m68k.py",
+    "bytes": 2438,
+    "sha256": "0567bf26e32a274b086d296fdcc078dcbda2c66280f941e5986b30eecc647bc8"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/m68k_const.py",
+    "bytes": 10489,
+    "sha256": "79de0ea42977ad2875fd73a34ddb55fc2ace58dac45b0ee8aff0ae138c7a8faa"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/mips.py",
+    "bytes": 1001,
+    "sha256": "c23b6e5d5df2be6f728dda2da2a8f805d4d1500e383aebf555da1fa9650639e8"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/mips_const.py",
+    "bytes": 18592,
+    "sha256": "80a325c59a8a88918d1ebc55268e07461841ddde50d034a545d31cdf44668324"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/mos65xx.py",
+    "bytes": 998,
+    "sha256": "f9b525569fcae4768ac4b2230a46468a571e934717f14d52910e243d0b279e9a"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/mos65xx_const.py",
+    "bytes": 3393,
+    "sha256": "22762e23dec6d011f75068cac995f4c05f6cf5c93c207502eeb11d0cd4a136f3"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/ppc.py",
+    "bytes": 1384,
+    "sha256": "1ee21161d21902744379624d87048138272a99c6bd98623256baa065038bf03d"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/ppc_const.py",
+    "bytes": 45023,
+    "sha256": "4284db74b7db3a0e3eda043970096c047df81d9b0a81c13b3b5b70ca623d4b0b"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/riscv.py",
+    "bytes": 1104,
+    "sha256": "c40beee7bd99d3f1cc329203020def06140a786d17e2ec963feefb12e0c8e872"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/riscv_const.py",
+    "bytes": 10953,
+    "sha256": "6ac81243404207d74b3190c37180b6353a001191c7df5d04fd25f89b624abdd1"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/sh.py",
+    "bytes": 1478,
+    "sha256": "d50212075a918e94b41f1e67f838a3b70bc44d19941f33b6d502e5359c967592"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/sh_const.py",
+    "bytes": 7154,
+    "sha256": "a19a1837892a0eaa9bc3e5cd3638625471d705a35b08aa26994ad108928125be"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/sparc.py",
+    "bytes": 1127,
+    "sha256": "389867d194a7bef779466a5283953cb2b30d2e84368e80112677cfaa0334097c"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/sparc_const.py",
+    "bytes": 9738,
+    "sha256": "aef73803efe9a2e0e109fe05e0b791f33e62d41c54ed32cd2773837960d1ddae"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/systemz.py",
+    "bytes": 1115,
+    "sha256": "9e75611fb8930ef665b04a80e14ca0735953f69d2f0fdb608f96ea172cef7f2d"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/sysz_const.py",
+    "bytes": 56291,
+    "sha256": "98ad76240b48eff060f96fc0986933c904cbdfd654866eb49e7ee5879db2908e"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/tms320c64x.py",
+    "bytes": 1672,
+    "sha256": "597bf661d25e283c007c9ee76defb422f41e4279aae5bbd8b5736400109cf6b3"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/tms320c64x_const.py",
+    "bytes": 7257,
+    "sha256": "643aeb59e96e2eb10f6ca4e9d27db9c00d83195cf442dea453418ac2df0cb94b"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/tricore.py",
+    "bytes": 1123,
+    "sha256": "6716ed4579dadec5c476a0a704c35421860cdaaf20796c7d9c5ebfceb5c4e3cb"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/tricore_const.py",
+    "bytes": 12010,
+    "sha256": "95d640cfc8d698f162edc68646c4829cd25289ee47d2869815b33b7839d32bae"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/wasm.py",
+    "bytes": 1627,
+    "sha256": "8fb19dfb59cd7175ab0e55b8b7c2d37e150c237ed6060862be6ec3e98bf21d6d"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/wasm_const.py",
+    "bytes": 5132,
+    "sha256": "e03e231892153456070055f39a53ed3205feeb24e7d768a2b193adcbe26cffc5"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/x86.py",
+    "bytes": 2816,
+    "sha256": "08cbb0a02ff152bcf1fbd7c4f8850b3ade38c25b9f0a6a9b900a55ee75e87c67"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/x86_const.py",
+    "bytes": 45756,
+    "sha256": "83cf4550d9256f5f9b8e218b9b732e46d83ef602b463a01d6eeb778deb28e040"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/xcore.py",
+    "bytes": 1082,
+    "sha256": "67a3bab5ec77998bf88f320b61be7110318454be2252ff2a02f42ca4aab56a8c"
+  },
+  {
+    "path": "scripts/milk-honey/deps/capstone/xcore_const.py",
+    "bytes": 3424,
+    "sha256": "34367710ee0501621fb8b325890cae740ff38075d3ef66b36de9b8b4dcec227f"
+  },
+  {
+    "path": "scripts/milk-honey/inspect-retail.py",
+    "bytes": 998,
+    "sha256": "10ea747d04a80a9d268be9ca508f6f70fa2bcb4463e27bda807fd1084410ec80"
+  },
+  {
+    "path": "scripts/milk-honey/nonspell7-verify.py",
+    "bytes": 1725,
+    "sha256": "205a8db001e1850843d1856621ef9c1c9e8a70f335446245d3a4e7d72f8c1fbf"
+  },
+  {
+    "path": "scripts/milk-honey/prepare.py",
+    "bytes": 2586,
+    "sha256": "72a05258c179dc292d5170a02ac8fc0d745bf26c292e9e435de23ab0a639e44b"
+  },
+  {
+    "path": "scripts/milk-honey/verify-native.ps1",
+    "bytes": 1425,
+    "sha256": "96de66f6fd931948fe822712138537f432e113438ec5db5e888ae6c805e9b7c9"
+  },
+  {
+    "path": "scripts/milk-honey/verify.py",
+    "bytes": 2072,
+    "sha256": "6f83f0a397dde4524603c548b5ab91d6b347c20018642a7e9046a7a0bd92a7de"
+  },
+  {
+    "path": "scripts/milk-honey/visual-assets.py",
+    "bytes": 1044,
+    "sha256": "190f96ecb1577f43d77b93f32bf5c3e268354df9f7516c43f04b05c68aa447f9"
+  },
+  {
+    "path": "scripts/momiji-non1/verify-native.ps1",
+    "bytes": 1467,
+    "sha256": "fe5716448b27b7258b61dce13f609a9d82a0472c0d274dd7f5b11005088d95ab"
+  },
+  {
+    "path": "scripts/momiji-non1/verify.py",
+    "bytes": 2233,
+    "sha256": "ed2a58ae9a64c5dae7036bca299777a4d870fc9fab66d9a15499513d12e5b680"
+  },
+  {
+    "path": "scripts/mystia-aya/verify-native.ps1",
+    "bytes": 3670,
+    "sha256": "e67e2a545c9096048cabf54d45519be08f374d0032ecb5e082b3eb5d53b9a1fa"
+  },
+  {
+    "path": "scripts/mystia-aya/verify-static.py",
+    "bytes": 3485,
+    "sha256": "c57b2f5fecff83ab0cf24b2e6a43188230d20f6e35b733ef57ce71dd0ec7550f"
+  },
+  {
+    "path": "scripts/mystia-aya-easy-large/verify-native.ps1",
+    "bytes": 3696,
+    "sha256": "6ab0d43aaa539549980910139fbe61b78a796cdf8a9d9e0a2ebde357e918f546"
+  },
+  {
+    "path": "scripts/mystia-aya-easy-large/verify-static.py",
+    "bytes": 3476,
+    "sha256": "9f07a4126ac00fcbdd17f2dd4ae2124e9337ec747b5ca1404f32374de4e46e1a"
+  },
+  {
+    "path": "scripts/mystia-aya-lunatic/verify-native.ps1",
+    "bytes": 3693,
+    "sha256": "94f631b1e6c6eb03321e901932c245857492265224b6d1c8c4427ee7f852f091"
+  },
+  {
+    "path": "scripts/mystia-aya-lunatic/verify-static.py",
+    "bytes": 2344,
+    "sha256": "b6acc3274fd1b59dc9d7ff52b632d5b46a8d929440906a44ec0e0c7fc5f9e262"
+  },
+  {
+    "path": "scripts/mystia-aya-normal-large/verify-native.ps1",
+    "bytes": 3705,
+    "sha256": "a6d0a36aaceb8426e5db69fc36d4cc7c2358769daaafd807067f8a43b2743f28"
+  },
+  {
+    "path": "scripts/mystia-aya-normal-large/verify-static.py",
+    "bytes": 3527,
+    "sha256": "c7de0623d8fc2e19da496929d4b04c1ddf2da9bb4864101d47882f68f6b50e4d"
+  },
+  {
+    "path": "scripts/royal-flare/import-fire.py",
+    "bytes": 1600,
+    "sha256": "38b2022b6867b103b80acdb26f22a03241097d1cd6a96eefc1647d51fd50a142"
+  },
+  {
+    "path": "scripts/royal-flare/verify-native.ps1",
+    "bytes": 4608,
+    "sha256": "9ccdad7c713c21bc8f110d6a26af049d33e7e5d0f9f8c629b343fd32f08c2c0d"
+  },
+  {
+    "path": "scripts/stage12/audit-source.py",
+    "bytes": 2704,
+    "sha256": "ff4523420cad66f9564eda7fce32063fdb500371d875232be5c26cac13a1aea1"
+  },
+  {
+    "path": "scripts/stage12/package-current.py",
+    "bytes": 5930,
+    "sha256": "7e3945c7204d3aa4c44aef7a18bda88858de386a3d29bea803d17f1a658adf98"
+  },
+  {
+    "path": "scripts/stage12/package.py",
+    "bytes": 2313,
+    "sha256": "9fdecb6a39870292fbd06ff9c666d59b9dd20a9c2cfec7c5606875b17452fce7"
+  },
+  {
+    "path": "scripts/stage12/prepare-audio.py",
+    "bytes": 4114,
+    "sha256": "be034b4b5748e0a428039436f68e04ac817ab40fcb2ac4e8d4f33f43c12895ea"
+  },
+  {
+    "path": "scripts/stage12/prepare.py",
+    "bytes": 6731,
+    "sha256": "defe4ffe9af8d17d707889cc2800f1e89a6fdaa0234b30360b4513d8b624218b"
+  },
+  {
+    "path": "scripts/stage12/verify-anchor.py",
+    "bytes": 4845,
+    "sha256": "a02d78e5ce9d4b4b3a64994048bea25f5ea0abdb87562ac6fbad2cd5711333c2"
+  },
+  {
+    "path": "scripts/stage12/verify-art.py",
+    "bytes": 2166,
+    "sha256": "8c1298df9a60e23e6982c5377fb9aee8e1adc3cb9a506c40f60b67bf461330a9"
+  },
+  {
+    "path": "scripts/stage12/verify-audio.py",
+    "bytes": 1502,
+    "sha256": "67a096e1c20d6b656b2392c31fa1bfba9cacbda78b2c3cc12a6a0772baf03b77"
+  },
+  {
+    "path": "scripts/stage12/verify-background.py",
+    "bytes": 1658,
+    "sha256": "340b7831a4fc6d6e8fc5b2c42865fadf2dc754a2c6755bfd260be73d95fa8da0"
+  },
+  {
+    "path": "scripts/stage12/verify-balance.py",
+    "bytes": 1776,
+    "sha256": "ca59823cb15780fd614f9db577973e2f86044639aa2725e48f70033b1c61703c"
+  },
+  {
+    "path": "scripts/stage12/verify-context-move.py",
+    "bytes": 1720,
+    "sha256": "cb7c04be5d5c8f13bf619b33b43c80a93b2be8dab6e68251a275ce3eea9ccd88"
+  },
+  {
+    "path": "scripts/stage12/verify-context-overlap.py",
+    "bytes": 2306,
+    "sha256": "ad4e55c973cebfdc8706b4c1b097632923bbc363800792f8d62571d56f272585"
+  },
+  {
+    "path": "scripts/stage12/verify-flare-th16.py",
+    "bytes": 2831,
+    "sha256": "3fd961bf4edf72148a68ad2be327c35c0fecc51a4e17a988417872ab45e2a326"
+  },
+  {
+    "path": "scripts/stage12/verify-flow-context.py",
+    "bytes": 5052,
+    "sha256": "689e7975d722550a17298496c6333afd65e4cc13ee07413d65b32bc4143f4112"
+  },
+  {
+    "path": "scripts/stage12/verify-hp.py",
+    "bytes": 2185,
+    "sha256": "8d6162a1b6b03f78a1333a34d07ff4fbfc70ee5fb4ab4443b6a3cc7aeabfbdef"
+  },
+  {
+    "path": "scripts/stage12/verify-momiji-rice-laser.py",
+    "bytes": 4999,
+    "sha256": "f332e0ac1d7b8a7a3a3ac12f1fe344f2d9b834cd9d9dc3a011e38500d6402500"
+  },
+  {
+    "path": "scripts/stage12/verify-native.ps1",
+    "bytes": 2944,
+    "sha256": "de78bdbca93fb309e44f604e6364928d6e2ed0aca76e8f3ef6a0422485612450"
+  },
+  {
+    "path": "scripts/stage12/verify-notes.py",
+    "bytes": 3972,
+    "sha256": "41ae435484d213c7959539da9654caaec4755919e8d7feabbadd25f5256bf8e9"
+  },
+  {
+    "path": "scripts/stage12/verify-player.py",
+    "bytes": 5676,
+    "sha256": "dab126e47667c69a563dde7190890983747d7138f2ca858bf36ddb29a71cc814"
+  },
+  {
+    "path": "scripts/stage12/verify-power.py",
+    "bytes": 3230,
+    "sha256": "085826813defcf3a52bfdd7486d733c1628f7b7ffb6c79c180b92630d3ffc994"
+  },
+  {
+    "path": "scripts/stage12/verify-practice.py",
+    "bytes": 1458,
+    "sha256": "0ede05e41e6ded930943de3b6ecf7036c09976ad978c25252ebca71cf0679ac3"
+  },
+  {
+    "path": "scripts/stage12/verify-sunflower.py",
+    "bytes": 2277,
+    "sha256": "2b07ee0b23a82dfbf191101ad4ed1bae057de44f02552171000d43f3e0f836cc"
+  },
+  {
+    "path": "scripts/stage12/verify-tuning.py",
+    "bytes": 2467,
+    "sha256": "f9a91384745a2133d108de19eb5edee426381374134cc6e24613ff57540f84c0"
+  },
+  {
+    "path": "scripts/stage12/verify.py",
+    "bytes": 5492,
+    "sha256": "8f189d0b5aad57a74cddda1cad55b947d0694a0868cf2137dfc51171cf1b94e1"
+  },
+  {
+    "path": "scripts/stage2-full/harness.lua",
+    "bytes": 8607,
+    "sha256": "b4136958e82ed48451b0746385088ad707f08b7584a153a4f730e0921d04bd32"
+  },
+  {
+    "path": "scripts/stage2-full/inspect-binary.py",
+    "bytes": 833,
+    "sha256": "03046ee7d8eff9cf6db369b33c4573841c309c18b32db4b43fa2213a716c11a9"
+  },
+  {
+    "path": "scripts/stage2-full/prepare.py",
+    "bytes": 6341,
+    "sha256": "43750825916809d5e8facd49877ee783809aa4ebad119832bf064e4290fcef26"
+  },
+  {
+    "path": "scripts/stage2-full/verify.py",
+    "bytes": 11981,
+    "sha256": "c3d2730e45fde49a8a60f44be5bf18a3a3b78c26213db92ae7f1f016389036a0"
+  },
+  {
+    "path": "scripts/suwako5/assets.py",
+    "bytes": 3266,
+    "sha256": "b3ae6418dc7471965992b29d7005a6f1cafe671b733abd3509c2ab575a818f20"
+  },
+  {
+    "path": "scripts/suwako5/build.py",
+    "bytes": 4245,
+    "sha256": "0a0b1f033d41daae179f1712903c9f33b5e687403b878f10c6115d2b045b8733"
+  },
+  {
+    "path": "scripts/suwako5/practice-catalog.json",
+    "bytes": 3311,
+    "sha256": "086f6b87e7bae3fe905e24a10e8b2f6f6f7a07bc4431cc6ae317fd1c923cc703"
+  },
+  {
+    "path": "scripts/suwako5/source_audit.py",
+    "bytes": 2099,
+    "sha256": "6768d3c5bc1bdd203d3c230c6782964e6d9263e07df8c964c4cb7af839e79c45"
+  },
+  {
+    "path": "scripts/suwako5/verify-native.ps1",
+    "bytes": 2425,
+    "sha256": "3573e5a4b02232046dd437ef94a5898482baddaf27021ae909c9f79f23e567ca"
+  },
+  {
+    "path": "scripts/suwako5/verify.py",
+    "bytes": 4504,
+    "sha256": "d056fb1bfe7d4d0f8b59a3d508e06ebb71bddeb308e6d375e6ab4215933813eb"
+  },
+  {
+    "path": "scripts/th08-stage4/build-reference.py",
+    "bytes": 3518,
+    "sha256": "152490d79e24f83cb468a024036537a49360fef0fcb61b8a2c6689a58e5fb2e8"
+  },
+  {
+    "path": "scripts/th08-stage4/verify-native.ps1",
+    "bytes": 3802,
+    "sha256": "9924250b369e3c4aa594bfe7f9b290fa720b120c375d48cd6c7f6b3ca63a2638"
+  },
+  {
+    "path": "scripts/th08-stage4/verify.py",
+    "bytes": 4472,
+    "sha256": "20c98e95711377930fd4a22b24971aad435d591d9bc74cc8e42468fe1802b371"
+  },
+  {
+    "path": "scripts/th14-stage1/movement-harness.lua",
+    "bytes": 1327,
+    "sha256": "f70c888175b4f4407fa60f13a9141b27ef7d4d91f311255c80f8227250f50301"
+  },
+  {
+    "path": "scripts/th14-stage1/schedule-harness.lua",
+    "bytes": 1868,
+    "sha256": "e842b2fe0a61dd99cc66335323746c6143ac2d33666fc8cd3ff0965f233b4149"
+  },
+  {
+    "path": "scripts/th14-stage1/verify-native.ps1",
+    "bytes": 3645,
+    "sha256": "5cf5fb7d2df400e6d5aea6a47afa0678d8ca059d5856effe3d8e99035c1f69f6"
+  },
+  {
+    "path": "scripts/th14-stage1/verify.py",
+    "bytes": 4506,
+    "sha256": "e48f4f4f702b8a9dd4028fc2cd5bcdfbf4f065891f3e142d21b054f21752a285"
+  },
+  {
+    "path": "start-deepseek-abyss-context.cmd",
+    "bytes": 134,
+    "sha256": "0413967c6e672248a5db74c8c16231225d2a41ed0735444b17aef5fa7a469f73"
+  },
+  {
+    "path": "start-deepseek-abyss-query.cmd",
+    "bytes": 134,
+    "sha256": "63639b2a953c933ecb53baa393c9a11f1db03ffed2267a786757f056c8bfa9f7"
+  },
+  {
+    "path": "start-deepseek-abyss-sonar.cmd",
+    "bytes": 134,
+    "sha256": "e4bff1e1a0c9b43ab0a9501ed617b386c17344c8e72429d1d9a200be7ed14be3"
+  },
+  {
+    "path": "start-deepseek-abyss-whale.cmd",
+    "bytes": 134,
+    "sha256": "6464137087e304d0bb7db398904f74a5b56d415a48384f8b949e5d25d722016d"
+  },
+  {
+    "path": "start-deepseek-abyss.cmd",
+    "bytes": 121,
+    "sha256": "31f7de39592528e8305c2c6ab2e8daa763d56cefce3a3a1b90e4beef701e3ea9"
+  },
+  {
+    "path": "start-deepseek-abyss.ps1",
+    "bytes": 570,
+    "sha256": "b8c3650b4d46d6e23d02da6252438519b358c0901f9e67c758df45c6f4e5fcc7"
+  },
+  {
+    "path": "start-deepseek-cot.cmd",
+    "bytes": 247,
+    "sha256": "93297af5d9bde308fef3d4b1cbdb4925aaffb27e7b7c4b1ef24d9a18bc0476b5"
+  },
+  {
+    "path": "start-dragon-sneeze.cmd",
+    "bytes": 120,
+    "sha256": "ec2c397a3a604abc54244039120b342e93d7a40178a1894a8efe56876f420e9a"
+  },
+  {
+    "path": "start-dragon-sneeze.ps1",
+    "bytes": 422,
+    "sha256": "af50a353083f0974571b3b6b8f408eb3f80d8f0df9c0899bf41c59ba0b49d870"
+  },
+  {
+    "path": "start-engine-demo.cmd",
+    "bytes": 165,
+    "sha256": "ce5a0e834f9b5e371d07f6e9b62f7b81d06d5c18cd291392ef1af05cc44d1346"
+  },
+  {
+    "path": "start-mamizou-stage2-bird.cmd",
+    "bytes": 107,
+    "sha256": "a2cdcee7a9bd3a6a1c8bf245f9f6caaee88143114c5d47bddf84333c2aabc2b4"
+  },
+  {
+    "path": "start-mamizou-stage2-final.cmd",
+    "bytes": 107,
+    "sha256": "0b6f94e1694518ef9f2c4bc19d9f1dbb62101a304d7cbba736ce221fd200fbb5"
+  },
+  {
+    "path": "start-mamizou-stage2-market.cmd",
+    "bytes": 107,
+    "sha256": "a244df1bbde970cd7df114055f358920e4510af83763953f50566ff6d0397884"
+  },
+  {
+    "path": "start-mamizou-stage2.cmd",
+    "bytes": 98,
+    "sha256": "1e6482b5760a2f3809e6ecc80cfe1f8c56d05ef2184abf88426ba690fa48b3b2"
+  },
+  {
+    "path": "start-mamizou-stage2.ps1",
+    "bytes": 537,
+    "sha256": "625536a8c9f1de7b07f565db1313c108ddc1cdeb3f36096f875e755eb96bc29b"
+  },
+  {
+    "path": "start-milk-honey.cmd",
+    "bytes": 116,
+    "sha256": "2b920f7a9541cb86c247730014f65c02aaef66034df9a5c9874ead0c723c43f9"
+  },
+  {
+    "path": "start-milk-honey.ps1",
+    "bytes": 408,
+    "sha256": "165c07f74a02f021bdf6fba2a069c6125f0ef52b528c00d7c44424c463784179"
+  },
+  {
+    "path": "start-momiji-non1.cmd",
+    "bytes": 117,
+    "sha256": "47a7281737e66a2f47f9cdbb0a9c4a329d3b3c8bb76241f0466aa9eec278c9cb"
+  },
+  {
+    "path": "start-momiji-non1.ps1",
+    "bytes": 419,
+    "sha256": "3cd77e1191697d9484a520aa7908d97467545e025b1e82a5562c4a4b9207eabf"
+  },
+  {
+    "path": "start-mystg.cmd",
+    "bytes": 150,
+    "sha256": "8a644a4d11539e14960c43a15bc5888cd6118d689171ab291657ee958fb49eb0"
+  },
+  {
+    "path": "start-mystia-aya-easy-large.cmd",
+    "bytes": 105,
+    "sha256": "f7226994ca0fdc09a51404e4a50840e3c1489708a51ab5b20483cd96a566e24a"
+  },
+  {
+    "path": "start-mystia-aya-easy-large.ps1",
+    "bytes": 431,
+    "sha256": "87537924d7a38c58e0fed937b9037d5499a3ecd14a64ea9e6936c5bfd0e77dab"
+  },
+  {
+    "path": "start-mystia-aya-lunatic.cmd",
+    "bytes": 102,
+    "sha256": "336b5454ed266ade82ff3a6ce80ccf48dd52071a49eaa1660e2f18eeee330484"
+  },
+  {
+    "path": "start-mystia-aya-lunatic.ps1",
+    "bytes": 429,
+    "sha256": "1191606b138251d13de0b41ebe024875b1fa7c2b0ca0ac01020ffb1fd3de9e6e"
+  },
+  {
+    "path": "start-mystia-aya-normal-large.cmd",
+    "bytes": 107,
+    "sha256": "23cb95d0e325778a9a811bde625d850c44bf373080ae23ed4793bf7da51409e9"
+  },
+  {
+    "path": "start-mystia-aya-normal-large.ps1",
+    "bytes": 433,
+    "sha256": "ad62579f3eedf17085dfcb961d59e462e694d099cf022eaba00d5c3628639596"
+  },
+  {
+    "path": "start-mystia-aya.cmd",
+    "bytes": 94,
+    "sha256": "e8950b534c9ef7786781f16900211bf0afb9538f8d43e45423cb8c816aaf4e04"
+  },
+  {
+    "path": "start-mystia-aya.ps1",
+    "bytes": 422,
+    "sha256": "1e8f64ce9c1d2d2ec4ce5f248d5f22b9c02e23c9457f90f71e171fd55d3218e1"
+  },
+  {
+    "path": "start-royal-flare-follow.cmd",
+    "bytes": 124,
+    "sha256": "ff37f812415355168b5d5854ab84f069b18bd8dc5a6014926b0b9fba3620c06c"
+  },
+  {
+    "path": "start-royal-flare-follow.ps1",
+    "bytes": 450,
+    "sha256": "bb956e2251e31452a0c57274da1625407a1ab2f6496fad05be0a418731889cee"
+  },
+  {
+    "path": "start-royal-flare.cmd",
+    "bytes": 117,
+    "sha256": "04d8255ce171ec3b366a16e4b769980b8a9426eef41721ee85924d58be9f693c"
+  },
+  {
+    "path": "start-royal-flare.ps1",
+    "bytes": 419,
+    "sha256": "026bf1f7aac8275b06af09bd310565fe173103c4ee66e7528807e1525a0f4f50"
+  },
+  {
+    "path": "start-stage12-anchor-original.cmd",
+    "bytes": 160,
+    "sha256": "80fd1622f9c051e814980b70e02d8b206196416b7b0600802a9c9267dfacb8f3"
+  },
+  {
+    "path": "start-stage12-context.cmd",
+    "bytes": 124,
+    "sha256": "6e79335a96472cd435a549d0c03fc6a51b51f30939421cee75c7a785cbcf8120"
+  },
+  {
+    "path": "start-stage12-context.ps1",
+    "bytes": 496,
+    "sha256": "d3969f71a106f2c16ee0e30dbde14c92995e128866b86ba07b7899cb294e1e31"
+  },
+  {
+    "path": "start-stage12-practice.cmd",
+    "bytes": 130,
+    "sha256": "b192a397d53df69eb3712de48a72776ccdb7c27595360802807f9a69a2c843e3"
+  },
+  {
+    "path": "start-stage12-practice.ps1",
+    "bytes": 3309,
+    "sha256": "8e67c1f54eff87e9ceacffa33633d943936758ddd4213ad331d7e437651335d9"
+  },
+  {
+    "path": "start-stage12.cmd",
+    "bytes": 116,
+    "sha256": "06767473bdf7bda68e5576d1a87b8d7de9675f82d8c8f136dacc6853baa5e026"
+  },
+  {
+    "path": "start-stage12.ps1",
+    "bytes": 428,
+    "sha256": "83e5b5fb6bcb2b3b3bde3c43426173240cb62997892f4849460ec4685f21b045"
+  },
+  {
+    "path": "start-stage2-full.cmd",
+    "bytes": 117,
+    "sha256": "3d4caac4b2bc73b5b446fc04d2c09a9117f5d6898cc10fe4a76495a1757763d1"
+  },
+  {
+    "path": "start-stage2-full.ps1",
+    "bytes": 429,
+    "sha256": "2517143fc02e0edf492fd09dc4b06a7fec20ba5ba55e5978c2390335e1256b1f"
+  },
+  {
+    "path": "start-stage4-boss.cmd",
+    "bytes": 127,
+    "sha256": "6be4dde2a49fef51572ef11d2705bb88a91fd42ec3d61cdfa30cbaf6b53a27b8"
+  },
+  {
+    "path": "start-stage4-final.cmd",
+    "bytes": 128,
+    "sha256": "302e66baab6d8ad89f84d8c5738c513c0876ca5fa7c033e7c34ad94a6884a3fd"
+  },
+  {
+    "path": "start-stage4-master.cmd",
+    "bytes": 129,
+    "sha256": "dc6796e568e3c3f8d782e0002d99070a56d94214ded47d9dfab272c75fb509d0"
+  },
+  {
+    "path": "start-stage4.cmd",
+    "bytes": 112,
+    "sha256": "f9335be7d15850749eb53c1d1bf2fa251c36056905280acb615f246cf4b74487"
+  },
+  {
+    "path": "start-stage4.ps1",
+    "bytes": 796,
+    "sha256": "9e3252650cbc8526539fc2cfe0434a3ec19ea4d94df413821e107f55ef0bb381"
+  },
+  {
+    "path": "start-stage5-practice.cmd",
+    "bytes": 129,
+    "sha256": "6d6bf9e1dccf45f7c8aa6117b81671cc1ce6a6670f6584577622c443bd85e98a"
+  },
+  {
+    "path": "start-stage5-practice.ps1",
+    "bytes": 4352,
+    "sha256": "14a1335bea9ebbf611fe73d6659915d4268b9013edf01ee22f7618310f93bff2"
+  },
+  {
+    "path": "start-stage5.cmd",
+    "bytes": 112,
+    "sha256": "58f577e4b16925cacfc275485fe26fbfb708d806d698d6f7690a54515c91d16a"
+  },
+  {
+    "path": "start-stage5.ps1",
+    "bytes": 874,
+    "sha256": "2d7c8f0c005d65d3229714fd4212b1bb14a5b1fe546c9dc5afc40bd6e526db0f"
+  },
+  {
+    "path": "start-th14-stage1-scale.cmd",
+    "bytes": 133,
+    "sha256": "8cb0d866e3023ff5cc06766cbb99156e776eabfa6f1cea8b0c175d560edc1824"
+  },
+  {
+    "path": "start-th14-stage1-tail.cmd",
+    "bytes": 132,
+    "sha256": "0724c033009ff46f99f034d5777baecaaf598d78ff06aff25cd3281befd371b0"
+  },
+  {
+    "path": "start-th14-stage1.cmd",
+    "bytes": 117,
+    "sha256": "0cf277940843697803781043206489af3d850a68a160f2c4427367973a5c8d75"
+  },
+  {
+    "path": "start-th14-stage1.ps1",
+    "bytes": 761,
+    "sha256": "ab1e06a4903f18612e532d22aa83033e72e6395fa5165e85775e47154f757a3b"
+  },
+  {
+    "path": "watch-stage2-replay.cmd",
+    "bytes": 122,
+    "sha256": "609975744bea1657ed545654136fb0a3edc16e84e53eff4cc42c5a184ba89e5b"
+  },
+  {
+    "path": "watch-stage2-replay.ps1",
+    "bytes": 648,
+    "sha256": "a2f6f33eeaeb2d5f8223eaaa4993653c2d2791cc4c3c7c7d632a28f00f818592"
+  }
+]

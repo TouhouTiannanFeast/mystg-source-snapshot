@@ -1,0 +1,156 @@
+[
+  {
+    "id": "th10-non1",
+    "label": "非符 | 原版第 1 非符",
+    "hp": 8000,
+    "seconds": 60.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-non2",
+    "label": "非符 | 原版第 2 非符",
+    "hp": 8000,
+    "seconds": 60.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-non3",
+    "label": "非符 | 原版第 3 非符",
+    "hp": 8000,
+    "seconds": 60.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-non4",
+    "label": "非符 | 原版第 4 非符",
+    "hp": 8000,
+    "seconds": 60.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-non5",
+    "label": "非符 | 原版第 5 非符",
+    "hp": 8000,
+    "seconds": 60.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-non6",
+    "label": "非符 | 原版第 6 非符",
+    "hp": 8000,
+    "seconds": 60.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-non8",
+    "label": "非符 | 原版第 8 非符",
+    "hp": 8000,
+    "seconds": 60.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card1",
+    "label": "符卡 | 开宴「二拜二拍一拜」",
+    "hp": 2800,
+    "seconds": 105.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card2",
+    "label": "符卡 | 土著神「手长足长大人」",
+    "hp": 3600,
+    "seconds": 105.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card3",
+    "label": "符卡 | 神具「洩矢的铁轮」",
+    "hp": 2800,
+    "seconds": 105.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card4",
+    "label": "符卡 | 源符「厌川的翡翠」",
+    "hp": 3600,
+    "seconds": 105.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card5",
+    "label": "符卡 | 蛙狩「蛙以口鸣，方致蛇祸」",
+    "hp": 3500,
+    "seconds": 105.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card6",
+    "label": "符卡 | 土著神「七石七木」",
+    "hp": 3500,
+    "seconds": 105.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card8",
+    "label": "符卡 | 土著神「宝永四年的赤蛙」",
+    "hp": 10000,
+    "seconds": 40.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card9",
+    "label": "符卡 | 「诹访大战 ～ 土著神话 vs 中央神话」",
+    "hp": 10000,
+    "seconds": 84.0,
+    "group": "th10"
+  },
+  {
+    "id": "th10-card10",
+    "label": "符卡 | 祟符「御社宫司大人」",
+    "hp": 10000,
+    "seconds": 160.0,
+    "group": "th10"
+  },
+  {
+    "id": "th125-a",
+    "label": "符卡 | 神樱「湛樱花吹雪」",
+    "hp": 10000,
+    "seconds": 200.0,
+    "group": "dsa"
+  },
+  {
+    "id": "th125-b",
+    "label": "符卡 | 姬川「Princess Jade Green」",
+    "hp": 10000,
+    "seconds": 200.0,
+    "group": "dsb"
+  },
+  {
+    "id": "th125-c",
+    "label": "符卡 | 铁轮「Mythical Ring」",
+    "hp": 10000,
+    "seconds": 200.0,
+    "group": "dsc"
+  },
+  {
+    "id": "th125-d",
+    "label": "符卡 | 土著神「御射军神大人」",
+    "hp": 10000,
+    "seconds": 200.0,
+    "group": "dsd"
+  },
+  {
+    "id": "th143-0902",
+    "label": "符卡 | 绿石「Jade Break」",
+    "hp": 3200,
+    "seconds": 90.0,
+    "group": "isc0902"
+  },
+  {
+    "id": "th143-0906",
+    "label": "符卡 | 蛙符「涂有鲜血的赤蛙塚」",
+    "hp": 1900,
+    "seconds": 90.0,
+    "group": "isc0906"
+  }
+]
