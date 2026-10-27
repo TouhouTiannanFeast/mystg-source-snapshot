@@ -8,7 +8,9 @@ stage.group.DefStageFunc(stage_name,'init',function(s)
     stage.group.initTask(s,function()
         New(default_stage_background); New(T.Hud)
         if setting.th08_practice then
-            local b=New(T.Marisa,setting.th08_practice)
+            local practice=setting.th08_practice
+            local zuu=practice=='boss' or practice:sub(1,4)=='zuu-'
+            local b=New(zuu and Zuu4Boss or T.Marisa,practice:sub(1,4)=='zuu-' and practice:sub(5) or practice)
             while IsValid(b) do task.Wait(1) end
         else
             local previous=0
@@ -19,7 +21,7 @@ stage.group.DefStageFunc(stage_name,'init',function(s)
                 elseif e.kind=='Sub16' or e.kind=='Sub27' then
                     T.clear(false)
                     local mid=e.kind=='Sub16'
-                    local b=New(T.Marisa,mid and 'mid' or 'boss')
+                    local b=New(mid and T.Marisa or Zuu4Boss,mid and 'mid' or 'boss')
                     while IsValid(b) do task.Wait(1) end
                     T.label=mid and 'Stage 4B / latter road' or 'Stage Clear'
                 elseif e.kind=='Sub15' or e.kind=='Sub35' then

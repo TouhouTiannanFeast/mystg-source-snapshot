@@ -1,7 +1,6 @@
 -- Stage-four route extensions. Source scheduler is private to this stage.
 local R=Th18Stage5Runtime
 local oldCommand,oldValue,oldMotion,oldNew,oldStep=R.command,R.value,R.motion,R.newActor,R.step
-local ordinaryHPScale={Cir00=.1,Cir01=.1,Cir02=.1,Cir03=.1,Phantom01=.1,GirlC01=.1,GirlD01=.1,GirlD02=.1}
 local function zeros()return setmetatable({},{__index=function()return 0 end})end
 function R.newActor(group,x,y)
  local a=oldNew(group,x,y);a.id=#R.actors;a.drops={main=0,extra={},timed={},area={32,32},start=R.tick};a.floatTweens={}
@@ -75,7 +74,7 @@ function R.command(a,e,k,v)
   end
   local child=R.newActor('th18',v[2]+(k=='enmCreate' and a.x or 0),v[3]+(k=='enmCreate' and a.y or 0))
   child.i,child.f=R.copy(a.i),R.copy(a.f);setmetatable(child.i,{__index=function()return 0 end});setmetatable(child.f,{__index=function()return 0 end})
-  child.hp=v[4]*(ordinaryHPScale[v[1]]or 1);child.name=v[1];child.drops.main=v[6] or 0;R.lastId=child.id;R.byId[child.id]=child
+  child.hp=v[4];child.name=v[1];child.drops.main=v[6] or 0;R.lastId=child.id;R.byId[child.id]=child
   R.spawn(child,v[1],{},-2);if R.onActor then R.onActor(child)end
   R.stats.actors=R.stats.actors+1
  elseif k=='enmKillAll' then

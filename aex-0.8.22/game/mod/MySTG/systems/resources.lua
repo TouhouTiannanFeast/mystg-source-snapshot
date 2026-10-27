@@ -2,6 +2,9 @@ Include('systems/resource-config.lua')
 MyResources={}
 local R,C=MyResources,MyResourceConfig
 function R.enabled() return C.enabled end
+function R.lockPower()
+ if C.enabled and C.fixed_power then lstg.var.power=C.fixed_power end
+end
 function R.state()
  local v=lstg.var
  v.my_resources=v.my_resources or {coins=0,cards={}}
@@ -31,6 +34,7 @@ function item.PlayerInit(...)
  if C.enabled then
   lstg.var.my_resources={coins=0,cards={}}
   for _,id in ipairs(C.starting_cards) do R.equip(id) end
+  R.lockPower()
  end
 end
 -- Coin art uses the existing item sprite tinted gold; no source art replaced.
@@ -62,11 +66,20 @@ end
 local oldPower=GetPower
 function GetPower(value)
  if not C.enabled then return oldPower(value) end
+ if C.fixed_power then
+  R.lockPower()
+  if value>0 then lstg.var.score=lstg.var.score+value*C.full_power_score end
+  return
+ end
  -- Preserve the existing gain and threshold-crossing semantics.
  local before=math.floor(lstg.var.power/100)
  lstg.var.power=math.min(400,lstg.var.power+value)
  if math.floor(lstg.var.power/100)>before then PlaySound('powerup1',0.5) end
  if lstg.var.power>=400 then lstg.var.score=lstg.var.score+value*C.full_power_score end
+end
+local miss=item.PlayerMiss
+function item:PlayerMiss(...)
+ local result=miss(self,...);R.lockPower();return result
 end
 local collect=item.playercollect
 function item.playercollect(...)
@@ -76,8 +89,13 @@ end
 -- Read physical held state every frame, even during cooldown/dialog/death.
 -- A press during a blocked frame is discarded rather than firing later.
 local sys=player_lib.system
+local systemInit=sys.init
+function sys:init(...)
+ R.lockPower();return systemInit(self,...)
+end
 local oldFrame=sys.updateKeyState
 function sys:updateKeyState(...)
+ R.lockPower()
  local result=oldFrame(self,...)
  local p=self.player
  local held=p.__shoot_flag or player_lib.debug_data.keep_shooting or false
@@ -97,3 +115,5 @@ end
 Include('systems/resource-ui.lua')
 
 if setting.resources_test then Include('systems/resource-probe.lua') end
+
+if setting.resources_power_test then Include('systems/power-probe.lua') end

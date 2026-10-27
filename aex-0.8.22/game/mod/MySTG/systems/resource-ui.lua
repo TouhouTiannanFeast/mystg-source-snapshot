@@ -6,7 +6,6 @@ local function info1(self)
         { "line_2", 109 + w.scrr, 397, 0, 1, 1 },
         { "line_3", 109 + w.scrr, 349, 0, 1, 1 },
         { "line_4", 109 + w.scrr, 311, 0, 1, 1 },
-        { "line_5", 109 + w.scrr, 247, 0, 1, 1 },
         { "line_6", 109 + w.scrr, 224, 0, 1, 1 },
         { "line_7", 109 + w.scrr, 202, 0, 1, 1 },
         { "hint.hiscore", 12 + w.scrr, 425, 0, 1, 1 },
@@ -15,7 +14,6 @@ local function info1(self)
         { "hint.Bnumber", 12 + w.scrr, 334, 0, 1, 1 },
         { "hint.Cnumber", 138 + w.scrr, 316, 0, 0.85, 0.85 },
         { "hint.Cnumber", 138 + w.scrr, 354, 0, 0.85, 0.85 },
-        { "hint.power", 39 + w.scrr, 253, 0, 0.5, 0.5 },
         
         { "hint.graze", 54 + w.scrr, 208, 0, 0.5, 0.5 }
     }
@@ -56,8 +54,6 @@ local function info1(self)
     RenderText("score3", string.format("%d/5", lstg.var.bombchip), 214 + w.scrr, 323, 0.35, "right")
     SetFontState("score1", "", Color(alplat, 205, 102, 0))
     SetFontState("score2", "", Color(alplat, 34, 216, 221))
-    RenderText("score1", string.format("%d.    /4.    ", math.floor(lstg.var.power / 100)), 204 + w.scrr, 262, 0.4, "right")
-    RenderText("score1", string.format("      %d%d        00", math.floor((lstg.var.power % 100) / 10), lstg.var.power % 10), 205 + w.scrr, 258.5, 0.3, "right")
     RenderText("score3", "COINS", 12 + w.scrr, 239, 0.35, "left")
     RenderScore("score2", MyResources.state().coins, 204 + w.scrr, 239, 0.4, "right")
     SetFontState("score3", "", Color(alplat, 173, 173, 173))
@@ -96,8 +92,6 @@ local function info1(self)
     RenderText("score3", string.format("%d/5", lstg.var.bombchip), 214 + w.scrr, 323, 0.35, "right")
     SetFontState("score1", "", Color(alplat, 205, 102, 0))
     SetFontState("score2", "", Color(alplat, 34, 216, 221))
-    RenderText("score1", string.format("%d.    /4.    ", math.floor(lstg.var.power / 100)), 204 + w.scrr, 262, 0.4, "right")
-    RenderText("score1", string.format("      %d%d        00", math.floor((lstg.var.power % 100) / 10), lstg.var.power % 10), 205 + w.scrr, 258.5, 0.3, "right")
     RenderText("score3", "COINS", 12 + w.scrr, 239, 0.35, "left")
     RenderScore("score2", MyResources.state().coins, 204 + w.scrr, 239, 0.4, "right")
     SetFontState("score3", "", Color(alplat, 255, 255, 255))
@@ -114,7 +108,6 @@ local function info2(self)
             388, 520, 0.5, "right", "top")
     SetFontState("score", "", Color(0xFFFF4040))
     RenderText("score",
-            string.format("%1.2f", lstg.var.power / 100),
             8, 496, 0.5, "left", "top")
     SetFontState("score", "", Color(0xFF40FF40))
     RenderText("score",

@@ -195,10 +195,11 @@ stage.group.DefStageFunc(stageName,'init',function(s)
    task.Wait(1)
   end
   if not setting.suwako5_practice and(not setting.suwako5_test_plan or setting.th18_stage5_test)then
-   H.begin(S.seed);S.route=true
-   if setting.th18_stage5_test_skip_front then T.tick=4176;for i=1,4176 do B.step(bg.state)end
+   B.armMidboss(bg.state);H.begin(S.seed);S.route=true
+   if setting.th18_stage5_test_skip_front then T.tick=4176;for i=1,4176 do B.stageStep(bg.state)end
    else T.run('MainFront');while not T.idle()do routeStep()end end
    T.command(T.controller,{i={},f={}},'enmKillAll',{});T.command(T.controller,{i={},f={}},'etClear',{640})
+   B.beginValley(bg.state)
    T.command(T.controller,{i={},f={}},'enmCreateA',{'MBoss',-192,-32,40,0,1})
    for i=1,160 do routeStep()end
    T.run('MainLatter');while not T.idle()do routeStep()end

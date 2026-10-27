@@ -32,5 +32,5 @@ for row in refs:
  assert hashlib.sha256((folder/row['target']).read_bytes()).hexdigest()==row['sha256']
 for row in json.loads((folder/'route-source.json').read_text(encoding='utf-8'))['sources']:
  assert hashlib.sha256(Path(row['path']).read_bytes()).hexdigest()==row['sha256']
-l.execute("for _,pool in ipairs({Suwako5Pool.nonspells,Suwako5Pool.spells})do for _,s in ipairs(pool)do assert(s.frames==1800)end end;assert(#Suwako5Pool.spells==15 and #Suwako5Pool.nonspells==7);assert(Suwako5Pool.find('th10-card2').hp==360 and Suwako5Pool.find('th125-a').hp==1000 and Suwako5Pool.find('th143-0906').hp==190)")
+l.execute("for _,pool in ipairs({Suwako5Pool.nonspells,Suwako5Pool.spells})do for _,s in ipairs(pool)do assert(s.frames==1800)end end;assert(#Suwako5Pool.spells==15 and #Suwako5Pool.nonspells==7);assert(Suwako5Pool.find('th10-card2').hp==3600 and Suwako5Pool.find('th125-a').hp==1000 and Suwako5Pool.find('th143-0906').hp==190)")
 print('PASS',len(refs),'source texture hashes / ECL hashes / existing Suwako pool15+7, HP and30s')

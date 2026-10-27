@@ -39,3 +39,35 @@ Lua5.1语法、所有引用ANM、全部二面背景循环和关底中断、Norma
 2026-10-26 受击修正：自定义敌机帧更新需要把enemybase拦截的colli写入同步到引擎碰撞开关。已补齐；真实自机子弹验证首波小怪扣血、击破及原脚本掉落通过。此前整关快速扣血测试未覆盖这个连接，验证日志补充在work/logs/stage5/collision09-before.log和collision09-after.log。
 
 2026-10-27 小怪血量调整：Cir00/01/02/03、Phantom01、GirlC01、GirlD01/02在创建时取原现值的1/10，覆盖上文关于道中HP沿用原值的说明。道中Boss和诹访子血量保持现状。实际数值与检查记录见work/logs/stage5/hp10.log；其余参数未调整。
+
+## 2026-10-27 背景原生机制复核
+
+此前虽然读取了全部STD/ANM数据，但绘制时把type4树冠也作为世界XY平面处理、统一打开距离雾，并整体关闭深度；这不能还原原版树林。原生运行通过仅证明能运行，不代表画面已还原。此次说明覆盖此前的渲染实现描述。
+
+- 原版type4树冠：先投影中心，再按镜头右方向计算尺寸，始终朝向镜头；只使用Z旋转，忽略脚本的X/Y旋转。原版type8地面/雾层则使用完整三维矩阵。已分别执行，并修正地面UV在X=pi之前的Y符号。
+- 原版只给type8开雾，type4树冠关闭雾。原exe初始化FOGTABLEMODE=0、FOGVERTEXMODE=3，采用逐顶点计算后插值的线性雾；已按此执行，而非统一按像素距离染色。机制说明：[Microsoft Vertex Fog](https://learn.microsoft.com/en-us/windows/win32/direct3d9/vertex-fog)、[Fog Formulas](https://learn.microsoft.com/en-us/windows/win32/direct3d9/fog-formulas)。
+- 原版按层、STD实例顺序、实例内部面片顺序绘制，采用LESSEQUAL深度比较。type8写深度，type4测试深度但不写深度；alpha测试为>=1/255。之前开关式处理会出现透明矩形遮挡，现已补齐这些独立状态。
+- AEX公开精灵接口把深度测试和写入绑定在一起，因此新增background-native.hlsl专门绘制st02的60个原面片。shader使用原三张纹理；geometry由background-shader.py从原STD生成。background.lua继续执行原STD/ANM时间轴，传入镜头、雾与树冠动画状态。未改原纹理，也未改共用anm.lua。
+- source头位置仍是包围盒中心，不加入面片世界坐标。场景保留36度FOV、近30/远8000、模式1摇摆、树冠2900帧后移动/变暗、雾色渐变、512帧滚动循环和关底中断1。
+
+原exe的11处指令检查和地址保存在background-reference.json、work/logs/stage5/bg11-native-mechanism.log。局部检查通过：60面片源顺序、朝向与顶点、原图哈希、时间轴/循环/中断；此前小怪HP0.1、碰撞修复和诹访子30秒保持。背景专项原生捕获180/2176/2688/3100/3400/4300/6000及关底中断前后9张图，无道中或关底战斗；本机稳定约60FPS。日志work/logs/stage5/bg11-source.log与bg11-native.log。
+
+另已打开原版Normal二面Practice观察前段树林构图与移动；用户物理Esc停止computer-use后未再操作原版窗口。原版后段未逐帧对照，D3D9/D3D11的采样、精度和边缘规则仍可能有细小差异，不宣称像素完全一致。
+
+复查命令：python scripts/stage5/verify-background.py；powershell -File scripts/stage5/verify-background.ps1。普通试玩入口仍是G:\MySTG\start-stage5.cmd。
+
+## 2026-10-27 山谷露出与道中Boss衔接纠正
+
+用户提供原版后段画面后确认：中央应是明亮山谷，暗树冠只保留在两侧。上一次仍错误地放大了树冠：native47f289从4b9138读取0.5、47f29f先乘投影单位长度，再乘sprite尺寸/STD比例，之后才使用居中锚点。因此STD512x435实际对应256x217.5的相机朝向贴片；此前漏掉这个独立0.5，造成树冠覆盖中央山谷。现已修正CPU顶点与实际shader，并把检查期望改成原生推导值。
+
+另补齐原版背景相机的408x472视口、裁切至384x448弹幕区的投影关系，依据41b9fb从supervisor camera3(4cd478)复制相机。原图、原颜色及非背景参数不变。
+
+五面采用四面道中，前半时长与背景来源二面不同。当前由五面实际MBoss创建事件开始播放二面原始转场片段，而不是提前按二面总时长播放完。事件前循环原始森林滚动片段；事件后从源时间2176开始原镜头/雾/ANM程序，保留滚动相位，不跳屏。树冠在事件后724帧开始移动/变暗，1224帧完成，两侧暗树冠和中央明亮山谷分开保留。单卡练习入口不等待道中Boss。
+
+验证：原exe半尺寸指令与常量读回；事件门控、滚动连续性、原始渐变/循环/关底中断；六个背景专项实际画面（登场前、登场、+600、+924、+1224与后段），约60FPS。山谷中央亮度114、两侧42/18（同一张图不同区域取样）；14个非背景Lua文件哈希不变，普通小怪HP0.1、诹访子30s和碰撞修复保留。证据work/logs/stage5/bg12-{source,native,preservation}.log及bg12-*.jpg。运行验证：verify-background.ps1 -Valley；试玩仍使用start-stage5.cmd。
+
+剩余画面问题：树冠尺寸纠正后，前段顶部两角可露出底色，需继续对照原版背景表面的覆盖/合成；本次没有通过更改原色掩盖它。当前完成的是用户指出的山谷露出及道中Boss转场衔接，不宣称完整背景像素已完全一致。
+
+## 2026-10-27 顶部蓝色底色修正
+
+此前记录的顶部两角蓝色已修正。根因是把STD13写入的全局清屏色用于内场景；原版内场景在41c461使用Stage+0x390的当前雾色清屏。STD8在41d630写runtime+0x384，runtime=Stage+0xc，因此两者是同一fogColor字段。现仅把背景填充RGB改为当前原始雾色，未加遮挡贴图或改变树冠、山谷、时序。前段顶部蓝色像素检查为0，六个背景事件画面运行通过；证据bg13-check.log、bg13-native.log及bg13-forest/valley.jpg。上文关于蓝色边角未修复的记录由本条覆盖。
