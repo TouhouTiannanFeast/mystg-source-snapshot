@@ -1,6 +1,7 @@
 -- Encounter-local source coordinates: x[0,384], y[0,448], down positive.
 -- No existing stage scheduler, projectile table or resource rule is modified.
-Zuu4R={}
+-- The boss system can call card.frame before the first card.init.
+Zuu4R={tick=0}
 local R=Zuu4R
 local pi=math.pi
 function R.cos(a)return math.cos(a*pi/180)end

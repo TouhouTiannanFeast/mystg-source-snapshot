@@ -135,13 +135,16 @@ function R.command(a,e,k,v)
   if k:sub(-1)=='2' then rec.i,rec.j,rec.k,rec.l=v[start+2],v[start+3],v[start+4],v[start+5];rec.r,rec.s,rec.u,rec.v=v[start+6],v[start+7],v[start+8],v[start+9] end
   p.ex[slot]=rec;if not indexed then p.next=slot+1 end
  elseif k=='etOn' then R.fire(a,pat(a,v[1]))
- elseif k=='laserNew' then local p=pat(a,v[1]);p.laser={start=v[2],length=v[3],max=v[4],width=v[5]}
+ elseif k=='laserNew' then
+  local p=pat(a,v[1]);p.laser={start=v[2],length=v[3],max=v[4],width=v[5]}
+  if a.group=='dsd' then p.laser={nativeLine=true,initial=v[2],length=v[2],max=v[3],terminal=v[4],travel=0,width=v[5]} end
  elseif k:find('^laserOn') then
   if a.group=='th10' then
    local p={typ=v[1],color=v[2],angle=v[3],speed=v[4],n=1,layers=1,aim=1,ox=0,oy=0,dist=v[5],ex={}}
    p.laser={length=v[6],max=v[6],width=v[8]}
-   -- Type-0 native line semantics are enabled only for the two reported cards.
-   if R.spec.id=='th10-card2' or R.spec.id=='th10-card6' then
+   -- All selected TH10 laser cards use native growth before tail movement.
+   -- Keep card1 covered: verify-line-growth.py guards against partial fixes.
+   if R.spec.id=='th10-card1' or R.spec.id=='th10-card2' or R.spec.id=='th10-card6' then
     p.dist=0
     p.laser={nativeLine=true,initial=v[5],length=v[5],max=v[6],terminal=v[7],width=v[8]}
    end
@@ -180,13 +183,14 @@ function R.motion(a)
  a.x,a.y=a.x+(a.offsetX or 0),a.y+(a.offsetY or 0)
 end
 function R.start(spec,seed)
- R.actors={};R.hazards={};R.tick=0;R.instructions=0;R.coverage={};R.random=Suwako5Pool.rng(seed);R.hp=spec.hp;R.spec=spec;R.invuln=0;R.photos=0
+ R.actors={};R.hazards={};R.tick=0;R.instructions=0;R.coverage={};R.random=Suwako5Pool.rng(seed);R.hp=spec.hp;R.spec=spec;R.invuln=0;R.photos=0;R.dsLaserWaves=0;R.dsLaserWaveTick=nil
  R.playerX,R.playerY=0,400;R.stats={bullets=0,lasers=0,actors=0}
  R.boss=R.newActor(spec.group,0,spec.group:sub(1,3)=='isc' and 192 or 112);R.spawn(R.boss,spec.entry,{},-2)
 end
 function R.step(px,py,hp)
  R.playerX,R.playerY,R.hp=px,py,hp;R.instructions=0
- if R.spec.group:sub(1,2)=='ds' then R.photos=math.max(R.photos,Suwako5Pool.photoIndex(hp,R.spec.hp)) end
+ if R.spec.group=='dsd' then R.photos=math.min(2,math.max(0,R.dsLaserWaves-1))
+ elseif R.spec.group:sub(1,2)=='ds' then R.photos=Suwako5Pool.photoIndex(R.tick) end
  for ai=1,#R.actors do
   local a=R.actors[ai]
   if not a.dead then

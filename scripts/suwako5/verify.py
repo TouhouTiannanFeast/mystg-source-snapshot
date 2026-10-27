@@ -57,9 +57,9 @@ lua.execute('''
  assert(math.abs(a.speed-2.01)<1e-8,'mode7 additive interpolation')
  assert(R.integer(3+1/5)==3 and R.integer(-3.8)==-3,'ECL integer truncation')
  for k=0,5 do
-  assert(P.photoIndex(10000*(1-k/6),10000)==k,'DS HP stage threshold')
+  assert(P.photoIndex(k*120)==k,'DS time stage threshold')
  end
- assert(P.photoIndex(0,10000)==5 and P.photoIndex(20000,10000)==0)
+ assert(P.photoIndex(600)==5 and P.photoIndex(1800)==5 and P.photoIndex(-1)==0)
 ''')
 rows=[]
 for pool in [P.nonspells,P.spells]:
@@ -75,8 +75,8 @@ for i in range(10,14):
  for t in range(1800):
   stage=min(5,t//300)
   R.step(32,400,spec.hp*(1-stage/6));R.stepHazards()
- assert R.photos==5
- print('DS HP PROGRESSION PASS',spec.id,'bullets',R.stats.bullets,'lasers',R.stats.lasers,flush=True)
+ assert R.photos==(2 if spec.group=='dsd' else 5)
+ print('DS TIME PROGRESSION PASS',spec.id,'bullets',R.stats.bullets,'lasers',R.stats.lasers,flush=True)
  R.clearHazards(False);R.stepHazards();assert len(R.hazards)==0
 (LOG/'traces.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf-8')
 print('PASS: source hashes; Lua5.1 syntax; 10000 reproducible draws, exclusions and nonspell order; source volley/speed/wait/birth/vector/relative-motion/mode7 assertions; 22 bounded firing traces and cleanup.')

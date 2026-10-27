@@ -145,7 +145,7 @@ local function card(spec,index)
   end)
  end
  c.del=function(o)
-  if setting.suwako5_test_progress then assert(R.photos==5,'DS blood-volume progression incomplete '..spec.id) end
+  if setting.suwako5_test_progress then assert(R.photos==(spec.group=='dsd' and 2 or 5),'DS progression incomplete '..spec.id) end
   if setting.suwako5_test_shoot then assert(o.suwako5_damaged,'shooting damage missing '..spec.id);print('SUWAKO5 SHOOT PASS '..spec.id) end
   print('SUWAKO5 END '..spec.id..' tick='..R.tick..' bullets='..R.stats.bullets..' lasers='..R.stats.lasers)
   clean();assert(next(S.owned)==nil,'stage-five object cleanup failed')

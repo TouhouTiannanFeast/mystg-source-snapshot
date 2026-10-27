@@ -31,3 +31,4 @@ Include("stages/th18_stage5/background.lua")
 Include("stages/th18_stage5/host.lua")
 Include("systems/th18-fire/runtime.lua")
 Include("stages/suwako5/stage.lua")
+if setting.dsd_laser_test then Include('stages/suwako5/dsd-laser-probe.lua') end

@@ -66,8 +66,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/root.lua",
-    "bytes": 1369,
-    "sha256": "8845f625a55ae2a96fbfbeb1652db805fc995da8946e31b8267e32373f5e81b6"
+    "bytes": 1451,
+    "sha256": "004d22625e9988e0c07cf2d097ecce30ceee645bcc83a7e6242f3da96d897bf2"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/normal.lua",
@@ -80,14 +80,19 @@
     "sha256": "b4d59b6a36980a69ba114e3c7e485d7893069ebee3fd318d6a8b198f1a8f88c8"
   },
   {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/dsd-laser-probe.lua",
+    "bytes": 496,
+    "sha256": "9aa34557339aa9289b15ae00dfa0a3ca1f8972ee542dc0f53bf65698344f10e8"
+  },
+  {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/laser-art.lua",
     "bytes": 1903,
     "sha256": "76de9666e3d3bad4fe50c2e7ba3247c7dd66c1cca9440b225a24d20788393670"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/pool.lua",
-    "bytes": 3279,
-    "sha256": "a67876873bcfa3e806c641346a58b2f1ee7d2887e7b3152e73651fbd6aace21c"
+    "bytes": 3217,
+    "sha256": "c3ab708d1f69ba861c143619424bebc50cee56fbdc3df9e619fe311db6ed2ad3"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/programs.lua",
@@ -96,23 +101,23 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/projectiles.lua",
-    "bytes": 9326,
-    "sha256": "2a5ac49790eec9230d1f0f326a0a3254777e073e594ff79d0494423436fde4da"
+    "bytes": 9769,
+    "sha256": "52b2cf94999df218275d84362b94139a37579104efe4689c870b78313c2297a8"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/README.md",
-    "bytes": 11930,
-    "sha256": "05ac1aa9e1914c7b4d70c6fe7d88de7baef22f9d432d7225f36f029124a3cf2a"
+    "bytes": 14220,
+    "sha256": "e573887f4174fcf567fd6df95416d1a6cc6bd1468b1ad8111bc7326519e5b5da"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/runtime.lua",
-    "bytes": 11900,
-    "sha256": "2ab774ad829da6b0dd0e32a83b7a6e8da718e66cf5bad547c91034adf6dd822e"
+    "bytes": 12227,
+    "sha256": "d52be415127388462291305bea16c9ac137516e6a54c9436c14eaf198efe2073"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/stage.lua",
-    "bytes": 13044,
-    "sha256": "0ae07347a2cdd377b52e44047311a6050d275a739d79b684249f78e0cc7204f1"
+    "bytes": 13060,
+    "sha256": "30ede2623d0b47e87289d74bbd1a62f90ddb70dbbd97cda37a0b678e42941eea"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/boss.lua",
@@ -231,8 +236,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/runtime.lua",
-    "bytes": 6240,
-    "sha256": "1f858244afa724fbd77761a47735259f212040a6d8fb1082db0f84c45411abd8"
+    "bytes": 6313,
+    "sha256": "707004b547cb9b428ab5158d8613cfa8900153e01231c77dcf1e05332737161d"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/th20.lua",
@@ -1215,9 +1220,24 @@
     "sha256": "134f8c2bf259c894feee2c0b6fb83a4f9cf625d6b26bfd89209c4b232d612dfe"
   },
   {
+    "path": "scripts/suwako5/verify-dsd-laser.py",
+    "bytes": 2086,
+    "sha256": "8f82933624784244b65cb457f02725d49d4d151a48927e8662e253151fe552c6"
+  },
+  {
+    "path": "scripts/suwako5/verify-dsd-native.ps1",
+    "bytes": 1198,
+    "sha256": "4491ed54c52597a0427db2c48cbcb256b0afe0820b0b1d36b04417fad1c60efd"
+  },
+  {
     "path": "scripts/suwako5/verify-laser-position.py",
     "bytes": 3569,
     "sha256": "3231d2f77bce96cc39910c15e026e94ca401a01514293210f992d5c2d6a81b23"
+  },
+  {
+    "path": "scripts/suwako5/verify-line-growth.py",
+    "bytes": 1533,
+    "sha256": "dfdeb373de6da07c85b292854ad26a821e09fd76180c34dbf5c9d15700b67743"
   },
   {
     "path": "scripts/suwako5/verify-native.ps1",
@@ -1226,8 +1246,8 @@
   },
   {
     "path": "scripts/suwako5/verify.py",
-    "bytes": 4504,
-    "sha256": "d056fb1bfe7d4d0f8b59a3d508e06ebb71bddeb308e6d375e6ab4215933813eb"
+    "bytes": 4537,
+    "sha256": "3eada22ee4059e9602e33642d0776c4e6a056bc11654b0ab4ad6a6fdf5d63c00"
   },
   {
     "path": "scripts/th08-stage4/build-reference.py",
@@ -1288,6 +1308,11 @@
     "path": "scripts/zuu4/verify-native.ps1",
     "bytes": 1935,
     "sha256": "191861307b97daa73f3ee2f8dcb929fdc3bc746e4e00aa60c238c5b0ce1acc5a"
+  },
+  {
+    "path": "scripts/zuu4/verify-startup.py",
+    "bytes": 1032,
+    "sha256": "bc679e82cfa8b9b36e997c383e9b0b023aff401191484d65e07b55f7d29255ca"
   },
   {
     "path": "scripts/zuu4/verify.py",

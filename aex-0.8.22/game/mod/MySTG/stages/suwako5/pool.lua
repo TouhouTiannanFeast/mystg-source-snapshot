@@ -42,12 +42,10 @@ function P.find(id)
  for _,pool in ipairs({P.spells,P.nonspells}) do for _,spec in ipairs(pool) do if spec.id==id then return spec end end end
  error('unknown Suwako phase: '..tostring(id))
 end
--- Six shooting-progress stages replace successful photos0..5.
+-- Six timed stages replace successful photos0..5: 0/2/4/6/8/10 seconds.
 -- Counter5 is the last source-safe stage: DS-d's wait is260-50*counter.
-function P.photoIndex(hp,maxHp)
- assert(maxHp>0,'invalid DS maximum HP')
- local lost=1-math.max(0,math.min(1,hp/maxHp))
- return math.min(5,math.floor(lost*6+0.000000001))
+function P.photoIndex(elapsedFrames)
+ return math.min(5,math.floor(math.max(0,elapsedFrames)/120))
 end
 
 -- Observation order matches the launcher: original nonspells, then spell catalog.

@@ -15,6 +15,10 @@ function R.clearHazards(lasersOnly)
  for _,b in ipairs(R.hazards or {}) do if not lasersOnly or b.laser then b.dead=true end end
 end
 function R.fire(a,p)
+ if a.group=='dsd' and p.laser and R.dsLaserWaveTick~=R.tick then
+  R.dsLaserWaveTick=R.tick;R.dsLaserWaves=(R.dsLaserWaves or 0)+1
+  R.photos=math.min(2,R.dsLaserWaves-1)
+ end
  local base=p.angle or 0;local n,layers=p.n or 1,p.layers or 1
  local aim=math.atan2(R.playerY-a.y,R.playerX-a.x)
  for j=0,layers-1 do for i=0,n-1 do
@@ -150,12 +154,19 @@ function R.projectileStep(b)
  end
  b.active=active
  local scale=b.birth and b.age<b.birth and 0.5 or 1
- if b.laser and b.laser.nativeLine and b.laser.length<b.laser.max then
+ if b.laser and b.laser.nativeLine and b.laser.length<b.laser.max and (b.group~='dsd' or b.laser.travel==0) then
   -- Native0x41D4CF: grow first from the fixed origin; move the tail only
   -- after maximum length is reached. Growth uses source speed, not its
   -- temporary deceleration vector (Seven Stones/Woods starts at y=0).
   b.laser.length=math.min(b.laser.max,b.laser.length+b.speed)
- else b.x,b.y=b.x+b.vx*scale,b.y+b.vy*scale end
+ else
+  b.x,b.y=b.x+b.vx*scale,b.y+b.vy*scale
+  if b.group=='dsd' and b.laser and b.laser.nativeLine then
+   local l=b.laser;l.travel=l.travel+b.speed
+   l.length=math.min(l.max,math.max(0,l.terminal-l.travel))
+   if l.length<=0 then b.dead=true end
+  end
+ end
  b.age=b.age+1;b.cull=b.cull-1;b.collidable=not b.birth or b.age>=b.birth
  local w,h=16,16
  if b.group=='th10' and Suwako5Art and Suwako5Art[b.typ] then local v=Suwako5Art[b.typ][b.color] or Suwako5Art[b.typ][0];if v then w,h=v.w/2,v.h/2 end
