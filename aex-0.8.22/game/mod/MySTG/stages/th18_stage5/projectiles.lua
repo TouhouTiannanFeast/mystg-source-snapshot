@@ -162,7 +162,7 @@ function R.projectileStep(b)
  if b.group=='th10' and Suwako5Art and Suwako5Art[b.typ] then local v=Suwako5Art[b.typ][b.color] or Suwako5Art[b.typ][0];if v then w,h=v.w/2,v.h/2 end
  elseif b.typ==31 then w,h=64,64 end
  if b.laser then w,h=math.max(b.laser.length,b.laser.width),math.max(b.laser.length,b.laser.width) end
- if b.cull<=0 and (b.x+w<=-192 or b.x-w>=192 or b.y+h<=-64 or b.y-h>=448) then b.dead=true end
+ if b.cull<=0 and (b.x+w<=-192 or b.x-w>=192 or b.y+h<=-64 or b.y-h>=448) then b.dead=true;b.offscreenRemoval=true end
  if b.bombProof then b.bombProof=math.max(0,b.bombProof-1) end
 end
 function R.stepHazards()

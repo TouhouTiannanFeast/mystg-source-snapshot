@@ -3,6 +3,7 @@ local S={owned={},ended=0,current=nil}
 Zuu4Stage=S
 local prefix='stages/zuu4/'
 Include(prefix..'art.lua');Include(prefix..'runtime.lua')
+Include(prefix..'animation.lua')
 -- runtime.lua owns the sole encounter scheduler.
 R=Zuu4R
 Include(prefix..'patterns.lua');Include(prefix..'horou.lua');Include(prefix..'horou-spells.lua');Include(prefix..'th20.lua')
@@ -15,6 +16,7 @@ end
 for row=0,15 do for col=0,7 do LoadImage('zuu4.model'..(row*10+col),'zuu4.zuu',col*118,row*128,118,128)end end
 LoadImage('zuu4.wingBase','zuu4.wings',0,256,256,128);SetImageCenter('zuu4.wingBase',0,64)
 LoadImage('zuu4.wingNormal','zuu4.wings',0,0,512,256);SetImageCenter('zuu4.wingNormal',0,128)
+for i=0,7 do LoadImage('zuu4.normalStrip'..i,'zuu4.wings',i*64,0,64,256)end
 LoadImage('zuu4.wingMachineBase','zuu4.wings',512,256,128,256)
 LoadImage('zuu4.wingMachine','zuu4.wings',256,256,256,64);SetImageCenter('zuu4.wingMachine',0,32)
 LoadImage('zuu4.wingUdjyat','zuu4.wings',0,384,256,128)
@@ -52,6 +54,7 @@ function Shot:frame()
  if b.age<b.delay then local u=(b.age+1)/b.delay;self.hscale,self.vscale=4-3*u,4-3*u;self._a=u*160 end
  self._blend=(art.add or(b.addDelay and b.age<b.delay))and 'mul+add' or ''
  self.group=b.bombProof and GROUP_INDES or GROUP_ENEMY_BULLET
+ if b.drawLayer then self.layer=LAYER_ENEMY_BULLET+b.drawLayer*0.01 end
  if b.collidable==false then self.colli=false end
 end
 function Shot:render()
@@ -150,13 +153,24 @@ function Familiar:kill()self.data.dead=true;S.owned[self]=nil end
 function Familiar:del()S.owned[self]=nil end
 R.onActor=function(a)New(Familiar,a)end
 R.onShot=function(b)New(b.kind=='shot' and Shot or b.kind=='beam' and Beam or Explosion,b)end
+local WingExit=Class(object)
+function WingExit:init(parts)
+ self.parts=parts;self.group=GROUP_GHOST;self.layer=LAYER_ENEMY;self.bound=false;self.colli=false
+end
+function WingExit:frame()
+ if self.timer>=150 then Del(self);return end
+ R.animation.fadeStep(self.parts,self.timer)
+end
+function WingExit:render()
+ for _,p in ipairs(self.parts)do if p.active then R.animation.drawPart(p)end end
+end
 local function card(id,index)
  local spec=Zuu4Specs[id]
  local c=boss.card.New(spec.name or '',0,0,spec.time,spec.hp,{0,0,0},false)
  c.frame=function(o)if spec.hold and R.tick<spec.hold then o.timer=0 end end
  c.init=function(o)
   clean();S.boss=o;S.current=id;S.index=index;S.damage=0;S.familiarHits=0
-  th08s4.label=spec.name or ('Torisumi Zuu / '..id)
+  th08s4.label=spec.name or ('Torisumi Horou / '..id)
   R.start(id,tonumber(setting.zuu4_seed)or 20261027,o.x+192,224-o.y)
   R.setHostHP=function(hp)o.hp=hp end
   print('ZUU4 START '..id..' hp='..spec.hp..' frames='..spec.time*60)
@@ -185,54 +199,45 @@ local function card(id,index)
    print('ZUU4 SHOOT '..id..' damage='..S.damage..' familiarHits='..S.familiarHits)
   end
   print('ZUU4 END '..id..' ticks='..R.tick..' bullets='..R.counts.shots..' beams='..R.counts.beams..' subphase='..R.subphase)
+  local exitParts=id=='final' and R.animation.detach(R.boss)
   S.ended=S.ended+1;clean();assert(next(S.owned)==nil,'Zuu4 object leak')
+  if exitParts then New(WingExit,exitParts)end
  end
  return c
 end
 local ZuuDamage=Class(boss)
 Zuu4Boss=Class(ZuuDamage)
 function Zuu4Boss:init(mode)
+ R.animation.clock=0;R.animation.wingClock=0;R.animation.book=true;R.animation.float=0
  local cards={};local ids=Zuu4Order
  if mode and Zuu4Specs[mode]then ids={mode}end
  for i,id in ipairs(ids)do cards[#cards+1]=card(id,i)end
- S.ended=0;boss.init(self,0,96,'Torisumi Zuu',cards,nil,'Normal');self.a,self.b=24,16
+ S.ended=0;boss.init(self,0,96,'Torisumi Horou',cards,nil,'Normal');self.a,self.b=24,16
 end
 function ZuuDamage:take_damage(dmg)
  local id=S.current;local spec=Zuu4Specs[id]
  if spec and R.boss and R.boss.visible~=false and not(id=='non3' and R.tick<120)then
-  local before=self.hp;boss.take_damage(self,dmg*spec.rate);S.damage=(S.damage or 0)+(before-self.hp)
+  local multiplier=spec.rate
+  if spec.bombRate and Th18Fire and Th18Fire.damageKind=='bomb' then multiplier=multiplier*spec.bombRate end
+  local before=self.hp;boss.take_damage(self,dmg*multiplier);S.damage=(S.damage or 0)+(before-self.hp)
  end
 end
 function Zuu4Boss:render()
  self._bosssys:render()
- local y=self.y+12+4*sin(self.ani*4)
- if R.wings then
-  local t=R.tick-R.wingStart
-  Render('zuu4.wingBase',self.x+8*cos(212),y-8*sin(212),-212,0.5,-0.5)
-  Render('zuu4.wingNormal',self.x+16*cos(192),y-16*sin(192),-192,0.5,-0.5*(0.8+0.2*sin(t*4)))
-  local bx,by=self.x+64*cos(164),y-64*sin(164)
-  Render('zuu4.wingMachineBase',bx,by,-74,0.6,0.6)
-  local left,right=R.horouAnchors(R.boss,t)
-  for i,a in ipairs(left)do Render('zuu4.wingMachine',a.x-192,224-a.y,-a.angle,0.5,-0.4-0.2*sin((204-(i-1)*12)+math.floor(t/4)*32))end
-  bx,by=self.x+48*cos(-8),y-48*sin(-8)
-  Render('zuu4.wingUdjyat',bx,by,8,0.8,0.8)
-  Render('zuu4.wingEye',bx,by,8,0.5,0.5);Render('zuu4.wingPupil',bx,by,8,0.25,0.25)
-  for _,a in ipairs(right)do Render('zuu4.wingFlyer',a.x-192,224-a.y,-a.angle,0.3,0.3*sin(a.angle*2+360*sin(t*2)))end
-  for i=0,2 do local a=8+({-16,0,16})[i+1];local d=({4,8,16})[i+1];local sc=0.5-i*0.1
-   Render('zuu4.wingImmortal',self.x+d*cos(a),y-d*sin(a),-a+8*sin(t/2*5),sc,sc)
-  end
- end
- local frame=math.floor(R.tick/12)%4
- if R.boss and R.boss.action=='shot1' then frame=15 end
- if not R.boss or R.boss.book~=true then frame=frame+30 end
- Render('zuu4.model'..frame,self.x,y)
- if R.tablet then local tab=R.tablet;Render('zuu4.model'..(120+math.floor(R.tick/6)%8),tab.x-192,224-tab.y,0,0.75,0.75)end
+ R.animation.render(R.boss or{x=self.x+192,y=224-self.y,book=true})
 end
 if setting.zuu4_test then
  if setting.zuu4_test_shoot then player_lib.debug_data.keep_shooting=true end
  local oldRender=RenderFunc;local captures={}
  RenderFunc=function()
   oldRender()
+  for _,t in ipairs(setting.zuu4_snapshot_points or{})do
+   local key=(S.current or'')..'-audit06-'..t
+   if S.current and R.tick>=t and not captures[key]then
+    captures[key]=true;local path='userdata/snapshot/zuu4-'..key..'.jpg'
+    lstg.Snapshot(path);print('ZUU4 AUDITSHOT '..path)
+   end
+  end
   if S.current and R.tick>=(tonumber(setting.zuu4_snapshot_frame)or 450)then
    local key=S.current..'-'..R.subphase
    if not captures[key]then captures[key]=true;local path='userdata/snapshot/zuu4-'..key..'.jpg';lstg.Snapshot(path);print('ZUU4 SNAPSHOT '..path)end

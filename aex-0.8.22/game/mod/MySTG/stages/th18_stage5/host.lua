@@ -75,7 +75,17 @@ function Enemy:frame()
  if spr then w,h=spr[4]*math.abs(root.values.scale[1]),spr[5]*math.abs(root.values.scale[2])end
  R.cullActor(a,w,h)
 end
+-- Only the MBoss visual is replaced. Source animations still drive culling unchanged.
+function H.renderMidbossPyramid(root,x,y)
+ if not root or root.dead then return end
+ local spr=assert(D.enemy.sprites[root.sprite])
+ local image='th18s5.pyramid.'..(math.floor(root.age/8)%5)
+ SetImageState(image,'',Color(math.max(0,math.min(255,root.values.alpha[1])),255,255,255))
+ Render(image,x+root.values.pos[1],y-root.values.pos[2],0,
+  root.values.scale[1]*spr[4]/48,root.values.scale[2]*spr[5]/48)
+end
 function Enemy:render()
+ if self.data.name=='MBoss' then H.renderMidbossPyramid(self.animations[0],self.x,self.y);return end
  local list={}for slot,anm in pairs(self.animations)do list[#list+1]={slot,anm}end
  table.sort(list,function(a,b)return(a[2].layer or 0)<(b[2].layer or 0)end)
  for _,v in ipairs(list)do A.render(v[2],self.x,self.y)end
@@ -97,7 +107,7 @@ function Shot:frame()
 end
 function Shot:render()A.render(self.animation,self.x,self.y)end
 function Shot:kill()self.data.dead=true;H.owned[self]=nil;bullet.kill(self)end
-function Shot:del()H.owned[self]=nil;bullet.del(self)end
+function Shot:del()H.owned[self]=nil;if not self.data.offscreenRemoval then bullet.del(self)end end
 function H.begin(seed)
  H.cleanup();A.load();H.counts={spawned={},collected={}};R.startRoute(seed)
  R.onActor=function(a)New(Enemy,a)end
@@ -130,6 +140,9 @@ function H.renderSuwako(s,x,y)A.render(s.animation,x,y)end
 
 -- Keep shared source sheets in the mod resource pool across practice re-entry.
 A.load()
+LoadTexture('th18s5.pyramid','stages/th18_stage5/art/th20-pyramid/enemy_stone.png')
+SetTextureSamplerState('th18s5.pyramid','linear+wrap')
+for i=0,4 do LoadImage('th18s5.pyramid.'..i,'th18s5.pyramid',i*48,96,48,48)end
 
 
 

@@ -9,8 +9,8 @@ R.enableWings=function(o)
  if R.wingColliders then return end
  R.wingStart=R.tick;R.wingColliders=true
  for _,x in ipairs({-96,96})do
-  local a=R.actor(o.x+x,o.y,'wingHitbox',999999,1)
-  a.follow=true;a.ox,a.oy=x,0;a.hitRadius=48;a.noVisual=true
+  local a=R.actor(o.x+x,o.y,'wingHitbox',999999,1,48)
+  a.follow=true;a.ox,a.oy=x,0;a.noVisual=true
  end
 end
 local function standby(o,x,y,n,stopTimer)
@@ -23,6 +23,7 @@ local function moveRandom(o,distance)
  local x=math.max(48,math.min(336,o.x+dist*cos(angle)))
  local y=math.max(124,math.min(196,o.y+dist*sin(angle)))
  R.weightMove(o,x,y,15,4,0.1,12)
+ if R.setAction then R.setAction(o,'move',160)end
 end
 R.horouAnchors=function(o,frame)
  local left,right={},{}
@@ -129,7 +130,11 @@ local function wingNon2(o)
 end
 P.non1=function(o)
  o.book=true;standby(o,192,160,300,true);wait(1)
- spawn(function()wait(90);o.book=false;R.tablet={x=o.x,y=o.y-96,age=0}end)
+ if R.setAction then R.setAction(o,'shot2',90)end
+ spawn(function()
+  wait(90);R.tablet={x=o.x-24,y=o.y-58,sx=o.x-24,sy=o.y-58,tx=o.x,ty=o.y-96,age=0}
+  wait(1);o.book=false
+ end)
  wait(150)
  local function lasers()
   spawn(function()
@@ -152,8 +157,14 @@ end
 P.non2=function(o)
  o.book=false;standby(o,192,224,360,true);wait(60)
  -- A02_OpeningMotion:90+60+30+90, while the source scene timer is stopped.
- spawn(function()wait(60);o.book=true;R.tablet=nil end)
+ o.book=true;R.tablet=nil;if R.setAction then R.setAction(o,'shot3',60)end
+ spawn(function()
+  wait(150);R.wingVisual={x=o.x,y=o.y-96,start=R.tick}
+  wait(30);if R.setAction then R.setAction(o,'shot1',120)end
+ end)
  wait(270);R.tablet=nil;R.enableWings(o)
+ R.wingVisual=nil
+ if R.setAction then R.setAction(o,'left',90)end
  R.move(o,192,140,90,'linear');wingNon2(o);wait(180);local count=0;local dir=1
  while true do
   if count%2==1 then moveRandom(o,24)end
@@ -174,7 +185,8 @@ P.spell1=function(o)
  o.book=false;standby(o,192,160,60);wait(60);wait(60);local count=0;local dir=1
  while true do
   local center=({192,192+R.rand(64,128),192,192-R.rand(64,128)})[count%4+1]
-  wait(90);R.move(o,center,160,90,'linear');wait(30)
+  if R.setAction then R.setAction(o,'shot2',90)end
+  wait(90);R.move(o,center,160,90,'linear');if R.setAction then R.setAction(o,'move',90)end;wait(30)
   local direction=dir
   spawn(function()
    local base=R.rand(0,360)

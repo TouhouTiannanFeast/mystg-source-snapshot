@@ -23,7 +23,7 @@ end
 function Blast:frame()
  if self.timer>=11 then Del(self);return end
  local radius=64+8*self.timer
- eachOverlap(self.x,self.y,radius,function(e)F.damage(e,100)end)
+ eachOverlap(self.x,self.y,radius,function(e)F.damage(e,100,'bomb')end)
  New(bomb_bullet_killer,self.x,self.y,radius,radius,false)
 end
 function Blast:render()
@@ -67,7 +67,7 @@ function Orb:frame()
  end
  if self.timer%3==0 then
   eachOverlap(self.x,self.y,56,function(e)
-   F.damage(e,15);self.total=self.total+15
+   F.damage(e,15,'bomb');self.total=self.total+15
   end)
  end
  if self.timer%8==self.index then New(bomb_bullet_killer,self.x,self.y,64,64,false) end

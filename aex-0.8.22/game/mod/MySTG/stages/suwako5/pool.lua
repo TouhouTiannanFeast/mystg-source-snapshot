@@ -11,10 +11,10 @@ for _,id in ipairs({1,2,3,4,5,6,8,9,10}) do
 end
 local ds={'神樱「湛樱花吹雪」','姬川「Princess Jade Green」','铁轮「Mythical Ring」','土著神「御射军神大人」'}
 for i,c in ipairs({'a','b','c','d'}) do
- P.spells[#P.spells+1]={id='th125-'..c,name=ds[i],group='ds'..c,entry='Boss',hp=1000,frames=1800}
+ P.spells[#P.spells+1]={id='th125-'..c,name=ds[i],group='ds'..c,entry='Boss',hp=3000,frames=1800}
 end
-P.spells[#P.spells+1]={id='th143-0902',name='绿石「Jade Break」',group='isc0902',entry='AttackFunc',hp=320,frames=1800}
-P.spells[#P.spells+1]={id='th143-0906',name='蛙符「涂有鲜血的赤蛙塚」',group='isc0906',entry='AttackFunc',hp=190,frames=1800}
+P.spells[#P.spells+1]={id='th143-0902',name='绿石「Jade Break」',group='isc0902',entry='AttackFunc',hp=4000,frames=1800}
+P.spells[#P.spells+1]={id='th143-0906',name='蛙符「涂有鲜血的赤蛙塚」',group='isc0906',entry='AttackFunc',hp=4000,frames=1800}
 for _,id in ipairs({1,2,3,4,5,6,8}) do
  P.nonspells[#P.nonspells+1]={id='th10-non'..id,name='',group='th10',entry='Boss'..id,hp=8000,frames=1800,sourceIndex=id}
 end

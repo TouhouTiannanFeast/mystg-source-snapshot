@@ -66,7 +66,7 @@ local function layer(o,phase)
   base=base+R.rand(-180,180)
   local r=R.rand(-128,128);local ox,oy=r*R.cos(base),r*R.sin(base)
   fan(o,7,angle,0.436332*degrees,1.5,6,ox,oy,0,function(b)
-   b.profile={hold=0,initial=1.5,n1=120,s1=0.5};b.wraps=1;b.wrapMask=3;b.noCull=true
+   b.profile={hold=0,initial=1.5,n1=120,s1=0.5};b.wraps=1;b.wrapMask=3;b.wrapPadding=32;b.noCull=true;b.drawLayer=0
   end)
   wait(({20,24,28,28})[phase+1])
  end
@@ -76,7 +76,7 @@ local function ringLayer(o,phase)
  while R.subphase==phase do
   local unused=R.rand(0,20)
   local angle=R.rand(-180,180);local r=R.rand(-128,128)
-  ring(o,32,angle,1.8,3,r*R.cos(base),r*R.sin(base),0,function(b)b.profile={hold=0,initial=1.8,n1=80,s1=0.8};b.noCull=true end)
+  ring(o,32,angle,1.8,3,r*R.cos(base),r*R.sin(base),0,function(b)b.profile={hold=0,initial=1.8,n1=80,s1=0.8};b.noCull=true;b.drawLayer=0 end)
   base=base+3.883222*degrees;wait(120)
  end
 end
@@ -85,29 +85,40 @@ local function tripleLayer(o,phase,final)
  while R.subphase==phase do
   local unused=R.rand(0,20);local angle=final and R.aim(o)or base;local r=R.rand(-128,128)
   ring(o,final and 1 or 3,angle,3.8,final and 1 or 5,r*R.cos(base),r*R.sin(base),0,function(b)
-   b.profile={hold=0,initial=3.8,n1=60,s1=final and 2.2 or 1.2};b.transformIndex=3;b.noCull=true
+   -- Native etEx25 writes +0x44, used by the six render-list buckets (47d85b).
+   b.profile={hold=0,initial=3.8,n1=60,s1=final and 2.2 or 1.2};b.drawLayer=3;b.noCull=true
   end)
   base=base+3.883222*degrees;wait(final and 8 or 13)
  end
 end
 local function launchLayers(o,phase)
- R.subphase=phase;spawn(function()layer(o,phase)end)
+ R.subphase=phase;R.stonePhaseStarts=R.stonePhaseStarts or{};R.stonePhaseStarts[phase+1]=R.tick
+ spawn(function()layer(o,phase)end)
  if phase>=1 then spawn(function()ringLayer(o,phase)end)end
  if phase>=2 then spawn(function()tripleLayer(o,phase,false)end)end
  if phase>=3 then spawn(function()tripleLayer(o,phase,true)end)end
 end
 P.stone=function(o)
+ R.stonePhaseStarts={}
  R.move(o,192,144,60,'decel');o.visible=true;wait(120)
  launchLayers(o,0)
  local elapsed=0
- while elapsed<=1800 and R.hp>8000 do wait(1);elapsed=elapsed+1;if elapsed%200==0 then randomMove(o,60,4,1,144,64,128)end end
+ -- ECL decrements B before testing B<5400:1801 checks,1800 waits.
+ while true do
+  elapsed=elapsed+1;if elapsed>1800 or R.hp<=8000 then break end
+  wait(1);if elapsed%200==0 then randomMove(o,60,4,1,144,64,128)end
+ end
  for phase=1,3 do
   local cap=({8000,5000,2000})[phase]
   R.hp=cap;if R.setHostHP then R.setHostHP(cap)end
   R.clearBullets();launchLayers(o,phase)
   if phase<3 then
    local elapsed=0;local nextHP=phase==1 and 5000 or 2000
-   while elapsed<1800 and R.hp>nextHP do wait(1);elapsed=elapsed+1;if elapsed%200==0 then randomMove(o,60,4,1,144,64,128)end end
+   -- A>=1800 is tested on entry:1800 checks,1799 waits.
+   while true do
+    elapsed=elapsed+1;if elapsed>=1800 or R.hp<=nextHP then break end
+    wait(1);if elapsed%200==0 then randomMove(o,60,4,1,144,64,128)end
+   end
   end
  end
  while true do wait(200);randomMove(o,60,4,1,144,64,128)end

@@ -18,8 +18,8 @@ function R.resume(t)
  local ok,n=coroutine.resume(t.co);assert(ok,n)
  t.dead=coroutine.status(t.co)=='dead';t.wake=R.tick+(n or 1)
 end
-function R.actor(x,y,kind,hp,link)
- local a={x=x,y=y,kind=kind,hp=hp or 55,link=link or 0,age=0,angle=0,speed=0,visible=true}
+function R.actor(x,y,kind,hp,link,hitRadius)
+ local a={x=x,y=y,kind=kind,hp=hp or 55,link=link or 0,hitRadius=hitRadius,age=0,angle=0,speed=0,visible=true}
  R.actors[#R.actors+1]=a;if R.onActor then R.onActor(a)end;return a
 end
 function R.move(o,x,y,n,mode)
@@ -76,6 +76,7 @@ function R.start(id,seed,x,y)
  local state=(seed or 20261027)%2147483647;if state<=0 then state=1 end
  R.random=function()state=state*16807%2147483647;return (state-1)/2147483646 end
  R.boss={x=x or 192,y=y or 128,angle=0,speed=0}
+ if R.resetAnimation then R.resetAnimation(R.boss)end
  R.spawn(function()Zuu4Patterns[id](R.boss)end)
  if R.wings and R.enableWings then R.enableWings(R.boss)end
 end
@@ -115,7 +116,13 @@ function R.projectileStep(b)
   b.x,b.y=b.x+b.speed*R.cos(b.angle),b.y+b.speed*R.sin(b.angle)
  end
  if b.wraps and b.wraps>0 and b.age>=128 and (b.y<0 or b.y>448)then
-  if b.y<0 then b.y=b.y+448 else b.y=b.y-448 end;b.wraps=b.wraps-1
+  local pad=b.wrapPadding or 0;local half=pad/2
+  -- Native483270 first checks the full sprite bounds, then wraps by H+spriteH.
+  local outside=pad==0 or b.x<=-half or b.x>=384+half or b.y<=-half or b.y>=448+half
+  if outside then
+   local extent=448+pad
+   if b.y<0 then b.y=b.y+extent else b.y=b.y-extent end;b.wraps=b.wraps-1
+  end
  end
  if b.afterMove then b.afterMove(b)end
  b.age=b.age+1
@@ -128,6 +135,7 @@ function R.step(px,py,hp)
  for i=1,n do local t=R.threads[i];if not t.dead and t.generation==R.generation and t.wake<=R.tick then R.resume(t)end end
  local live={};for _,t in ipairs(R.threads)do if not t.dead and t.generation==R.generation then live[#live+1]=t end end;R.threads=live
  R.motionStep(R.boss)
+ if R.animateStep then R.animateStep(R.boss)end
  local actors={};for _,a in ipairs(R.actors)do if not a.dead then
   if a.follow then a.x,a.y=R.boss.x+a.ox,R.boss.y+a.oy;a.visible=R.boss.visible~=false else R.motionStep(a)end
   a.age=a.age+1

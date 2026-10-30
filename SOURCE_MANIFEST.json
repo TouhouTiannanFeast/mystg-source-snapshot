@@ -25,6 +25,71 @@
     "sha256": "6f47199a2c0a52e1b6982f63a9f5dc9bb324f1a045900e129cd7e8dffe512c3f"
   },
   {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/art.lua",
+    "bytes": 78125,
+    "sha256": "1bdca6be45b77a46f6ec5c446dd992326c0d2c21acbb272f8d8a017ef4f0cddc"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/constants.lua",
+    "bytes": 27278,
+    "sha256": "d499642950a20bb2600a94855dc1aa24ca3d5cff2a352804f01b836a15616c92"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/host.lua",
+    "bytes": 6935,
+    "sha256": "a630eaa1188fd85d579ffaba2f3f851858ce16559963f3991b5af3b95203dcd7"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/player-config.lua",
+    "bytes": 190,
+    "sha256": "5d8840c6133d0919beba05ca7223321a6a186052b2c271b032593ec3efcd2a2d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/player-data.lua",
+    "bytes": 2106,
+    "sha256": "4525ed616ddb76ee490069a4668a15c160ad95bac864b427c8f7c3acf35a6f09"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/player.lua",
+    "bytes": 6747,
+    "sha256": "c2860ea1b33f3f2857a3fb16c10bbb4fd47cd196cd91895f5efb6099faaff3a3"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/power-lock.lua",
+    "bytes": 1558,
+    "sha256": "c72086e214cca4db3562f01eeabebb91d73a2088964873ecf614f904c059cfb9"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/road.lua",
+    "bytes": 87548,
+    "sha256": "070e558bed013a79eaab66577162677c262f62f5dfcfc0fe2f3ad0e629da58d5"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/root.lua",
+    "bytes": 2171,
+    "sha256": "4e179f117bc29e841ea7c242ac55e140ef2e280149a7be8b9222b80e7eaef93b"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/runtime.lua",
+    "bytes": 13145,
+    "sha256": "b2672e482ea869d8d3510f361680448bc6d182498984be2b94af644475d0425a"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/sound-data.lua",
+    "bytes": 2247,
+    "sha256": "54bab641e1fb883e2d438e2ca1247e96ff3a19b7bdce6f6fdc7d2d12e8e6f2da"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/sound.lua",
+    "bytes": 1889,
+    "sha256": "9fa74c66c1c048774e4766aa7ebf6bdfffb6ae62e78d0272426d875f9982d63d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/HSoBStage5Normal/source/player-template.lua",
+    "bytes": 4582,
+    "sha256": "663480eff627fdcb390fe36076767fd33ae7d810fdf6cba715b0655250cbf181"
+  },
+  {
     "path": "aex-0.8.22/game/mod/Le03Stage4Normal/README.md",
     "bytes": 19472,
     "sha256": "52b42d48a183449ba85cf1a8cbd5bba176af8af420a54fe912afe2691e4474f4"
@@ -166,8 +231,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/pool.lua",
-    "bytes": 3217,
-    "sha256": "c3ab708d1f69ba861c143619424bebc50cee56fbdc3df9e619fe311db6ed2ad3"
+    "bytes": 3219,
+    "sha256": "83e2de5dbfdaec60af69ac8581bf4ea21d540650337cee09b4c2e4bac37040f5"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/programs.lua",
@@ -176,8 +241,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/projectiles.lua",
-    "bytes": 9769,
-    "sha256": "52b2cf94999df218275d84362b94139a37579104efe4689c870b78313c2297a8"
+    "bytes": 9793,
+    "sha256": "9b213ed23064f5b42d35b7e52ac99f91ac96b1d113a3231b1d993f8194c16850"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/runtime.lua",
@@ -186,8 +251,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/suwako5/stage.lua",
-    "bytes": 13060,
-    "sha256": "30ede2623d0b47e87289d74bbd1a62f90ddb70dbbd97cda37a0b678e42941eea"
+    "bytes": 13593,
+    "sha256": "cb950398c285f20653d3cf77876412336e69e29642460d6a3b22e7afa1b6ebc1"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th08_stage4/boss.lua",
@@ -216,8 +281,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/README.md",
-    "bytes": 10441,
-    "sha256": "8cb208025c328af27ac70a4b7928791be05e9c15045ab40ad5b4abe36f83e16d"
+    "bytes": 12586,
+    "sha256": "6d702c10718cdff73d6058d8ab5fbae273fd5e71d52fa15224f6cc9a7ab54b7a"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/anm.lua",
@@ -251,8 +316,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/host.lua",
-    "bytes": 8851,
-    "sha256": "941077fe01ff2683258e3bb71568772b5bb8129b2a1c65fbe565051f23c79e45"
+    "bytes": 9723,
+    "sha256": "3bf26a9a92ba55edc68d53de6102b8ca95ca36fa28a848de04c9d3014eedcd72"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/programs.lua",
@@ -261,8 +326,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/projectiles.lua",
-    "bytes": 9530,
-    "sha256": "b25f29523f0047b5f84ad72cc6e9a5379570242cf6ff3456b4347fb3c72f6e1f"
+    "bytes": 9554,
+    "sha256": "0e59c50460a01c5f4a171632378e0d4fa93be70d611f4eab12662d02c13f8356"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/route.lua",
@@ -275,9 +340,19 @@
     "sha256": "461e06c87610093783ca1f415b2d01c7972794e9650dd2727760f3a028179707"
   },
   {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/th18_stage5/sections.lua",
+    "bytes": 1447,
+    "sha256": "5b3bab208ce9919f707fa0595d8e7d6459579bb2626b7258b30155b9bc851dfb"
+  },
+  {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/README.md",
-    "bytes": 3309,
-    "sha256": "c4b1d9d2dbc18bac0b0d0e33519fe157b9681eba8324983a5c233e4406610f72"
+    "bytes": 3989,
+    "sha256": "8abc2bc1b9354a2e6c77c0a40e988c9ac5db7d06093780a7df4015f7592a992b"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/animation.lua",
+    "bytes": 9038,
+    "sha256": "f708a95752eb45c878ec4c2e9e6393ca8eb4637ae8e310960086319a1aac22f6"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/art.lua",
@@ -286,33 +361,33 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/horou-spells.lua",
-    "bytes": 7195,
-    "sha256": "d70ff89bfa97cc9891d5d2295c7872879afb2a0c6dc4b8b0966a28fb898fd3d8"
+    "bytes": 7280,
+    "sha256": "f662938b33a8de90af001bf239c71680f79c656ec3920bf33a964b64912a9702"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/horou.lua",
-    "bytes": 7616,
-    "sha256": "4388803404c6ddb2a2d309be1c68cd3105e1efc8b083b37918dea388fb4b2637"
+    "bytes": 8084,
+    "sha256": "446e8a8944de03c6d10134b4d0eb09f710e16965099ddca8baeb06497c7e5666"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/host.lua",
-    "bytes": 12614,
-    "sha256": "7409207fb3281906a7f00980bf4b7fe5e212deaff86359d982b139b37def3110"
+    "bytes": 12594,
+    "sha256": "d16d122db6a13af35f10c05c14d9fc7bf6f51229a0b799e61d7a4dfb267eec75"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/patterns.lua",
-    "bytes": 839,
-    "sha256": "6ca6525830917efe0bf617f31ce2d1be17f9200e1ad425526e8e8d20cae149b9"
+    "bytes": 849,
+    "sha256": "a603d937fd814b57954d35d32dc7cf6fdf98b4b35cc49ffc7fcf8ca797ae9cac"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/runtime.lua",
-    "bytes": 6313,
-    "sha256": "707004b547cb9b428ab5158d8613cfa8900153e01231c77dcf1e05332737161d"
+    "bytes": 6713,
+    "sha256": "7a9858ea6218af632b8523ee4151904b92cc7aebc0980182203624f372049850"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/stages/zuu4/th20.lua",
-    "bytes": 4598,
-    "sha256": "aa79ff1aadff7d209be7db7dc0b0309f7e3d392a803e0c6f7ce95fefeaf92933"
+    "bytes": 5006,
+    "sha256": "449ace79d64d93d40a1f07ba9d10beaf71f15430e693c73dd0d015fc46cd458d"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/systems/README.md",
@@ -351,13 +426,13 @@
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/systems/th18-fire/bomb.lua",
-    "bytes": 3837,
-    "sha256": "e75d888dbcb78adb7fd5b59dda9bf8c01a8ba101d05b9df3d5a026b9322e4f25"
+    "bytes": 3851,
+    "sha256": "f2d3b11d3f3ebe8a6c0ea3abc40122e2c88ec23176e309fb16dbfe080144e30f"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/systems/th18-fire/core.lua",
-    "bytes": 1938,
-    "sha256": "49af8cd91f94f913c9144367b63512462905d65f6e9bc9e1cb077960715aa8ff"
+    "bytes": 2019,
+    "sha256": "a08fd5fd91e89139922ab060c6eb008cbb14150e7e3514cef41fff82174eb39e"
   },
   {
     "path": "aex-0.8.22/game/mod/MySTG/systems/th18-fire/data.lua",
@@ -413,6 +488,16 @@
     "path": "aex-0.8.22/game/mod/MystiaAyaNon3NormalLarge/root.lua",
     "bytes": 7881,
     "sha256": "56dfd0c730c6fce2faff95e2a5001a3530ba89ca13afdd512a7fd9584f56c13a"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/RingoDango/pattern.lua",
+    "bytes": 3690,
+    "sha256": "84dae5b55ca001581da2e12280a552a8506984b8881ff2ca958cfb31efb8ed99"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/RingoDango/root.lua",
+    "bytes": 4052,
+    "sha256": "fdd41f943594c409ab63826b2225d0d22e8cb262f9273fc315734b7aa1f76235"
   },
   {
     "path": "aex-0.8.22/game/mod/RoyalFlareFollow/root.lua",
@@ -1150,6 +1235,26 @@
     "sha256": "2ed012f30d3a753f012f7092f2db1fd155b8b36313f30199f60647debc01693c"
   },
   {
+    "path": "scripts/ringo-dango/extract.py",
+    "bytes": 1828,
+    "sha256": "22b863d128bb4e52b5a35da69ff0673f67f3a9cc2f898cc333679befed2ba0a0"
+  },
+  {
+    "path": "scripts/ringo-dango/pe_probe.py",
+    "bytes": 1958,
+    "sha256": "f28802c04776c40ab802eb7df4dd4251682ea0f4221406cc73325f74c2a56f3c"
+  },
+  {
+    "path": "scripts/ringo-dango/verify-native.ps1",
+    "bytes": 1430,
+    "sha256": "3177db242e81a51de73a0ab37474a7e120b14366527950aba684e4de5fb478fd"
+  },
+  {
+    "path": "scripts/ringo-dango/verify.py",
+    "bytes": 3319,
+    "sha256": "9d38398597cc29dd6c827f6ab8d71adb5ea4b137f43c7f16d8332eb53442eda6"
+  },
+  {
     "path": "scripts/royal-flare/import-fire.py",
     "bytes": 1600,
     "sha256": "38b2022b6867b103b80acdb26f22a03241097d1cd6a96eefc1647d51fd50a142"
@@ -1345,9 +1450,24 @@
     "sha256": "1b709837613841b6e23f50897e8575a32d7209d536242700c718492266289a92"
   },
   {
+    "path": "scripts/stage5/verify-offscreen25.py",
+    "bytes": 4046,
+    "sha256": "38be6db0e7c326f9b9dda30636f49dfed09e40e4fc1698c6aa5e986a85a2e7e4"
+  },
+  {
+    "path": "scripts/stage5/verify-pyramid21.py",
+    "bytes": 2775,
+    "sha256": "1e3b0d0106af8ece4f41d9c3fd41d60a542199760b28e63b9bbcf67443c68df2"
+  },
+  {
     "path": "scripts/stage5/verify-resources.py",
     "bytes": 3383,
     "sha256": "0a2222344dae13fa2f8dfb6b5a3bd82abe0784f287c24b4492cf2bd2c8cb1b3d"
+  },
+  {
+    "path": "scripts/stage5/verify-sections22.py",
+    "bytes": 4482,
+    "sha256": "9161e68684cc8520e9543a3eefc83cae3b211ac745ed9847f6b9f4fa7d7c38ef"
   },
   {
     "path": "scripts/stage5/verify-source.py",
@@ -1635,9 +1755,29 @@
     "sha256": "b18056ff02f56ff681016f729dfc3f98cc72a168a00476fc518d1c8ffc2fd94c"
   },
   {
+    "path": "scripts/zuu4/native-audit06.ps1",
+    "bytes": 2499,
+    "sha256": "ddbf908d185203e0dfe0ecff25eb6d35908bdabf00ce97ce8eb0cddc6a61c841"
+  },
+  {
     "path": "scripts/zuu4/native-transform-evidence.py",
     "bytes": 1465,
     "sha256": "6df6a142f824aec9ac3ec9021a4de73fb94471c3731a708f690eed3a22b897e4"
+  },
+  {
+    "path": "scripts/zuu4/report-audit06.py",
+    "bytes": 8407,
+    "sha256": "5ff6014b83c4c4cb98c1f1719add2d4aea8243a2b1781357d796878fd1dfc6af"
+  },
+  {
+    "path": "scripts/zuu4/source-audit06.py",
+    "bytes": 1697,
+    "sha256": "268ed436df50dd178953ebb9d6168e691f730b80760726e6e5607f5e5e0bcfc2"
+  },
+  {
+    "path": "scripts/zuu4/verify-audit06.py",
+    "bytes": 7741,
+    "sha256": "88688fc0064bb3c1893e43b8b876f0f28e28b73b9dde1b63c71f0a0e964e626b"
   },
   {
     "path": "scripts/zuu4/verify-native.ps1",

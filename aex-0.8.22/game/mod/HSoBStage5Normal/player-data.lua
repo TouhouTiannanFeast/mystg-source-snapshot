@@ -1,0 +1,14 @@
+Y3ReimuBData={
+ positions={
+{},
+{{0.0,32.0,0.0,20.0}},
+{{-32.0,-0.0,-16.0,20.0},{32.0,-0.0,16.0,20.0}},
+{{-32.0,-0.0,-16.0,20.0},{32.0,-0.0,16.0,20.0},{0.0,32.0,0.0,30.0}},
+{{-32.0,-0.0,-16.0,20.0},{32.0,-0.0,16.0,20.0},{-16.0,32.0,-8.0,30.0},{16.0,32.0,8.0,30.0}},
+},shooters={
+{{option=0,x=-10.0,y=8.0,speed=24.0,damage=15,rate=3,delay=0},{option=0,x=10.0,y=8.0,speed=24.0,damage=15,rate=3,delay=0}},
+{{option=0,x=-10.0,y=8.0,speed=24.0,damage=14,rate=3,delay=0},{option=0,x=10.0,y=8.0,speed=24.0,damage=14,rate=3,delay=0},{option=1,x=-8.0,y=-0.0,speed=28.0,damage=5,rate=3,delay=0},{option=1,x=8.0,y=-0.0,speed=28.0,damage=5,rate=3,delay=0}},
+{{option=0,x=-10.0,y=8.0,speed=24.0,damage=13,rate=3,delay=0},{option=0,x=10.0,y=8.0,speed=24.0,damage=13,rate=3,delay=0},{option=1,x=-8.0,y=-0.0,speed=28.0,damage=3,rate=3,delay=0},{option=1,x=8.0,y=-0.0,speed=28.0,damage=5,rate=3,delay=0},{option=2,x=-8.0,y=-0.0,speed=28.0,damage=5,rate=3,delay=0},{option=2,x=8.0,y=-0.0,speed=28.0,damage=3,rate=3,delay=0}},
+{{option=0,x=-10.0,y=8.0,speed=24.0,damage=12,rate=3,delay=0},{option=0,x=10.0,y=8.0,speed=24.0,damage=12,rate=3,delay=0},{option=1,x=-8.0,y=-0.0,speed=28.0,damage=3,rate=3,delay=0},{option=1,x=8.0,y=-0.0,speed=28.0,damage=4,rate=3,delay=0},{option=2,x=-8.0,y=-0.0,speed=28.0,damage=6,rate=3,delay=0},{option=2,x=8.0,y=-0.0,speed=28.0,damage=6,rate=3,delay=0},{option=3,x=-8.0,y=-0.0,speed=28.0,damage=4,rate=3,delay=0},{option=3,x=8.0,y=-0.0,speed=28.0,damage=3,rate=3,delay=0}},
+{{option=0,x=-10.0,y=8.0,speed=24.0,damage=10,rate=3,delay=0},{option=0,x=10.0,y=8.0,speed=24.0,damage=10,rate=3,delay=0},{option=1,x=-8.0,y=-0.0,speed=28.0,damage=3,rate=3,delay=0},{option=1,x=8.0,y=-0.0,speed=28.0,damage=3,rate=3,delay=0},{option=2,x=-8.0,y=-0.0,speed=28.0,damage=4,rate=3,delay=0},{option=2,x=8.0,y=-0.0,speed=28.0,damage=6,rate=3,delay=0},{option=3,x=-8.0,y=-0.0,speed=28.0,damage=6,rate=3,delay=0},{option=3,x=8.0,y=-0.0,speed=28.0,damage=4,rate=3,delay=0},{option=4,x=-8.0,y=-0.0,speed=28.0,damage=3,rate=3,delay=0},{option=4,x=8.0,y=-0.0,speed=28.0,damage=3,rate=3,delay=0}},
+}}

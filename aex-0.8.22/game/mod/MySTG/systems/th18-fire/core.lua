@@ -2,12 +2,15 @@
 Th18Fire={budgets=setmetatable({},{__mode='k'})}
 local F,D=Th18Fire,Th18FireData
 function F.clock() return stage.current_stage.timer end
-function F.damage(target,amount)
+function F.damage(target,amount,kind)
  if not IsValid(target) or target.protect then return 0 end
  local tick=F.clock();local b=F.budgets[target]
  if not b or b.tick~=tick then b={tick=tick,total=0};F.budgets[target]=b end
  local value=math.min(amount,math.max(0,90-b.total));b.total=b.total+value
- if value>0 then Damage(target,value) end
+ if value>0 then
+  local previous=F.damageKind;F.damageKind=kind
+  Damage(target,value);F.damageKind=previous
+ end
  return value
 end
 function F.rows(p,slow,emit)

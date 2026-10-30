@@ -60,11 +60,11 @@ local function wingCard2(o,dir)
  end)
 end
 P.spell2=function(o)
- R.enableWings(o);o.book=false;H.standby(o,192,140,300,true);wait(60)
+ R.enableWings(o);o.book=true;H.standby(o,192,140,300,true);wait(60)
  -- Original seven-colour weapon resonance returns immediately for ordinary AEX Reimu.
  local dir=1
  while true do
-  o.action='shot1';wait(60)
+  if R.setAction then R.setAction(o,'shot1',180)end;wait(60)
   sideAnchors(o,dir,function(a,pattern)arrow(a.x,a.y,a.angle,pattern)end)
   wait(60);wingCard2(o,dir);wait(270);dir=-dir
  end
@@ -121,8 +121,9 @@ local function finalRay(x,y,angle)
  end)
 end
 P.final=function(o)
- R.enableWings(o);R.finalRage=0;o.book=false
+ R.enableWings(o);R.finalRage=0;o.book=true
  H.standby(o,192,208,360,true);wait(120)
+ if R.setAction then R.setAction(o,'shot2',999*60)end
  spawn(function()
   while true do
    local left=98-math.max(0,R.tick-360)/60

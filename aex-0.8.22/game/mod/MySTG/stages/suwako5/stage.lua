@@ -1,3 +1,4 @@
+Include('stages/th18_stage5/sections.lua')
 -- Ordinary shooting host for the source-driven stage-five boss encounter.
 local R,P=Suwako5Runtime,Suwako5Pool
 local S={owned={},finished=false,phase=0}
@@ -88,7 +89,7 @@ function NativeShot:frame()
  self._a=255
 end
 function NativeShot:render()self.rot=self.heading or 0;bullet.render(self);self.rot=0 end
-function NativeShot:del()S.owned[self]=nil;bullet.del(self) end
+function NativeShot:del()S.owned[self]=nil;if not self.data.offscreenRemoval then bullet.del(self)end end
 function NativeShot:kill()self.data.dead=true;S.owned[self]=nil;bullet.kill(self) end
 local NativeLaser=Class(laser)
 function NativeLaser:init(b)
@@ -171,9 +172,11 @@ stage.group.AddStage('Normal',stageName,{lifeleft=4,power=400,bomb=3},true)
 stage.group.DefStageFunc(stageName,'init',function(s)
  S.finished=false;S.phase=0
  S.seed=tonumber(setting.suwako5_seed) or ran:Int(1,2147483646)
+ local entry=Th18Stage5Sections.entry(setting.suwako5_entry)
  local phases
  if setting.suwako5_test_plan then phases={};for _,id in ipairs(setting.suwako5_test_plan) do phases[#phases+1]=P.find(id) end
  elseif setting.suwako5_practice then phases=P.practice(setting.suwako5_practice,setting.suwako5_continue) else phases=P.draw(S.seed,4) end
+ if not setting.suwako5_practice and not setting.suwako5_test_plan then phases=Th18Stage5Sections.phases(phases,entry)end
  local ids={};for _,p in ipairs(phases) do ids[#ids+1]=p.id end
  print('SUWAKO5 DRAW seed='..S.seed..' '..table.concat(ids,','))
  stage.group.initTask(s,function()
@@ -194,15 +197,22 @@ stage.group.DefStageFunc(stageName,'init',function(s)
    end
    task.Wait(1)
   end
-  if not setting.suwako5_practice and(not setting.suwako5_test_plan or setting.th18_stage5_test)then
+  if not entry.boss and not setting.suwako5_practice and(not setting.suwako5_test_plan or setting.th18_stage5_test)then
    B.armMidboss(bg.state);H.begin(S.seed);S.route=true
-   if setting.th18_stage5_test_skip_front then T.tick=4176;for i=1,4176 do B.stageStep(bg.state)end
-   else T.run('MainFront');while not T.idle()do routeStep()end end
+   if entry.front then
+    if setting.th18_stage5_test_skip_front then T.tick=4176;for i=1,4176 do B.stageStep(bg.state)end
+    else Th18Stage5Sections.run(T,entry,'MainFront');while not T.idle()do routeStep()end end
+   end
    T.command(T.controller,{i={},f={}},'enmKillAll',{});T.command(T.controller,{i={},f={}},'etClear',{640})
    B.beginValley(bg.state)
-   T.command(T.controller,{i={},f={}},'enmCreateA',{'MBoss',-192,-32,40,0,1})
-   for i=1,160 do routeStep()end
-   T.run('MainLatter');while not T.idle()do routeStep()end
+   if entry.mid then
+    T.command(T.controller,{i={},f={}},'enmCreateA',{'MBoss',-192,-32,40,0,1})
+    for i=1,160 do routeStep()end
+   else
+    -- Direct latter-road practice begins after the original valley reveal.
+    for i=1,1400 do B.step(bg.state)end
+   end
+   Th18Stage5Sections.run(T,entry,'MainLatter');while not T.idle()do routeStep()end
    H.finishRoute();for i=1,120 do routeStep()end;S.route=false
   else task.Wait(60)end
   if not setting.th18_stage5_test_scenery then B.interrupt(bg.state,1)end
