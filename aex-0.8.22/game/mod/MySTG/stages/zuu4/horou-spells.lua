@@ -6,7 +6,8 @@ local spawn,wait=R.spawn,R.wait
 local colors={0,6,3,1,5,2,4,7}
 local function square(x,y,angle,pattern,delay)
  spawn(function()
-  wait(delay);local way=pattern==1 and 10 or 14
+  R.effect('square',x,y,angle)
+  wait(delay);R.sound('shot4');local way=pattern==1 and 10 or 14
   for i=0,3 do
    local x1,y1=cos(angle+i*90)*2.5,sin(angle+i*90)*2.5
    local x2,y2=cos(angle+(i+1)*90)*2.5,sin(angle+(i+1)*90)*2.5
@@ -28,11 +29,12 @@ local function arrow(x,y,angle,pattern)
  spawn(function()
   local tip=R.shot(x,y,0,angle,545,30);tip.addDelay=true;tip.noCull=true;tip.bombProof=true
   -- Source red concentration marker180 frames before tracking begins.
-  local notice=R.beam(x,y,angle,160,2,9999,180,'notice',0);notice.visual=377;notice.collidable=false
+  R.effect('arrow',x,y,angle,180)
+  R.effect('point',R.boss.x,R.boss.y,tip,{255,32,32},3,75)
   wait(180);if tip.dead then return end
-  local driver=H.curve(x,y,16/3,angle,30,18,265,60);driver.noCull=true;driver.accel,driver.limit=-(16/3)/30,0
+  local driver=H.curve(x,y,16/3,angle,30,18,265,60);driver.noCull=true;driver.accel,driver.limit=-(16/3)/30,0;R.sound('bulletBreak')
   local function motion(speed,a)
-   driver.speed,driver.angle,driver.accel,driver.limit=speed,a,-speed/30,0
+   driver.speed,driver.angle,driver.accel,driver.limit=speed,a,-speed/30,0;R.sound('bulletBreak')
    spawn(function()wait(60);if not tip.dead then tip.speed,tip.angle,tip.accel,tip.limit=speed,a,-speed/30,0 end end)
   end
   motion(16/3,angle);wait(30)
@@ -55,16 +57,17 @@ local function wingCard2(o,dir)
   for i=0,6 do
    local a=90-65*dir;local speed=2*(1+i/7);local way=30-i
    H.wingWay(o.x+108*cos(a),o.y+108*sin(a)-64,speed,a,545,30,60+i*5,way,(150-i*10)/way*dir,120-i*10,0.5)
+   R.sound('shot2')
    wait(5)
   end
  end)
 end
 P.spell2=function(o)
- R.enableWings(o);o.book=true;H.standby(o,192,140,300,true);wait(60)
+ R.enableWings(o);o.book=true;H.standby(o,192,140,300,true);wait(60);R.effect('spellStart')
  -- Original seven-colour weapon resonance returns immediately for ordinary AEX Reimu.
  local dir=1
  while true do
-  if R.setAction then R.setAction(o,'shot1',180)end;wait(60)
+  R.effect('charge',o,90);R.sound('power2');if R.setAction then R.setAction(o,'shot1',180)end;wait(60)
   sideAnchors(o,dir,function(a,pattern)arrow(a.x,a.y,a.angle,pattern)end)
   wait(60);wingCard2(o,dir);wait(270);dir=-dir
  end
@@ -89,7 +92,7 @@ local function finalBird(core,angle,dir)
   for i=0,count-1 do
    if f.dead then return end
    local id=353+colors[(i*6+2)%7+1];local s=1*(1+i*0.015)
-   local b=R.shot(f.x,f.y,s,f.angle-90*dir,id,15,-s/30,s/4);b.bombProof=true;R.accelerate(b,30,s/600,s)
+   local b=R.shot(f.x,f.y,s,f.angle-90*dir,id,15,-s/30,s/4);b.bombProof=true;R.accelerate(b,30,s/600,s);R.sound('shot5')
    wait(2)
   end
  end)
@@ -110,6 +113,7 @@ local function finalRay(x,y,angle)
    wait(5)
   end
   wait(60)
+  R.sound('laser1')
   for i=0,3 do for _,dir in ipairs(i==0 and {1}or {1,-1})do
    local offset=i*dir;local b=R.beam(x,y,angle,0,32,0,105,'finalRay',0);b.visual=236;b.noCull=true
    b.update=function(s)
@@ -127,13 +131,23 @@ P.final=function(o)
  spawn(function()
   while true do
    local left=98-math.max(0,R.tick-360)/60
-   if R.finalRage==0 and(R.hp<=7777*0.25 or left<=33)then R.finalRage=1 end
-   if R.finalRage==1 and(R.hp<=7777*0.125 or left<=22)then R.finalRage=2 end
-   if R.finalRage==2 and left<=11 then R.finalRage=3 end
+   if R.finalRage==0 and(R.hp<=7777*0.25 or left<=33)then R.finalRage=1;if left>11 then R.sound('shot1')end end
+   if R.finalRage==1 and(R.hp<=7777*0.125 or left<=22)then R.finalRage=2;if left>11 then R.sound('shot1')end end
+   if R.finalRage==2 and left<=11 then R.finalRage=3;R.sound('shot1')end
    wait(1)
   end
  end)
  local core=R.nuclear(o.x,o.y-48,12,99999);core.noCull=true;core.moving=true;core.tint={255,255,0}
+ spawn(function()
+  for t=0,179 do
+   if t%8==0 then R.effect('point',core.x,core.y,core,{192,192,128},2,120,240,3)end
+   if t%60==0 then R.sound('power1')end
+   wait(1)
+  end
+ end)
+ spawn(function()wait(240);R.effect('spellStart');R.effect('cloud',core.x,core.y);R.sound('flare');wait(105)
+  while true do R.sound('shot2');wait(19)end
+ end)
  core.speed,core.angle,core.accel,core.limit=0,270,1/30,1;R.accelerate(core,120,-1/120,0)
  core.update=function(b)if b.age>=240 and b.age<285 then b.radius=12+96*sin((b.age-239)/45*90)elseif b.age>=285 then b.radius=108 end end
  spawn(function()
@@ -151,17 +165,17 @@ P.final=function(o)
   wait(240+45);local t=0
   while true do
    if R.finalRage>0 and t%3==0 and t%55<15 then
-    local s=1.25*0.75;ring(core.x,core.y,7,s*2,t*0.33,548,5,-s/30,s,core.radius)
+     local s=1.25*0.75;ring(core.x,core.y,7,s*2,t*0.33,548,5,-s/30,s,core.radius);R.sound('shot3')
    end
    if R.finalRage>1 and t%3==0 and(t+math.floor(55/2))%55<15 then
-    ring(core.x,core.y,7,2.5,-t*0.33,548,5,-1.25/30,1.25,core.radius)
+    ring(core.x,core.y,7,2.5,-t*0.33,548,5,-1.25/30,1.25,core.radius);R.sound('shot3')
    end
    if t%5==0 then
     local dist=math.sqrt((R.px-core.x)^2+(R.py-core.y)^2)
     if dist<108+64 then
      local a=R.rand(0,360);if t%20==0 then a=R.aim(core)end
-     ring(core.x,core.y,12,0,a,36,5,3.75/240,3.75,core.radius-32)
-    elseif R.finalRage>2 then ring(core.x,core.y,6,0,R.rand(0,360),36,5,3.75/240,3.75,core.radius-32)end
+     ring(core.x,core.y,12,0,a,36,5,3.75/240,3.75,core.radius-32);R.sound('shot3')
+    elseif R.finalRage>2 then ring(core.x,core.y,6,0,R.rand(0,360),36,5,3.75/240,3.75,core.radius-32);R.sound('shot3')end
    end
    t=t+1;wait(1)
   end
@@ -169,6 +183,7 @@ P.final=function(o)
  spawn(function()
   wait(240+285)
   while true do
+   R.effect('point',core.x,core.y,core,{192,192,128},15,120,240,3);R.sound('power2')
    wait(90);local angle=R.aim(core)
    local function volley(a)
     spawn(function()
@@ -177,7 +192,7 @@ P.final=function(o)
        local a=a+i*180/12*dir
        if sin(a)> -0.1 then finalRay(core.x+core.radius*cos(a),core.y+core.radius*sin(a),a)end
       end
-      wait(3)
+      R.sound('bulletBreak');wait(3)
      end
     end)
    end

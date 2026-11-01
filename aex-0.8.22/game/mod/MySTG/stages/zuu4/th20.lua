@@ -11,15 +11,15 @@ local function diamond(o,angle,speed,color,ox,oy,dist)
  b.nativeBirth=true;b.x,b.y=b.x-4*speed*R.cos(angle),b.y-4*speed*R.sin(angle)
  b.sourceColor=color;return b
 end
-local function ring(o,n,base,speed,color,ox,oy,dist,setup)
- for i=0,n-1 do local b=diamond(o,base+i*360/n,speed,color,ox,oy,dist);if setup then setup(b)end end
+local function ring(o,n,base,speed,color,ox,oy,dist,setup,keep)
+ for i=0,n-1 do if not keep or keep(i)then local b=diamond(o,base+i*360/n,speed,color,ox,oy,dist);if setup then setup(b)end end end
 end
-local function fan(o,n,base,spread,speed,color,ox,oy,dist,setup)
+local function fan(o,n,base,spread,speed,color,ox,oy,dist,setup,keep)
  -- Native odd/even centered shooter ordering.
  for i=0,n-1 do
   local delta=(n%2==1 and math.floor((i+1)/2)or(math.floor(i/2)+0.5))*spread
   if i%2==1 then delta=-delta end
-  local b=diamond(o,base+delta,speed,color,ox,oy,dist);if setup then setup(b)end
+  if not keep or keep(i)then local b=diamond(o,base+delta,speed,color,ox,oy,dist);if setup then setup(b)end end
  end
 end
 local function randomMove(o,n,mode,scale,cy,height,width)
@@ -29,13 +29,16 @@ local function randomMove(o,n,mode,scale,cy,height,width)
 end
 P.non3=function(o)
  R.move(o,192,128,60,'decel');o.visible=true
+ R.sound('th20.27');R.effect('th20Charge',o,false);R.sound('th20.54')
+ spawn(function()wait(90);R.effect('th20Charge',o,true);R.sound('th20.6')end)
+ spawn(function()wait(120);R.effect('th20Charge',o,false);R.sound('th20.54');wait(90);R.effect('th20Charge',o,true);R.sound('th20.6')end)
  spawn(function()
   -- Boss3's pre-dialogue positioning120, attack animation90+30.
   wait(240)
   while true do
    randomMove(o,60,0,0.8,128,96,280)
    for _,color in ipairs({3,1,5,6})do
-    ring(o,34,R.rand(-180,180),5*0.2,color)
+    ring(o,11,R.rand(-180,180),5*0.4,color)
     wait(20)
    end
   end
@@ -47,8 +50,8 @@ P.non3=function(o)
    for _,direction in ipairs({-1,1})do
     local angle=R.aim(o)+90*direction+R.rand(-10,10)
     for i=0,29 do
-     fan(o,3,angle,0.09424778*degrees,1*0.2,3,0,0,32,function(b)
-      b.profile={hold=60+i*2,initial=1*0.2,n1=60,s1=0.2*0.2,n2=60,s2=3*0.2}
+     fan(o,1,angle,0.09424778*degrees,1*0.4,3,0,0,32,function(b)
+      b.profile={hold=60+i*2,initial=1*0.4,n1=60,s1=0.2*0.4,n2=60,s2=3*0.4}
      end)
      angle=angle-0.10472*degrees*direction;wait(2)
     end
@@ -65,9 +68,10 @@ local function layer(o,phase)
   local angle=R.aim(o)+R.rand(-10,10)
   base=base+R.rand(-180,180)
   local r=R.rand(-128,128);local ox,oy=r*R.cos(base),r*R.sin(base)
+  -- Retain all seven source directions; omit the two inner shoulders (5/7).
   fan(o,7,angle,0.436332*degrees,1.5,6,ox,oy,0,function(b)
    b.profile={hold=0,initial=1.5,n1=120,s1=0.5};b.wraps=1;b.wrapMask=3;b.wrapPadding=32;b.noCull=true;b.drawLayer=0
-  end)
+  end,function(i)return i~=3 and i~=4 end)
   wait(({20,24,28,28})[phase+1])
  end
 end
@@ -76,7 +80,9 @@ local function ringLayer(o,phase)
  while R.subphase==phase do
   local unused=R.rand(0,20)
   local angle=R.rand(-180,180);local r=R.rand(-128,128)
-  ring(o,32,angle,1.8,3,r*R.cos(base),r*R.sin(base),0,function(b)b.profile={hold=0,initial=1.8,n1=80,s1=0.8};b.noCull=true;b.drawLayer=0 end)
+  ring(o,32,angle,1.8,3,r*R.cos(base),r*R.sin(base),0,function(b)
+   b.profile={hold=0,initial=1.8,n1=80,s1=0.8};b.noCull=true;b.drawLayer=0
+  end,function(i)return i%4~=3 end)
   base=base+3.883222*degrees;wait(120)
  end
 end
@@ -88,7 +94,7 @@ local function tripleLayer(o,phase,final)
    -- Native etEx25 writes +0x44, used by the six render-list buckets (47d85b).
    b.profile={hold=0,initial=3.8,n1=60,s1=final and 2.2 or 1.2};b.drawLayer=3;b.noCull=true
   end)
-  base=base+3.883222*degrees;wait(final and 8 or 13)
+  base=base+3.883222*degrees;wait(final and 10 or 17)
  end
 end
 local function launchLayers(o,phase)
@@ -100,20 +106,24 @@ local function launchLayers(o,phase)
 end
 P.stone=function(o)
  R.stonePhaseStarts={}
- R.move(o,192,144,60,'decel');o.visible=true;wait(120)
+ R.sound('th20.27');R.effect('spellStart')
+ R.move(o,192,144,60,'decel');o.visible=true;wait(60)
+ R.effect('th20Charge',o,false);R.sound('th20.54');wait(60)
+ R.effect('th20Charge',o,true);R.sound('th20.6')
  launchLayers(o,0)
  local elapsed=0
  -- ECL decrements B before testing B<5400:1801 checks,1800 waits.
  while true do
-  elapsed=elapsed+1;if elapsed>1800 or R.hp<=8000 then break end
+  elapsed=elapsed+1;if elapsed>1800 or R.hp<=40500 then break end
   wait(1);if elapsed%200==0 then randomMove(o,60,4,1,144,64,128)end
  end
  for phase=1,3 do
-  local cap=({8000,5000,2000})[phase]
+  local cap=({40500,27000,13500})[phase]
+  R.sound('th20.27')
   R.hp=cap;if R.setHostHP then R.setHostHP(cap)end
   R.clearBullets();launchLayers(o,phase)
   if phase<3 then
-   local elapsed=0;local nextHP=phase==1 and 5000 or 2000
+   local elapsed=0;local nextHP=phase==1 and 27000 or 13500
    -- A>=1800 is tested on entry:1800 checks,1799 waits.
    while true do
     elapsed=elapsed+1;if elapsed>=1800 or R.hp<=nextHP then break end

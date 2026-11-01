@@ -66,7 +66,7 @@ local function object(x,y,kind)
  R.objects[#R.objects+1]=o;return o
 end
 function E.MakeEnemy(x,y,hp,size)
- hp=hp*5 -- Requested HSoB road enemy HP multiplier, applied once before native creation.
+ hp=hp*8 -- Requested HSoB road enemy HP multiplier, applied once before native creation.
  local o=object(x,y,'enemy');o.hp=hp;o.maxhp=hp;o.size=size;o.damageRate=1
  o.radius=({[0]=0,64,40,32,24,16,10})[size];o.playerRadius=({[0]=0,24,24,14,8,0,0})[size]
  R.counts.enemies=R.counts.enemies+1
@@ -76,7 +76,12 @@ function E.ObjEnemy_SetLife(o,hp)o.hp=hp end
 function E.ObjEnemy_SetDamageRate(o,s,b)o.damageRate=s/100;o.bombRate=b/100 end
 function E.WaitForKilled(o)while alive(o)and o.hp>0 do E.wait(1)end end
 function E.CheckKillType(o)return o.killed and 2 or 1 end
-function E.ZakoFinalize(o)if o.killed then E.CallSound(E.sndVanish)end;E.Obj_Delete(o)end
+function R.enemyKilled(o)
+ if o.deathSound then return end;o.deathSound=true
+ E.CallSound(E.sndVanish)
+ if R.onEnemyKilled then R.onEnemyKilled(o)end
+end
+function E.ZakoFinalize(o)if o.killed then R.enemyKilled(o)end;E.Obj_Delete(o)end
 function E.SetEnemyVisible(o,v)o.visible=E.truth(v)end
 function E.SetEnemyDropItem(o,center,around)o.dropCenter=center;o.dropAround=around end
 function E.DrawFairy(o,img,typ)o.art=img;o.fairy=typ end
@@ -145,12 +150,22 @@ function E.My_CreateStraightLaserA1(x,y,a,len,w,life,id,delay,thin)
 end
 E.ObjLaser_GetLength=function(o)return o.length end;E.ObjLaser_SetLength=function(o,n)o.length=n end
 E.ObjStLaser_GetAngle=function(o)return o.beamAngle end;E.ObjStLaser_SetAngle=function(o,a)o.beamAngle=a end
-function E.DeleteShotAll()for _,o in ipairs(R.objects)do if o.kind~='enemy'then o.dead=true end end end
+function R.eraseShot(o)
+ if o.dead or o.eraseTick then return end
+ if o.renderVisible==false then o.dead=true;return end
+ if R.eraseCountTick~=R.tick then R.eraseCountTick=R.tick;R.eraseCount=0 end
+ R.eraseCount=R.eraseCount+1
+ o.eraseTick=R.tick;o.eraseAge=0;o.eraseFX=R.eraseCount<=60;o.collidable=false
+end
+function E.DeleteShotAll()
+ for _,o in ipairs(R.objects)do if o.kind~='enemy'then R.eraseShot(o)end end
+end
 function E.SetAreaCommonData(_,k,v)R.common[k]=v end
 function E.GetAreaCommonData(_,k,d)local v=R.common[k];if v==nil then return d else return v end end
 function E.NextStageScene()
  R.scene=R.scene+1
  if R.scene==2 then
+  R.warpAt=R.tick
   -- BackgroundWorld05 SetWorld05b: normal warp_frame - 180.
   R.spawn(function()E.wait(math.floor(39.435*64)-180);R.common.STG5R_CHP5=1 end)
  end
@@ -183,16 +198,19 @@ function R.award(section)
 end
 function R.beginSection(n)
  R.section=n;R.events[#R.events+1]={kind='start',section=n,tick=R.tick}
+ if n==3 and not R.drawingReady and R.prepareDrawing then R.prepareDrawing()end
  R.spawn(function()
   local ranges={{1,3},{4,6},{7,8}}
   for c=ranges[n][1],ranges[n][2]do R.chapters[c]()end
   -- Let source wave tasks finish before cancelling their section.
-  R.scheduleDone=true
+  R.scheduleDone=true;R.scheduleDoneAt=R.tick
  end)
 end
 function R.start(seed,from)
  R.clear();R.tick=0;R.section=0;R.objects={};R.events={};R.rewarded={};R.counts={enemies=0,shots=0,beams=0}
  R.seed=seed or 20261030;R.scene=0;R.finished=false;R.scheduleDone=false;R.nextAt=nil;R.damage=0
+ R.cancelAt=nil;R.finishAt=nil;R.drawingReady=false;R.scheduleDoneAt=nil;R.warpAt=nil
+ R.eraseCountTick=nil;R.eraseCount=0;E.flgStopSetZako=false
  if R.resetPhase then R.resetPhase()end
  R.common={STG5R_CHP3=0,STG5R_CHP4=-1,STG5R_CHP4_2=-1,STG5R_CHP5=0}
  from=math.max(1,math.min(3,math.floor(tonumber(from)or 1)))
@@ -205,18 +223,63 @@ local function limited(v,a,m)
  if not a or a==0 then return v end
  local r=v+a;if m then r=a>0 and math.min(r,m)or math.max(r,m)end;return r
 end
+-- Advance the original shared wall/fairy prelude while Boss suppresses births.
+-- Do not pre-render a snapshot: all objects are born after the live gate release.
+local simulateFrame
+function R.prewarmDrawing(prelude,frames)
+ local savedTick,savedSection=R.tick,R.section
+ local shot,beam=R.onShot,R.onBeam;R.onShot=nil;R.onBeam=nil
+ E.flgStopSetZako=true
+ R.spawn(prelude)
+ for i=1,frames do
+  simulateFrame()
+ end
+ E.flgStopSetZako=false
+ for _,t in ipairs(R.threads)do t.wake=t.wake-frames end
+ R.tick=savedTick;R.section=savedSection;R.onShot=shot;R.onBeam=beam
+ assert(#R.objects==0,'suppressed CH7 prelude created a visible object')
+ R.drawingReady=true
+end
+function R.endSection()
+ if R.section==2 then
+  R.award(2);R.threads={};R.nextAt=R.tick+120;R.scheduleDone=false
+  R.events[#R.events+1]={kind='drained',section=2,tick=R.tick}
+  return
+ end
+ R.award(R.section);R.threads={};R.cancelAt=R.tick
+ R.events[#R.events+1]={kind='clear',section=R.section,tick=R.tick}
+ for _,o in ipairs(R.objects)do
+  if o.kind=='enemy'then o.hp=0;o.killed=true;o.dead=true;R.enemyKilled(o)else o.collidable=false end
+ end
+ if R.section<3 then R.nextAt=R.tick+120 else R.finishAt=R.tick+56 end
+end
 function R.step(px,py)
  if R.finished then return end
  R.tick=R.tick+1;R.px,R.py=px or R.px,py or R.py
+ if R.cancelAt then
+  -- Original expanding clear: radius +16/frame from the playfield centre.
+  local radius=(R.tick-R.cancelAt)*16
+  for _,o in ipairs(R.objects)do
+   if o.eraseTick then o.eraseAge=R.tick-o.eraseTick;if o.eraseAge>=32 then o.dead=true end end
+   if not o.dead and o.kind~='enemy'and ((o.x-192)^2+(o.y-224)^2<=radius^2 or radius>=math.sqrt(192^2+224^2)+64)then R.eraseShot(o)end
+  end
+  if R.nextAt and R.tick>=R.nextAt then
+   R.clear();R.objects={};R.cancelAt=nil;R.nextAt=nil;R.scheduleDone=false;R.beginSection(R.section+1)
+  elseif R.finishAt and R.tick>=R.finishAt then R.finished=true end
+  return
+ end
  local count=#R.threads
  for i=1,count do local t=R.threads[i];if not t.dead and R.tick>=t.wake then R.resume(t)end end
  local threads={};for _,t in ipairs(R.threads)do if not t.dead then threads[#threads+1]=t end end;R.threads=threads
  local objects={}
  for _,o in ipairs(R.objects)do if not o.dead then
-  if o.hp and o.hp<=0 then o.killed=true;o.dead=true end
+  if o.hp and o.hp<=0 then o.killed=true;o.dead=true;R.enemyKilled(o)end
+  if o.eraseTick then o.eraseAge=R.tick-o.eraseTick;if o.eraseAge>=32 then o.dead=true end end
   if not o.dead then
    o.age=o.age+1
-   if o.motion then
+   if o.eraseTick then
+    -- Cancelled sprites and their attached animation stop at the same point.
+   elseif o.motion then
     local m=o.motion;m.t=m.t+1;local t=math.min(m.n,m.t);local u
     if m.slow then u=t*(2*m.n-t+1)/(m.n*(m.n+1))
     else
@@ -242,10 +305,19 @@ function R.step(px,py)
   if R.tick>=R.nextAt then R.nextAt=nil;R.scheduleDone=false;R.beginSection(R.section+1)end
  elseif R.scheduleDone then
   local active=false
-  for _,o in ipairs(R.objects)do if o.kind=='enemy'and not o.dead then active=true;break end end
-  if not active and #R.threads==0 then
-   R.award(R.section);R.clear()
-   if R.section<3 then R.nextAt=R.tick+120 else R.finished=true end
+  for _,o in ipairs(R.objects)do
+   if not o.dead then
+    if o.kind=='enemy'then active=true;break end
+    if R.section==2 and o.renderVisible~=false then
+     local margin=(o.radius or 0)+(o.kind=='beam'and(o.length or 0)or 0)
+     if E.CheckDispIN(o,margin)then active=true;break end
+    end
+   end
+  end
+  if R.section==1 or(R.section==3 and R.tick>=R.scheduleDoneAt+240)or(R.section==2 and not active)then
+   R.endSection()
   end
  end
 end
+
+simulateFrame=R.step

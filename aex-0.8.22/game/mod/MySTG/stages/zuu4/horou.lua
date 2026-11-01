@@ -40,14 +40,14 @@ R.horouAnchors=function(o,frame)
  return left,right
 end
 local function wing(x,y,speed,angle,id,delay,timer,arc,radius,offset)
- local b=R.shot(x,y,0,angle,id,delay);b.wingGlow=true;b.scriptedPosition=true
+ local b=R.shot(x,y,0,angle,id,delay);b.wingGlow=true;b.add=true;b.scriptedPosition=true
  b.update=function(s)
   local t=s.age
   if t<timer then
    local d=sin((t+1)/timer*90);local a=(1-cos((t+1)/timer*180))/2
    local r=d*radius;local heading=angle+arc*a
    s.x,s.y=x+r*cos(heading),y+r*sin(heading);s.angle=heading+offset*d
-  else s.scriptedPosition=false;s.accel=speed/120;s.limit=speed;s.update=nil end
+  else s.scriptedPosition=false;s.accel=speed/120;s.limit=speed;s.update=nil;R.sound('shot2')end
  end
  return b
 end
@@ -65,11 +65,14 @@ end
 local function curve(x,y,speed,angle,length,width,id,delay)
  local b={x=x,y=y,angle=angle,speed=speed,accel=0,age=0,kind='driver',radius=0,segments=0,visual=id}
  R.hazards[#R.hazards+1]=b
+ spawn(function()wait(delay);if not b.dead then R.sound('laser1')end end)
  b.afterMove=function(s)
   local dx,dy=s.x-x,s.y-y;local distance=math.sqrt(dx*dx+dy*dy)
   if s.x>=-16 and s.x<=400 and s.y>=-16 and s.y<=464 then
    local beam=R.beam(s.x-dx*2,s.y-dy*2,atan(dy,dx),distance*4,width,delay,delay+length,'curve',0)
    beam.visual=id;beam.noCull=true
+   local palette={{255,64,64},{64,255,64},{64,64,255},{255,255,64},{255,64,255},{64,255,255},{255,160,64},{255,255,255}}
+   local c=palette[id%8+1];beam.tint={c[1]*0.75+96,c[2]*0.75+96,c[3]*0.75+96}
    beam.update=function(q)
     if q.age<delay then q.renderWidth=(q.age%6+1)*0.75;q.collidable=false
     else
@@ -89,6 +92,7 @@ local function homing(b,power,peak,timer)
  local d=(R.aim(b)-b.angle+180)%360-180;b.angle=b.angle+math.max(-h,math.min(h,d))
 end
 local function laserA1(x,y,a,color,offset)
+ R.sound('bulletBreak')
  local vx,vy=rot(16*cos(a)/2,16*sin(a),offset);local initial=math.sqrt(vx*vx+vy*vy)
  local b=curve(x,y,initial/2,atan(vy,vx),20,24,265+color,60)
  b.accel,b.limit=-initial/60,initial/4
@@ -100,9 +104,10 @@ local function laserA1(x,y,a,color,offset)
  end)
 end
 local function laserA2(anchor)
+ R.sound('bulletBreak')
  local b=curve(anchor.x,anchor.y,6,anchor.angle,20,24,265,60);b.accel,b.limit=-6/30,0
  spawn(function()
-  wait(30);if b.dead then return end;b.angle=R.aim(b);b.accel,b.limit=16/30,16;wait(1)
+  wait(30);if b.dead then return end;R.sound('bulletBreak');b.angle=R.aim(b);b.accel,b.limit=16/30,16;wait(1)
   for t=0,4 do if b.dead then return end;delayedPair(b.x,b.y,b.angle,1.5*(1+t*0.1),5+(5-t+1)*5,60,377);wait(2)end
  end)
 end
@@ -112,6 +117,7 @@ local function wingNon1(o,dir)
   for i=0,6 do
    local a=angle+45*dir;local x=o.x+64*cos(a)-16*cos(angle);local y=o.y+64*sin(a)-16*sin(angle)
    wingWay(x,y,2,a,545+colors[i+1],30,60+i*5,15-i,(135-i*5)/(15-i)*dir,160-i*10,0.5)
+   R.sound('shot2')
    wait(10)
   end
  end)
@@ -124,7 +130,7 @@ local function wingNon2(o)
     wingWay(o.x+32*cos(a),o.y+32*sin(a),2,a,545,30,60+i*5,15-i,(135-i*5)/(15-i)*dir,160-i*10,1)
     dir=-dir
    end
-   wait(10)
+   R.sound('shot2');wait(10)
   end
  end)
 end
@@ -137,6 +143,7 @@ P.non1=function(o)
  end)
  wait(150)
  local function lasers()
+  R.sound('power2')
   spawn(function()
    for i=0,6 do
     local tablet=R.tablet or {x=o.x,y=o.y-96};local offset=R.aim(tablet)
@@ -157,12 +164,13 @@ end
 P.non2=function(o)
  o.book=false;standby(o,192,224,360,true);wait(60)
  -- A02_OpeningMotion:90+60+30+90, while the source scene timer is stopped.
- o.book=true;R.tablet=nil;if R.setAction then R.setAction(o,'shot3',60)end
+ o.book=true;R.tablet=nil;R.sound('power2');if R.setAction then R.setAction(o,'shot3',60)end
  spawn(function()
-  wait(150);R.wingVisual={x=o.x,y=o.y-96,start=R.tick}
+  wait(90);R.effect('charge',R.tablet or o,90);R.sound('power1');wait(60)
+  R.wingVisual={x=o.x,y=o.y-96,start=R.tick};R.sound('power3')
   wait(30);if R.setAction then R.setAction(o,'shot1',120)end
  end)
- wait(270);R.tablet=nil;R.enableWings(o)
+ wait(270);R.tablet=nil;R.enableWings(o);R.sound('power5')
  R.wingVisual=nil
  if R.setAction then R.setAction(o,'left',90)end
  R.move(o,192,140,90,'linear');wingNon2(o);wait(180);local count=0;local dir=1
@@ -182,12 +190,14 @@ P.non2=function(o)
  end
 end
 P.spell1=function(o)
- o.book=false;standby(o,192,160,60);wait(60);wait(60);local count=0;local dir=1
+ o.book=false;standby(o,192,160,60);wait(60);R.effect('spellStart');wait(60);local count=0;local dir=1
  while true do
   local center=({192,192+R.rand(64,128),192,192-R.rand(64,128)})[count%4+1]
   if R.setAction then R.setAction(o,'shot2',90)end
+  R.effect('point',o.x-16,o.y-48,{x=center,y=0},{192,128,64},15,120)
+  R.effect('charge',o,90);R.sound('power2')
   wait(90);R.move(o,center,160,90,'linear');if R.setAction then R.setAction(o,'move',90)end;wait(30)
-  local direction=dir
+  local direction=dir;R.sound('flare')
   spawn(function()
    local base=R.rand(0,360)
    for t=0,359 do
@@ -202,7 +212,7 @@ P.spell1=function(o)
       if i%3==0 then b.update=function(s)
        if s.age>=30 then
         if s.age==30 and s.y<0 then s.update=nil;return end
-        if s.y<0 then local child=R.shot(s.x,s.y,speed,180-angle,380,15,-speed/120,speed/8);child.addDelay=true;R.accelerate(child,180,speed/480,speed/2);s.update=nil end
+        if s.y<0 then local child=R.shot(s.x,s.y,speed,180-angle,380,15,-speed/120,speed/8);child.addDelay=true;R.accelerate(child,180,speed/480,speed/2);s.update=nil;R.sound('bulletBreak')end
        end
       end end
      end

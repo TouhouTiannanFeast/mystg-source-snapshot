@@ -9,6 +9,8 @@ function R.sin(a)return math.sin(a*pi/180)end
 function R.atan(y,x)return math.atan2(y,x)*180/pi end
 function R.rand(lo,hi)return lo+(hi-lo)*R.random()end
 function R.aim(o)return R.atan(R.py-o.y,R.px-o.x)end
+function R.sound(name)if R.onSound then R.onSound(name)end end
+function R.effect(name,...)if R.fx then return R.fx[name](...)end end
 function R.wait(n)coroutine.yield(math.max(1,math.ceil(n)))end
 function R.spawn(fn)
  local t={co=coroutine.create(fn),wake=R.tick,generation=R.generation}
@@ -63,12 +65,16 @@ end
 function R.accelerate(b,at,accel,limit)
  b.events=b.events or {};b.events[#b.events+1]={at=at,accel=accel,limit=limit}
 end
+function R.erase(b)
+ if not b.dead and b.kind=='shot' and R.onErase then R.onErase(b)end
+ b.dead=true
+end
 function R.clear()
- for _,b in ipairs(R.hazards or {})do b.dead=true end
+ for _,b in ipairs(R.hazards or {})do R.erase(b)end
  for _,a in ipairs(R.actors or {})do a.dead=true end
  R.threads={};R.generation=(R.generation or 0)+1
 end
-function R.clearBullets()for _,b in ipairs(R.hazards)do b.dead=true end end
+function R.clearBullets()for _,b in ipairs(R.hazards)do R.erase(b)end end
 function R.start(id,seed,x,y)
  R.clear();R.id=id;R.tick=0;R.threads={};R.actors={};R.hazards={};R.counts={shots=0,beams=0}
  R.px,R.py=192,400;R.hp=Zuu4Specs[id].hp;R.maxhp=R.hp;R.subphase=0
@@ -76,6 +82,8 @@ function R.start(id,seed,x,y)
  local state=(seed or 20261027)%2147483647;if state<=0 then state=1 end
  R.random=function()state=state*16807%2147483647;return (state-1)/2147483646 end
  R.boss={x=x or 192,y=y or 128,angle=0,speed=0}
+ if R.resetAudio then R.resetAudio()end
+ if R.fx then R.fx.reset(id)end
  if R.resetAnimation then R.resetAnimation(R.boss)end
  R.spawn(function()Zuu4Patterns[id](R.boss)end)
  if R.wings and R.enableWings then R.enableWings(R.boss)end
@@ -136,6 +144,7 @@ function R.step(px,py,hp)
  local live={};for _,t in ipairs(R.threads)do if not t.dead and t.generation==R.generation then live[#live+1]=t end end;R.threads=live
  R.motionStep(R.boss)
  if R.animateStep then R.animateStep(R.boss)end
+ if R.fx then R.fx.step()end
  local actors={};for _,a in ipairs(R.actors)do if not a.dead then
   if a.follow then a.x,a.y=R.boss.x+a.ox,R.boss.y+a.oy;a.visible=R.boss.visible~=false else R.motionStep(a)end
   a.age=a.age+1

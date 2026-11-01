@@ -10,8 +10,10 @@ local ticks={}
 function R.playSource(file,volume,pan)
  assert(files[file],'Unmapped HSoB sound '..tostring(file))
  -- Original ObjSound_Play reuses one handle per event, not layered copies.
- if ticks[file]==R.tick then return end;ticks[file]=R.tick
- originalPlaySound('hs5.se.'..file,volume or 1,pan or 0,true)
+ local current=stage.current_stage
+ local tick=current and current.timer or R.tick
+ if ticks[file]==tick then return end;ticks[file]=tick
+ lstg.PlaySound('hs5.se.'..file,volume or 1,pan or 0)
  R.soundCount=(R.soundCount or 0)+1
 end
 R.onSound=function(id)local file=assert(R.soundFiles[id],'Unknown HSoB sound event '..tostring(id));R.playSource(file)end
@@ -24,7 +26,7 @@ function PlaySound(name,volume,pan,...)
  local current=stage.current_stage
  if current and current.stage_name=='HSoB Stage5 Road@Normal' then
   -- Enemy death and source shooting are emitted by their original event sites.
-  if name=='enep00' or name=='damage00' or name=='damage01' then return end
+  if name=='enep00' then return end
   local file=aliases[name];if file then return R.playSource(file,volume,pan)end
  end
  return originalPlaySound(name,volume,pan,...)

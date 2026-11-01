@@ -3,17 +3,20 @@ Include('player.lua')
 Include('power-lock.lua')
 Include('runtime.lua');Include('constants.lua');Include('art.lua');Include('sound.lua');Include('road.lua');Include('host.lua')
 local R=HSoB5
+Include('background.lua')
+Include('boss-link.lua')
 local Hud=Class(object)
 function Hud:init()self.group=GROUP_GHOST;self.layer=LAYER_TOP;self.bound=false;self.colli=false end
 function Hud:render()
- local label=R.finished and 'ROAD COMPLETE' or R.nextAt and 'LIFE +1 / B +1' or 'SECTION '..R.section..' / 3'
+ local label=R.bossActive and (R.bossLabel or 'TORISUMI HOROU') or R.finished and 'ROAD COMPLETE' or R.nextAt and 'LIFE +1 / B +1' or 'SECTION '..R.section..' / 3'
  RenderText('menu','HSOB STAGE 5 / NORMAL / '..label,0,-190,0.22,'centerpoint')
 end
 stage.group.New('Normal','menu',{lifeleft=8,power=400,bomb=3},true,2)
 stage.group.AddStage('Normal','HSoB Stage5 Road@Normal',nil,true)
 stage.group.DefStageFunc('HSoB Stage5 Road@Normal','init',function(s)
  stage.group.initTask(s,function()
-  R.cleanup();New(default_stage_background);New(Hud);R.start(tonumber(setting.hsob5_seed)or 20261030,tonumber(setting.hsob5_from)or 1)
+  R.cleanup();New(Hud);R.start(tonumber(setting.hsob5_seed)or 20261030,tonumber(setting.hsob5_from)or 1);R.newBackground()
+  if setting.hsob5_boss_only then R.clear();R.objects={};R.finished=true end
   LoadMusic('hs5.road','art/hsob_5road.ogg',8804862/44100,(8804862-520833)/44100);PlayMusic('hs5.road')
   local limit=setting.hsob5_test and (tonumber(setting.hsob5_test_frames)or 600)or math.huge
   if setting.hsob5_test and setting.hsob5_test_shoot then player_lib.debug_data.keep_shooting=true end
@@ -23,9 +26,11 @@ stage.group.DefStageFunc('HSoB Stage5 Road@Normal','init',function(s)
    R.step(x,y);task.Wait(1)
    if setting.hsob5_test and R.tick==750 then lstg.Snapshot('userdata/snapshot/hsob5-startup.jpg')end
   end
-  R.cleanup();print('HSOB5 '..(R.finished and 'COMPLETE'or'TEST END')..' tick='..R.tick..' enemies='..R.counts.enemies..' shots='..R.counts.shots..' beams='..R.counts.beams..' damage='..(R.damage or 0)..' sounds='..(R.soundCount or 0)..' section='..R.section)
+  R.cleanup()
+  if R.finished then R.playBoss()end
+  print('HSOB5 '..(R.finished and 'COMPLETE'or'TEST END')..' tick='..R.tick..' enemies='..R.counts.enemies..' shots='..R.counts.shots..' beams='..R.counts.beams..' damage='..(R.damage or 0)..' sounds='..(R.soundCount or 0)..' section='..R.section)
   if setting.hsob5_test then task.Wait(30);stage.QuitGame()else task.Wait(120);stage.group.FinishStage()end
  end)
 end)
-stage.group.DefStageFunc('HSoB Stage5 Road@Normal','del',R.cleanup)
+stage.group.DefStageFunc('HSoB Stage5 Road@Normal','del',function()R.cleanup();Zuu4Stage.cleanup()end)
 stage_init.frame=function(s)if s.timer==30 then lstg.var.player_name,lstg.var.rep_player=player_list[1][2],player_list[1][3];stage.group.Start('Normal')end end

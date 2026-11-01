@@ -203,6 +203,7 @@ SetEnemyF01=asTask(function(iniX,iniY,iniSpeed,iniAngle,iniToX,iniValue,iniValue
      ss=ss * ((1 - (((st % st_span)) / st_span)))
     end
     CreateShotWay_E01(sx,sy,ss,sa,g,0,1,1,0,E01_SQUARE)
+    CallSound(sndShot2)
     st=st + 1
    end
    beforeX=ObjMove_GetX(objEnemy)
@@ -836,7 +837,7 @@ end)
 SetEnemyI01=function(iniX,iniY,iniSpeed,iniAngle,iniValue,iniWait)
  local TAct,TMove,TShot,TUchikaeshi,eSize,eColor,objEnemy
  TAct=asTask(function()
-  R05_GainDamageRate(objEnemy,0,60)
+  R05_GainDamageRate(objEnemy,30,60)
   TMove()
   TShot()
   WaitForKilled(objEnemy)
@@ -1310,6 +1311,7 @@ SetEnemyF08=asTask(function(iniX,iniY,iniSpeed,iniAngle,iniValue,iniWait)
  eColor=EFF_YELLOW
  emnImage=imgZakoFairyEgypt
  objEnemy=MakeEnemy(iniX,iniY,eLife,eSize)
+ R05_GainDamageRate(objEnemy,20,0)
  DrawFairy(objEnemy,emnImage,at(arr(FAIRY_SMALL,FAIRY_MIDDLE,FAIRY_LARGE),e_type))
  TAct()
  WaitForKilled(objEnemy)
@@ -2422,6 +2424,7 @@ CHAPTER_7=function()
  local _CHAPTER_7a
  _CHAPTER_7a=asTask(function()
   SetDrawingWall(arr(arr("i","0","-0.8","0"),arr("n","0","0","0"),arr("d","0","0.6","1.2"),arr("o","0","0","1"),arr("z","0","-0.6","0"),arr("i","0","0.4","1"),arr("n","0","0","1.2")),(-1))
+  WaitRoad(phaseEx(4))
   F08(1)
   WaitRoad(phaseEx(4))
   SetDrawingWall(arr(arr("k","0","0","0.9"),arr("a","0","0","0.5"),arr("i","0","0","0.6"),arr("s","0","0","0.5"),arr("e","0","0","0.9"),arr("n","0","-0.3","0"),arr("d","0","0.4","1"),arr("o","0","0","1.1")),1)
@@ -2445,9 +2448,11 @@ CHAPTER_7=function()
  if truth((FLG_TEST_CHP > 7)) then
   do return  end
  end
- _CHAPTER_7a()
- for _loop10=0,(52)-1 do
-  WaitRoad(phase(1))
+ if not HSoB5.drawingReady then _CHAPTER_7a() end
+ local entryElapsed=HSoB5.drawingReady and 1082 or 0
+ for _loop10=0,(56)-1 do
+  local w=phase(1);local used=min(w,entryElapsed);entryElapsed=entryElapsed-used
+  WaitRoad(w-used)
  end
 end
 CHAPTER_8=function()
@@ -2466,3 +2471,28 @@ CHAPTER_8=function()
 end
 HSoB5.chapters={CHAPTER_1,CHAPTER_2,CHAPTER_3,CHAPTER_4,CHAPTER_5,CHAPTER_6,CHAPTER_7,CHAPTER_8}
 HSoB5.resetPhase=function()PhaseTotal=0 end
+HSoB5.prepareDrawing=function()
+ HSoB5.prewarmDrawing(function()
+  SetDrawingWall(arr(arr("i","0","-0.8","0"),arr("n","0","0","0"),arr("d","0","0.6","1.2"),arr("o","0","0","1"),arr("z","0","-0.6","0"),arr("i","0","0.4","1"),arr("n","0","0","1.2")),(-1))
+  WaitRoad(phaseEx(4))
+  F08(1)
+  WaitRoad(phaseEx(4))
+  SetDrawingWall(arr(arr("k","0","0","0.9"),arr("a","0","0","0.5"),arr("i","0","0","0.6"),arr("s","0","0","0.5"),arr("e","0","0","0.9"),arr("n","0","-0.3","0"),arr("d","0","0.4","1"),arr("o","0","0","1.1")),1)
+  WaitRoad(phaseEx(4))
+  F08((-1))
+  WaitRoad(phaseEx(4))
+  SetDrawingWall(arr(arr("s","0.1","0","0.8"),arr("i","0","0.75","0"),arr("z","0","0","0"),arr("i","0","-0.75","1"),arr("m","0","0","0.6"),arr("i","0","-0.35","0.6")),(-1))
+  WaitRoad(phaseEx(4))
+  F08(1)
+  WaitRoad(phaseEx(4))
+  SetDrawingWall(arr(arr("b","0","0","0.9"),arr("o","0","0","0.9"),arr("s","0","0","0.3"),arr("s","0","0","0.45"),arr("i","0","0.5","0.55"),arr("s","0","0","0.65"),arr("t","0","-0.5","0"),arr("h","0","0.5","0.9"),arr("o","0","0","1"),arr("t","0","-0.5","0"),arr("h","0","0.5","0.9")),1)
+  WaitRoad(phaseEx(4))
+  F08((-1))
+  WaitRoad(phaseEx(4))
+  SetDrawingWall(arr(arr("m","0","0","1"),arr("i","0","0.5","0"),arr("r","0","-0.5","1"),arr("u","0","0","1"),arr("k","0","0.5","1"),arr("a","0","0","1"),arr("n","0","-0.5","0"),arr("i","0","0.5","1")),(-1))
+  WaitRoad(phaseEx(4))
+  F08(1)
+  WaitRoad(phaseEx(4))
+  SetDrawingWall(arr(arr("s","0","0","0.5"),arr("e","0","0","0.5"),arr("t","-0.15","-0.5","0"),arr("i","-0.15","0.5","0.7"),arr("s","0","0","0.6"),arr("g","0","-0.35","0.7"),arr("o","0","0","1"),arr("d","-0.1","0.5","1")),1)
+ end,1082)
+end
