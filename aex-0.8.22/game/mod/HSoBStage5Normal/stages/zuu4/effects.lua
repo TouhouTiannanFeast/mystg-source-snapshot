@@ -7,6 +7,32 @@ local function rand(a,b)F.seed=F.seed*16807%2147483647;return a+(b-a)*(F.seed-1)
 local function add(kind,life,p)
  p=p or{};p.kind=kind;p.life=life;p.age=0;F.items[#F.items+1]=p;return p
 end
+function F.birdTail(target,angle)
+ -- Visual tail-ring layer; cosmetic only, independent of attack RNG.
+ add('birdRing',30,{x=target.x-14*cos(angle),y=target.y-14*sin(angle),a=angle+90,
+  target=target,col={255,240,64},size=0.7,
+  step=function(p)
+   if p.target.dead then p.life=0;return end
+   local a=p.target.angle or angle
+   p.x,p.y=p.target.x-14*cos(a),p.target.y-14*sin(a);p.a=a+90
+  end})
+ local vx,vy=rand(-8,-4),rand(-2,2)
+ local scale=target.age<45 and sin((target.age+1)/45*90)or 1
+ add('birdTail',30,{x=target.x,y=target.y,target=target,ox=0,oy=0,
+  vx=vx*cos(angle)-vy*sin(angle),vy=vx*sin(angle)+vy*cos(angle),a=angle+90,
+  an=math.floor(target.age*0.2)%7,scale=scale,
+  step=function(p)
+   if not p.target.dead then p.x,p.y=p.target.x,p.target.y end
+   local u=(p.age+1)/30;p.drawX,p.drawY=p.x+p.ox,p.y+p.oy
+   p.ox,p.oy=p.ox+p.vx*u,p.oy+p.vy*u
+  end})
+end
+function F.birdExit(target)
+ -- EffectZako_Explode: ENEMY_M size4 -> particle9 rings45f(size/2),30f(size*1.25/2).
+ add('birdDeathRing',45,{x=target.x,y=target.y,size=2,col={255,255,255}})
+ add('birdDeathRing',30,{x=target.x,y=target.y,size=2.5,col={255,255,255}})
+ add('birdExit',15,{x=target.x,y=target.y,a=target.angle+90,an=math.floor(target.age*0.2)%7})
+end
 function F.reset(id)
  F.items={};F.clock=0;F.id=id;F.spell=false
  F.base=id=='non1' and 1 or id=='final' and 0 or 2
@@ -27,6 +53,7 @@ function F.load()
   LoadTexture('horou.fx.'..n,pre..n..'.png')
   local w,h=GetTextureSize('horou.fx.'..n);LoadImage('horou.fx.'..n,'horou.fx.'..n,0,0,w,h)
  end
+ LoadImage('horou.fx.ring','horou.fx.particle',64,128,64,64)
  LoadImage('horou.fx.spark','horou.fx.particle',128,0,64,64)
  LoadImage('horou.fx.power','horou.fx.power_effect',0,0,256,256)
  LoadImage('horou.fx.cloud','horou.fx.expcloud',0,0,128,128)
@@ -182,7 +209,17 @@ function F.render(which)
    if p.kind=='cutin'then draw('horou.fx.horou1',p.x,p.y,0,0.65,0.65,p.alpha or 0,nil,'')
    elseif p.kind=='cutinShadow'then local sc=0.65*(1.1+u/2);draw('horou.fx.horou1',p.x,p.y,0,sc,sc,(1-u)*p.alpha/24)end
   elseif which=='front' then
-   if p.kind=='spark'then draw('horou.fx.spark',p.x,p.y,p.a,0.5*(1-u),0.5*(1-u),255,p.col)
+   if p.kind=='birdRing'then
+    local sc=0.25+p.size*sin(u*90)
+    draw('horou.fx.ring',p.x,p.y,p.a,sc,sc,(1-u)*255,p.col)
+   elseif p.kind=='birdDeathRing'then
+    local v=sin(u*90);draw('horou.fx.ring',p.x,p.y,0,p.size*v,p.size*v,math.min(255,(1-v)*512),p.col)
+   elseif p.kind=='birdExit'then
+    local v=sin((15-p.age)/15*90)
+    draw('zuu4.bird'..p.an,p.x,p.y,p.a,v,2-v,255,{178,178,128})
+   elseif p.kind=='birdTail'then
+    draw('zuu4.birdTail'..p.an,p.drawX or p.x,p.drawY or p.y,p.a,p.scale*2,p.scale*2,(1-u)*255*math.min(10*u,1),{132,132,32})
+   elseif p.kind=='spark'then draw('horou.fx.spark',p.x,p.y,p.a,0.5*(1-u),0.5*(1-u),255,p.col)
    elseif p.kind=='charge'and not p.target.dead then
     local v=sin(u*90);local sc=(1-v)^0.33*2.5;local a=p.a+p.spin*(1-v)^0.33;local alpha=math.min(108,192*v)
     draw('horou.fx.power',p.target.x,p.target.y,a,sc*cos(p.ax),sc*cos(p.ay),alpha*0.75,{128,128,128},'mul+rev')

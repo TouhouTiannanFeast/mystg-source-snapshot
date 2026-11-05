@@ -78,6 +78,14 @@ end
 local function finalBird(core,angle,dir)
  local f=R.actor(core.x,core.y,'bird',1000,1);f.color=3;f.visible=false;f.angle=angle;f.cull=64
  spawn(function()
+  local angle=f.angle
+  while not f.dead do
+   angle=angle+((f.angle-angle+540)%360-180)*0.05
+   if f.age%8==0 then R.effect('birdTail',f,angle)end
+   wait(1)
+  end
+ end)
+ spawn(function()
   local a=angle
   for t=1,180 do
    if f.dead then return end
@@ -88,7 +96,7 @@ local function finalBird(core,angle,dir)
  end)
  spawn(function()
   wait(45);if f.dead then return end;f.visible=true
-  local count=math.min(7,math.floor((1-R.hp/7777)*7/0.66));if R.finalRage>0 then count=7 end
+  local count=math.min(7,math.floor((1-R.hp/R.maxhp)*7/0.66));if R.finalRage>0 then count=7 end
   for i=0,count-1 do
    if f.dead then return end
    local id=353+colors[(i*6+2)%7+1];local s=1*(1+i*0.015)
@@ -99,7 +107,7 @@ local function finalBird(core,angle,dir)
  spawn(function()
   wait(45)
   while not f.dead do
-   local b=R.shot(f.x,f.y,1.66,f.angle+180+R.rand(-5,5),636,5,-1.66/30,0);b.life=30;wait(3)
+   local b=R.shot(f.x,f.y,1.66,f.angle+180+R.rand(-5,5),636,5,-1.66/30,0);b.life=60;b.fadeStart=30;wait(3)
   end
  end)
 end
@@ -107,37 +115,38 @@ local function finalRay(x,y,angle)
  spawn(function()
   for i=5,0,-1 do
    for _,dir in ipairs(i==0 and {1}or {1,-1})do
-    local offset=i*5*dir;local b=R.beam(x,y,angle+offset,0,2,9999,75,'notice',0);b.visual=364;b.collidable=false;b.noCull=true
-    b.update=function(s)local u=math.min(1,(s.age+1)/45*2);s.length=800*u;s.angle=angle+offset*sin(math.min(1,(45-s.age)/45)*90)end
+    local offset=i*5*dir;local b=R.beam(x,y,angle+offset,0,2,9999,105,'notice',0);b.visual=364;b.collidable=false;b.noCull=true;b.alpha=192
+    b.update=function(s)local u=math.min(1,(s.age+1)/45*2);s.length=800*u;s.renderWidth=2*math.min(1,0.05+0.1*(s.age+1))*(1+5*math.max(0,math.min(1,(s.age-45)/30)));s.alpha=128*math.min(1,math.max(0,(105-s.age)/30));s.angle=angle+offset*sin(math.max(0,math.min(1,(45-s.age)/45))*90)end
    end
    wait(5)
   end
   wait(60)
   R.sound('laser1')
   for i=0,3 do for _,dir in ipairs(i==0 and {1}or {1,-1})do
-   local offset=i*dir;local b=R.beam(x,y,angle,0,32,0,105,'finalRay',0);b.visual=236;b.noCull=true
+   local offset=i*dir;local b=R.beam(x,y,angle,0,32,0,105,'finalRay',0);b.visual=236;b.noCull=true;b.tint={255,255,128}
    b.update=function(s)
-    if s.age<75 then local u=1-cos((s.age+1)/75*90);s.angle=angle+u*offset;s.length=math.min(480,(s.age+1)*12);s.renderWidth=32
+    if s.age<75 then local u=1-cos((s.age+1)/75*90);s.angle=angle+u*offset;s.length=math.min(480,(s.age+1)*12);s.renderWidth=32*math.min(1,0.05+0.1*(s.age+1))
     else local t=104-s.age;local u=sin((t+1)/30*90);s.angle=angle+u*offset;s.length=480+(s.age-74)*12;s.renderWidth=32*u;s.collidable=t>=10 end
-    s.hitWidth=s.renderWidth/3
+    s.hitWidth=(s.age<75 and 32 or s.renderWidth)/3
    end
   end end
  end)
 end
 P.final=function(o)
  R.enableWings(o);R.finalRage=0;o.book=true
- H.standby(o,192,208,360,true);wait(120)
+ local prepare=Zuu4Specs.final.hold
+ H.standby(o,192,208,prepare,true);wait(prepare-240)
  if R.setAction then R.setAction(o,'shot2',999*60)end
  spawn(function()
   while true do
-   local left=98-math.max(0,R.tick-360)/60
-   if R.finalRage==0 and(R.hp<=7777*0.25 or left<=33)then R.finalRage=1;if left>11 then R.sound('shot1')end end
-   if R.finalRage==1 and(R.hp<=7777*0.125 or left<=22)then R.finalRage=2;if left>11 then R.sound('shot1')end end
+   local left=98-math.max(0,R.tick-prepare)/60
+   if R.finalRage==0 and(R.hp<=R.maxhp*0.25 or left<=33)then R.finalRage=1;if left>11 then R.sound('shot1')end end
+   if R.finalRage==1 and(R.hp<=R.maxhp*0.125 or left<=22)then R.finalRage=2;if left>11 then R.sound('shot1')end end
    if R.finalRage==2 and left<=11 then R.finalRage=3;R.sound('shot1')end
    wait(1)
   end
  end)
- local core=R.nuclear(o.x,o.y-48,12,99999);core.noCull=true;core.moving=true;core.tint={255,255,0}
+ local core=R.nuclear(o.x,o.y-48,12,99999);core.noCull=true;core.moving=true;core.bombProof=true;core.persistent=true;core.tint={255,255,0}
  spawn(function()
   for t=0,179 do
    if t%8==0 then R.effect('point',core.x,core.y,core,{192,192,128},2,120,240,3)end

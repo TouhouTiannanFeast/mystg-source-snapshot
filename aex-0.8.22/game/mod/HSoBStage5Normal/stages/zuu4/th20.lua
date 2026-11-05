@@ -39,7 +39,7 @@ P.non3=function(o)
   wait(240)
   while true do
    randomMove(o,60,0,0.8,128,96,280)
-   for _,color in ipairs({3,1,5,6})do
+   for _,color in ipairs({3,1,2,4})do
     ring(o,11,R.rand(-180,180),5*0.4,color)
     wait(20)
    end
@@ -109,7 +109,7 @@ end
 P.stone=function(o)
  R.stonePhaseStarts={}
  R.sound('th20.27');R.effect('spellStart')
- R.move(o,192,144,60,'decel');o.visible=true;wait(60)
+ R.move(o,192,72,60,'decel');o.visible=true;wait(60)
  R.effect('th20Charge',o,false);R.sound('th20.54');wait(60)
  R.effect('th20Charge',o,true);R.sound('th20.6')
  launchLayers(o,0)
@@ -117,7 +117,7 @@ P.stone=function(o)
  -- ECL decrements B before testing B<5400:1801 checks,1800 waits.
  while true do
   elapsed=elapsed+1;if elapsed>1800 or R.hp<=38000 then break end
-  wait(1);if elapsed%200==0 then randomMove(o,60,4,1,144,64,128)end
+  wait(1);if elapsed%200==0 then randomMove(o,60,4,1,72,64,128)end
  end
  for phase=1,3 do
   local cap=({38000,24500,11000})[phase]
@@ -129,9 +129,9 @@ P.stone=function(o)
    -- A>=1800 is tested on entry:1800 checks,1799 waits.
    while true do
     elapsed=elapsed+1;if elapsed>=1800 or R.hp<=nextHP then break end
-    wait(1);if elapsed%200==0 then randomMove(o,60,4,1,144,64,128)end
+    wait(1);if elapsed%200==0 then randomMove(o,60,4,1,72,64,128)end
    end
   end
  end
- while true do wait(200);randomMove(o,60,4,1,144,64,128)end
+ while true do wait(200);randomMove(o,60,4,1,72,64,128)end
 end

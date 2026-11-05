@@ -30,6 +30,7 @@ LoadImage('zuu4.wingPupil','zuu4.wings',384,384,128,128)
 LoadImage('zuu4.wingFlyer','zuu4.wings',256,320,256,64);SetImageCenter('zuu4.wingFlyer',0,32)
 LoadImage('zuu4.wingImmortal','zuu4.wings',512,0,512,256);SetImageCenter('zuu4.wingImmortal',0,128)
 for i=0,6 do LoadImage('zuu4.bird'..i,'zuu4.bird',(i%4)*64,math.floor(i/4)*64,64,64)end
+for i=0,6 do LoadImage('zuu4.birdTail'..i,'zuu4.bird',(i%4)*64,128+math.floor(i/4)*64,64,64)end
 LoadImage('zuu4.nuclearCore','zuu4.nuclear',0,0,512,512)
 LoadImage('zuu4.nuclearGlow','zuu4.nuclear',0,512,512,512)
 local function own(o)S.owned[o]=true end
@@ -57,12 +58,14 @@ function Shot:frame()
   local total=0;for _,f in ipairs(art.frames)do total=total+f.duration end
   local t=b.age%total;for _,f in ipairs(art.frames)do if t<f.duration then self.img=f.image;break else t=t-f.duration end end
  end
- local offset=art.offset or {0,0};local a=b.angle+90
+ local fixedNote=R.id=='final' and b.id>=353 and b.id<=360
+ local offset=art.offset or {0,0};local a=fixedNote and 0 or b.angle+90
  local dx=offset[1]*R.cos(a)-offset[2]*R.sin(a);local dy=offset[1]*R.sin(a)+offset[2]*R.cos(a)
  self.x,self.y,self.vx,self.vy=b.x+dx-192,224-b.y-dy,0,0
  self.a,self.b,self.rect=b.radius,b.radius,false
- self.colli=b.age>=b.delay;self.heading=-b.angle-90;self.rot=0
- self.hscale,self.vscale=1,1;self._a=255
+ self.colli=b.age>=b.delay;self.heading=fixedNote and 0 or -b.angle-90;self.rot=0
+ self.hscale,self.vscale=1,1;self._a=b.fadeStart and math.min(255,255*(b.life-b.age)/(b.life-b.fadeStart))or 255
+ if b.fadeStart and b.age>=b.fadeStart then self.colli=false end
  self.hidden=false
  if b.age<b.delay then
   local d=Zuu4DelayArt[b.id];self.hidden=d and not d.image
@@ -76,15 +79,22 @@ function Shot:frame()
 end
 function Shot:render()
  local b=self.data
- if b.wingGlow and Zuu4Art.shots[896]then
-  local img=Zuu4Art.shots[896].image
-  local cols={{255,64,64},{64,255,64},{64,64,255},{255,255,64},{255,64,255},{64,255,255},{255,160,64},{255,255,255}};local c=cols[b.id%8+1]
-  local a=(1-R.cos(math.min(1,b.age/60)*180))/2*255
-  SetImageState(img,'mul+add',Color(a,c[1]*0.5+64,c[2]*0.5+64,c[3]*0.5+64));Render(img,b.x-192,224-b.y,self.heading)
+
+ if not self.hidden then
+  SetImageState(self.img,self._blend,Color(self._a,255,255,255))
+  Render(self.img,b.x-192,224-b.y,self.heading,self.hscale,self.vscale)
  end
- if self.hidden then return end
- SetImageState(self.img,self._blend,Color(self._a,255,255,255))
- Render(self.img,b.x-192,224-b.y,self.heading,self.hscale,self.vscale)
+ if b.wingGlow and Zuu4Art.shots[896]then
+  local glow=Zuu4Art.shots[896];local img=glow.image
+  if #glow.frames>0 then
+   local total=0;for _,f in ipairs(glow.frames)do total=total+f.duration end
+   local t=b.age%total;for _,f in ipairs(glow.frames)do if t<f.duration then img=f.image;break else t=t-f.duration end end
+  end
+  local cols={{255,255,255},{255,0,0},{0,255,0},{0,0,255},{255,255,0},{255,0,255},{0,255,255},{255,128,0}}
+  local c=cols[b.id%8+1];local alpha=R.sin(math.min(1,(b.age+1)/60)*90)*255
+  SetImageState(img,'mul+add',Color(alpha,c[1]*0.5+64,c[2]*0.5+64,c[3]*0.5+64))
+  Render(img,b.x-192,224-b.y,self.heading)
+ end
 end
 function Shot:del()S.owned[self]=nil end
 function Shot:kill()R.erase(self.data);S.owned[self]=nil;self._index=nil;bullet.kill(self)end
@@ -105,11 +115,30 @@ function Beam:frame()
 end
 function Beam:render()
  local b=self.data;local a=Zuu4Art.shots[b.visual or 368]
+ local image=a.image;local sourceRect=a.rect
+ if (b.mode=='notice' or b.mode=='finalRay') and #a.frames>0 then
+  local total=0;for _,f in ipairs(a.frames)do total=total+f.duration end
+  local t=b.age%total;for _,f in ipairs(a.frames)do if t<f.duration then image=f.image;sourceRect=f.rect;break else t=t-f.duration end end
+ end
  local w=b.renderWidth or(b.age<b.delay and 2 or b.width*math.max(0,math.min(1,(b.age-b.delay+1)/15))^2)
+ if b.mode=='notice'then
+  -- Reference-image adaptation: opacity fades down the screen, independently of beam angle.
+  local r=sourceRect;local dx,dy=cos(self.rot),sin(self.rot);local nx,ny=-dy,dx
+  local function vertex(dist,side,u,v)
+   local x=self.x+dist*dx+side*w/2*nx;local y=self.y+dist*dy+side*w/2*ny
+   local depth=math.max(0,math.min(1,(224-y)/448))
+   return {x,y,0,u,v,Color((b.alpha or 128)*(0.85-0.7*depth),255,255,255)}
+  end
+  RenderTexture('zuu4.'..a.texture,'mul+add',
+   vertex(self.l2,-1,r[1],r[2]),vertex(self.l2,1,r[3],r[2]),
+   vertex(0,1,r[3],r[4]),vertex(0,-1,r[1],r[4]))
+  return
+ end
  local tint=b.tint or{255,255,255}
- SetImageState(a.image,b.mode=='loose' and 'mul+add' or '',Color(b.age<b.delay and 192 or 255,math.min(255,tint[1]),math.min(255,tint[2]),math.min(255,tint[3])))
+ local sourceLaser=b.mode=='notice' or b.mode=='finalRay'
+ SetImageState(image,(b.mode=='loose' or sourceLaser) and 'mul+add' or '',Color(b.alpha or (b.age<b.delay and 192 or 255),math.min(255,tint[1]),math.min(255,tint[2]),math.min(255,tint[3])))
  local r=a.rect
- Render(a.image,self.x+self.l2*0.5*cos(self.rot),self.y+self.l2*0.5*sin(self.rot),self.rot-90,w/(r[3]-r[1]),self.l2/(r[4]-r[2]))
+ Render(image,self.x+self.l2*0.5*cos(self.rot),self.y+self.l2*0.5*sin(self.rot),self.rot-90,w/(r[3]-r[1]),self.l2/(r[4]-r[2]))
 end
 function Beam:del()S.owned[self]=nil end
 function Beam:kill()self.data.dead=true;S.owned[self]=nil end
@@ -120,7 +149,7 @@ end
 function Explosion:frame()
  local b=self.data;if b.dead then Del(self);return end
  self.x,self.y=b.x-192,224-b.y;self.a,self.b=b.radius,b.radius;self.rect=false
- self.colli=b.kind=='nuclear';self.vx,self.vy=0,0
+ self.colli=b.kind=='nuclear';self.group=b.bombProof and GROUP_INDES or GROUP_ENEMY_BULLET;self.vx,self.vy=0,0
 end
 function Explosion:render()
  local b=self.data
@@ -149,18 +178,23 @@ local function bombCollision(self,other,base)
  S.bombHit=previous
 end
 local FamiliarDamage=Class(enemybase)
-function FamiliarDamage:colli(other)bombCollision(self,other,enemybase)end
+function FamiliarDamage:colli(other)
+ if self.data.kind=='bird'then return end
+ bombCollision(self,other,enemybase)
+end
 local Familiar=Class(FamiliarDamage)
 function Familiar:init(a)
- enemybase.init(self,a.hp,a.kind=='wingHitbox');self.data=a;self.a,self.b=a.hitRadius or 16,a.hitRadius or 16;self.bound=false;self.vx,self.vy=0,0;own(self)
+ enemybase.init(self,a.hp,a.kind=='wingHitbox');self.data=a;self.homingExcluded=a.kind=='bird';self.a,self.b=a.hitRadius or 16,a.hitRadius or 16;self.bound=false;self.vx,self.vy=0,0;own(self)
+ if a.kind=='bird'then self.group=GROUP_GHOST;self.colli=false;SetAttr(self,'colli',false)end
 end
 function Familiar:frame()
  local a=self.data;if a.dead then Del(self);return end
  if self.hp<=0 then a.dead=true;Kill(self);return end
  a.hp=self.hp;self.x,self.y,self.vx,self.vy=a.x-192,224-a.y,0,0
- self.colli=a.visible and a.kind~='trail';SetAttr(self,'colli',self._colli)
+ self.colli=a.visible and a.kind~='trail' and a.kind~='bird';SetAttr(self,'colli',self._colli)
 end
 function FamiliarDamage:take_damage(dmg)
+ if self.data.kind=='bird'then return end
  self.hp=self.hp-dmg
  if setting.zuu4_test_shoot then S.familiarHits=(S.familiarHits or 0)+1 end
  if self.data.link>0 and S.boss and IsValid(S.boss)then S.boss.class.base.take_damage(S.boss,dmg*self.data.link)end
@@ -190,6 +224,8 @@ function WingExit:init(parts)
  self.origin={x=R.boss.x,y=R.boss.y};self.death=R.fx.deathStart(self.origin);R.sound('bossBegin')
 end
 function WingExit:frame()
+ R.animation.clock=R.animation.clock+1;R.fx.step()
+ if self.timer==24 then R.setAction(R.boss,'stand',216000)end
  if self.timer>=255 then R.musicStop();Del(self);return end
  R.animation.fadeStep(self.parts,self.timer)
  R.fx.deathStep(self.death,self.timer)
@@ -243,7 +279,12 @@ local function card(id,index)
   end
   print('ZUU4 END '..id..' ticks='..R.tick..' bullets='..R.counts.shots..' beams='..R.counts.beams..' subphase='..R.subphase)
   local exitParts=id=='final' and R.animation.detach(R.boss)
-  if exitParts then S.dying=true;R.deathAge=0;R.wings=false;R.fx.items={}end
+  if exitParts then
+   S.dying=true;R.deathAge=0;R.wings=false
+   local tails={};for _,p in ipairs(R.fx.items)do if p.kind=='birdTail'then tails[#tails+1]=p end end;R.fx.items=tails
+   for _,a in ipairs(R.actors)do if a.kind=='bird' and a.visible then R.fx.birdExit(a)end end
+   R.boss.pose={kind='shot2',start=R.tick-18,duration=42}
+  end
   S.ended=S.ended+1;clean();assert(next(S.owned)==nil,'Zuu4 object leak')
   if exitParts then New(WingExit,exitParts)end
  end

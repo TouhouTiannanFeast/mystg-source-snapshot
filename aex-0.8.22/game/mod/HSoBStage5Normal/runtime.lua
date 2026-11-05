@@ -78,6 +78,7 @@ function E.WaitForKilled(o)while alive(o)and o.hp>0 do E.wait(1)end end
 function E.CheckKillType(o)return o.killed and 2 or 1 end
 function R.enemyKilled(o)
  if o.deathSound then return end;o.deathSound=true
+ if o.onDefeat then o.onDefeat()end
  E.CallSound(E.sndVanish)
  if R.onEnemyKilled then R.onEnemyKilled(o)end
 end
@@ -267,6 +268,13 @@ function R.step(px,py)
    R.clear();R.objects={};R.cancelAt=nil;R.nextAt=nil;R.scheduleDone=false;R.beginSection(R.section+1)
   elseif R.finishAt and R.tick>=R.finishAt then R.finished=true end
   return
+ end
+ -- Resolve lethal collision damage before WaitForKilled/link coroutines can
+ -- delete the endpoint as a normal exit and discard its LASER_ID geometry.
+ for _,o in ipairs(R.objects)do
+  if o.kind=='enemy' and not o.dead and o.hp and o.hp<=0 then
+   o.killed=true;o.dead=true;R.enemyKilled(o)
+  end
  end
  local count=#R.threads
  for i=1,count do local t=R.threads[i];if not t.dead and R.tick>=t.wake then R.resume(t)end end

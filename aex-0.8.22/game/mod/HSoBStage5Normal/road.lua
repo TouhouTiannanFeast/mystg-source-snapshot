@@ -842,7 +842,7 @@ SetEnemyI01=function(iniX,iniY,iniSpeed,iniAngle,iniValue,iniWait)
   TShot()
   WaitForKilled(objEnemy)
   if truth((CheckKillType(objEnemy) == 2)) then
-   TUchikaeshi(true)
+   if not objEnemy.deathVolley then objEnemy.deathVolley=true;TUchikaeshi(true) end
   end
   ZakoFinalize(objEnemy,eColor)
  end)
@@ -967,6 +967,7 @@ SetEnemyI01=function(iniX,iniY,iniSpeed,iniAngle,iniValue,iniWait)
  SetEnemyDropItem(objEnemy,arr(MY_ITEM_TIME_1),arr(MY_ITEM_TIME_1,5))
  Obj_SetValue(objEnemy,"LASER_ID",arr())
  DrawOnmyou(objEnemy,eColor)
+ objEnemy.onDefeat=function()if not objEnemy.deathVolley then objEnemy.deathVolley=true;TUchikaeshi(true)end end
  TAct()
  do return (objEnemy) end
 end

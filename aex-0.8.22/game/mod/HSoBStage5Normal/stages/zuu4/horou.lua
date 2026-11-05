@@ -40,7 +40,7 @@ R.horouAnchors=function(o,frame)
  return left,right
 end
 local function wing(x,y,speed,angle,id,delay,timer,arc,radius,offset)
- local b=R.shot(x,y,0,angle,id,delay);b.wingGlow=true;b.add=true;b.scriptedPosition=true
+ local b=R.shot(x,y,0,angle,id,delay);b.wingGlow=true;b.scriptedPosition=true
  b.update=function(s)
   local t=s.age
   if t<timer then

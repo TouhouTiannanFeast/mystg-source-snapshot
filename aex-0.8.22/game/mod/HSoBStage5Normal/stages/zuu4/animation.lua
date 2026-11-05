@@ -160,7 +160,7 @@ function A.drawPart(p,alpha)
  Render4V(p.image,unpack({out[1][1],out[1][2],out[1][3],out[2][1],out[2][2],out[2][3],out[3][1],out[3][2],out[3][3],out[4][1],out[4][2],out[4][3]}))
 end
 function A.render(o)
- local x,y=A.origin(o);local frame=A.bodyFrame(o);local wings={}
+ local x,y=A.origin(o);local frame=A.bodyFrame(o,R.deathAge and R.tick+R.deathAge or nil);local wings={}
  if R.wings then wings=A.wingParts(o)
  elseif R.wingVisual then
   local v=R.wingVisual;local age=R.tick-v.start;local u=sin(clamp((age-60)/60)*90)
@@ -189,7 +189,7 @@ end
 function A.fadeStep(parts,t)
  for _,p in ipairs(parts)do
   local age=t-p.wait
-  p.active=age>=0 and age<90
+  p.active=age<90
   if age>=0 and age<90 then
    p.x=p.x+p.speed*cos(p.exitAngle);p.y=p.y+p.speed*sin(p.exitAngle);p.speed=p.speed+p.accel
    p.sy=p.initialY*(1-sin(age))

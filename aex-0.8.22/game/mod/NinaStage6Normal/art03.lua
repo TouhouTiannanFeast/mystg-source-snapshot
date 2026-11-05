@@ -1,0 +1,9 @@
+Nina03Art={}
+Nina03Art[576]={image="nina.diamond.576",path="art/th20-diamond-576.png",w=30,h=30}
+Nina03Art[577]={image="nina.diamond.577",path="art/th20-diamond-577.png",w=30,h=30}
+Nina03Art[578]={image="nina.diamond.578",path="art/th20-diamond-578.png",w=30,h=30}
+Nina03Art[579]={image="nina.diamond.579",path="art/th20-diamond-579.png",w=30,h=30}
+Nina03Art[580]={image="nina.diamond.580",path="art/th20-diamond-580.png",w=30,h=30}
+Nina03Art[581]={image="nina.diamond.581",path="art/th20-diamond-581.png",w=30,h=30}
+Nina03Art[582]={image="nina.diamond.582",path="art/th20-diamond-582.png",w=30,h=30}
+Nina03Art[583]={image="nina.diamond.583",path="art/th20-diamond-583.png",w=30,h=30}

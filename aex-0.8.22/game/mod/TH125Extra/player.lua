@@ -1,0 +1,195 @@
+-- TH13 Reimu high-speed option cadence/assets with locally DPS-scaled damage.
+-- Slow mode keeps the focused piercing needles; resource rules are separate.
+Include('player-config.lua')
+Include('player-data.lua')
+Y3Player={}
+local P=Y3Player
+local hit=enemybase.colli
+local function piercingCollision(self,other)
+ if other.y3Piercing then
+  if other.y3Hits[self]then return end
+  if self.protect or self.invuln and self.invuln>0 or self.dmg_factor==0 then return end
+  other.y3Hits[self]=true
+ end
+ return hit(self,other)
+end
+enemybase.colli=piercingCollision;boss.colli=piercingCollision;enemy.colli=piercingCollision
+local Shot=Class(player_bullet_straight)
+P.Shot=Shot
+function Shot:init(x,y,speed,damage,piercing)
+ player_bullet_straight.init(self,piercing and 'y3.player.pierce' or 'y3.player.main',x,y,speed,90,damage)
+ self.a,self.b=24,piercing and 8 or 9;self.rect=true
+ self.y3Piercing=piercing;self.killflag=piercing
+ self.y3Hits=setmetatable({},{__mode='k'})
+end
+function Shot:frame()if self.y>lstg.world.boundt+64 then Del(self)end end
+-- TH13 native 0x446cb0/0x421c40: nearest within256, retain target until invalid.
+-- Native float constants and source pl00a.sht/ANM are recorded in homing29.
+function P.targetValid(e)
+ return e and IsValid(e)and not e.homingExcluded and not(e.data and e.data.kind=='bird') and e.colli and not e.protect and e.hp and e.hp>0
+  and not(e.data and(e.data.dead or e.data.visible==false))
+end
+function P.nearest(x,y)
+ local target,dist=nil,256*256
+ for _,group in ipairs({GROUP_ENEMY,GROUP_NONTJT})do
+  for _,e in ObjList(group)do
+   if P.targetValid(e)then
+    local d=(e.x-x)^2+(e.y-y)^2
+    if d<dist then target,dist=e,d end
+   end
+  end
+ end
+ return target
+end
+function P.home(b,target)
+ if target and b.timer<60 then
+  local diff=(Angle(b,target)-b.heading+540)%360-180
+  b.heading=b.heading+diff*.08
+  if math.abs(diff)<=15 then b.speed=math.min(16,b.speed+.2)
+  elseif math.abs(diff)>=45 then b.speed=math.max(4,b.speed-.2)end
+ elseif target then b.speed=b.speed+.2
+ else b.speed=math.min(16,b.speed+.1)end
+end
+local Homing=Class(player_bullet_straight)
+P.Homing=Homing
+function Homing:init(x,y,damage,angle,option)
+ self.option=option
+ player_bullet_straight.init(self,'hs5.player.charm',x,y,4,angle,damage)
+ self.a,self.b,self.rect=8,8,true;self.bound=false
+ self.heading,self.speed=angle,4;self.killflag=false
+end
+function Homing:frame()
+ if not self.target then self.target=P.nearest(self.x,self.y)
+ elseif not P.targetValid(self.target)then self.target=nil end
+ local target=self.target;P.home(self,target)
+ self.rot=self.heading;New(P.CharmEffect,self.x,self.y,self.rot,true);self.vx,self.vy=self.speed*cos(self.heading),self.speed*sin(self.heading)
+ if setting.hsob5_test and target and not P.nativeHomingChecked and self.timer>0 and self.timer<60 then
+  P.nativeHomingChecked=true;print('HSOB5 HOMING native target acquired; angle='..self.heading..' speed='..self.speed)
+ end
+ if self.timer>=15 and(self.x<lstg.world.boundl-64 or self.x>lstg.world.boundr+64 or self.y<lstg.world.boundb-64 or self.y>lstg.world.boundt+64)then Del(self)end
+end
+local CharmEffect=Class(object)
+function CharmEffect:init(x,y,rot,trail)
+ self.x,self.y,self.rot=x,y,rot;self.trail=trail
+ self.group=GROUP_GHOST;self.layer=LAYER_PLAYER_BULLET;self.colli=false;self.bound=false
+end
+function CharmEffect:frame()if self.timer>=(self.trail and 5 or 30)then Del(self)end end
+function CharmEffect:render()
+ local life=self.trail and 5 or 30
+ local image=self.trail and 'hs5.player.charm' or 'hs5.player.charm.hit'..math.min(2,math.floor(self.timer/10))
+ SetImageState(image,self.trail and 'mul+add' or '',Color((self.trail and 128 or 192)*(1-self.timer/life),255,self.trail and 96 or 255,self.trail and 96 or 255))
+ Render(image,self.x,self.y,self.rot)
+end
+P.CharmEffect=CharmEffect
+function Homing:render()
+ SetImageState(self.img,'',Color(128,255,255,255));Render(self.img,self.x,self.y,self.rot)
+end
+function Homing:kill()New(CharmEffect,self.x,self.y,self.rot,false)end
+function P.shoot(self)
+ self.nextshoot=1
+ if P.probing then return end
+ local clock=self.y3FireClock or 0
+ local rows=Y3ReimuBData.shooters[math.min(4,math.floor(lstg.var.power/100))+1]
+ local played=false
+ local homingDamage={}
+ for _,s in ipairs(rows)do
+  if s.option>0 and self.slow~=1 then
+   homingDamage[s.option]=(homingDamage[s.option]or 0)+s.damage
+  elseif clock>=s.delay and clock%s.rate==0 then
+   local x,y=self.x,self.y
+   if s.option>0 then
+    local sp=self.sp[s.option]
+    if sp and sp[3]>0.5 then x=self.supportx+sp[1];y=self.supporty+sp[2]else x=nil end
+   end
+   if x then
+    New(Shot,x+s.x,y+s.y,s.speed,s.damage*Y3PlayerConfig.damage_scale,s.option>0)
+    if setting.y3_test_player then
+     local key=self.slow==1 and 'slowDamage' or 'highDamage';P[key]=(P[key]or 0)+s.damage*Y3PlayerConfig.damage_scale
+    end
+    if not played then PlaySound('plst00',0.3,self.x/1024);played=true end
+   end
+  end
+ end
+ -- Source TH13: one centered charm per option every8 frames. The previous
+ -- rows fire6 times/16f: sum(row damage)*3 per charm preserves raw DPS.
+ if clock%8==0 then
+  local power=math.min(4,math.floor(lstg.var.power/100))
+  local angles=({{90},{110,70},{110,70,90},{110,70,100,80}})[power]
+  for option=1,4 do
+   local damage=homingDamage[option];local sp=self.sp[option]
+   if damage and sp and sp[3]>0.5 then
+    local scaled=damage*3*Y3PlayerConfig.damage_scale
+    New(Homing,self.supportx+sp[1],self.supporty+sp[2],scaled,angles[option],option)
+    if setting.y3_test_player then P.highDamage=(P.highDamage or 0)+scaled end
+    if not played then PlaySound('plst00',0.3,self.x/1024);played=true end
+   end
+  end
+ end
+
+end
+-- PlayerExtensions may reload the character after mod/root.lua. Bind through
+-- the running player system so the live class always uses this attack.
+local sys=player_lib.system
+local oldFrame=sys.frame
+function sys:frame(...)
+ local p=self.player
+ if p.class~=reimu_player then return oldFrame(self,...)end
+ if p.y3FireClock==nil then
+  p.slist=Y3ReimuBData.positions;p.slist[6]=p.slist[5];p.y3FireClock=0
+ end
+ p.class.shoot=P.shoot
+ local result=oldFrame(self,...)
+ if not p.time_stop then
+  if p.__death_state==0 and(p.__shoot_flag or player_lib.debug_data.keep_shooting)and not p.dialog then
+   p.y3FireClock=(p.y3FireClock+1)%16
+  else p.y3FireClock=0 end
+ end
+ return result
+end
+if setting.y3_test_player then
+ local updateKeys=sys.updateKeyState
+ function sys:updateKeyState(...)
+  local result=updateKeys(self,...)
+  self.player.__slow_flag=Y3 and Y3.tick>=450 or false
+  return result
+ end
+end
+LoadTexture('y3.player','art/player/pl00.png')
+LoadImage('y3.player.main','y3.player',0,176,64,16,24,9,true)
+LoadImage('y3.player.pierce','y3.player',64,176,64,8,24,8,true)
+SetImageState('y3.player.main','',Color(0x80FFFFFF))
+SetImageState('y3.player.pierce','',Color(0x80FFFFFF))
+LoadTexture('hs5.player.charm','art/player/th13-pl00.png')
+LoadImage('hs5.player.charm','hs5.player.charm',0,144,16,16,8,8,true)
+SetImageState('hs5.player.charm','',Color(0x80FFFFFF))
+for i=0,2 do LoadImage('hs5.player.charm.hit'..i,'hs5.player.charm',16+i*16,144,16,16)end
+
+-- Opt-in single-entry mechanical probe, called before the real Boss.
+local ProbeTarget
+if setting.y3_test_player then
+ ProbeTarget=Class(enemy)
+ function ProbeTarget:init(y)enemybase.init(self,100);self.x,self.y=0,y;self.a,self.b=8,8;self.bound=false end
+ function ProbeTarget:frame()enemybase.frame(self)end
+ function ProbeTarget:render()end
+ function ProbeTarget:colli(other)
+  print('Y3 PROBE CONTACT y='..self.y..' dmg='..tostring(other.dmg)..' pierce='..tostring(other.y3Piercing)..' repeat='..tostring(other.y3Hits and other.y3Hits[self]))
+  piercingCollision(self,other)
+ end
+end
+function P.probe()
+ local held,dialog=player_lib.debug_data.keep_shooting,player.dialog
+ P.probing=true
+ print('Y3 PROBE CLASS name='..tostring(lstg.var.player_name)..' live='..tostring(player.class==reimu_player)..' current='..tostring(player.class.shoot==P.shoot))
+ player_lib.debug_data.keep_shooting=false;player.dialog=true
+ for _,o in ObjList(GROUP_PLAYER_BULLET)do Del(o)end
+ -- Object removal/collision can finish after the stage coroutine yields.
+ -- Drain pre-probe volleys before creating either isolated target.
+ task.Wait(12)
+ local a,b=New(ProbeTarget,-64),New(ProbeTarget,32)
+ New(Shot,0,-128,28,10,true);task.Wait(10)
+ assert(a.hp==90 and b.hp==90,'Y3 piercing failed: '..tostring(a.hp)..'/'..tostring(b.hp))
+ print('Y3 PLAYER PIERCE PASS front='..a.hp..' rear='..b.hp)
+ Del(a);Del(b)
+ assert(lstg.var.power==400 and player.support==4,'Y3 initial Power/support')
+ player_lib.debug_data.keep_shooting=held;player.dialog=dialog;P.probing=false
+end
