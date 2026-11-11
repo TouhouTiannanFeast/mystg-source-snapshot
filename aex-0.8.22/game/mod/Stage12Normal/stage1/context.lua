@@ -17,6 +17,7 @@ local function emit(x,y,speed,angle,style,color,mode,options)
     return New(Shot,x,y,speed,angle,style or 'rice',color or COLOR_BLUE,mode or 'linear',options or {})
 end
 function Shot:init(x,y,speed,angle,style,color,mode,opt)
+    Stage12FireSound('tan00',x)
     bullet.init(self,styles[style],color,false,true); bullet.skip_fade_in(self)
     Stage12Art.bullet(self,'arrow',color)
     self.x,self.y,self.rot=x,y,angle
@@ -35,7 +36,7 @@ function Shot:frame()
     if self.mode=='linear' then
         self.vx,self.vy=self.travel_x,self.travel_y
     elseif self.mode=='echo' then
-        local ct=A.local_tick%G.echo_period
+        local ct=(A.local_tick-G.echo_start)%G.echo_period
         if ct>=G.echo_capture then
             self.mode='linear'; Stage12Art.bullet(self,'arrow',COLOR_CYAN)
             self._index,self.index=COLOR_CYAN,4
@@ -66,44 +67,35 @@ local function start_context()
     A.impacts={}
 end
 field=function(t)
- local c=A.carrier or {x=0,y=0}
- return G.translate(G.echo_rect(t),c.x,c.y)
+ return G.echo_rect(math.max(0,t-G.echo_start))
 end
-local function release_evenly(r)
-    local list={}
-    for b in pairs(A.owned) do if valid(b) and b.mode=='echo' then list[#list+1]=b end end
-    table.sort(list,function(a,b)return a.serial<b.serial end)
-    local count=#list;if count==0 then return end
-    local slots={};local random=function(a,b)return ran:Float(a,b)end
-    for i=1,count do slots[i]=i end
-    for i=count,2,-1 do local j=math.min(i,math.floor(random(0,i))+1);slots[i],slots[j]=slots[j],slots[i] end
-    for i,b in ipairs(list)do
-        b.x=r.l+8+(slots[i]-1+random(0,1))*(r.r-r.l-16)/count
-        b.mode='linear';Stage12Art.bullet(b,'arrow',COLOR_CYAN);b._index,b.index=COLOR_CYAN,4
-        b.rot=math.atan2(b.travel_y,b.travel_x)*180/math.pi
+local function release(r)
+    local count=0
+    for b in pairs(A.owned) do
+        if valid(b) and b.mode=='echo' then
+            b.mode='linear';Stage12Art.bullet(b,'arrow',COLOR_CYAN)
+            b._index,b.index=COLOR_CYAN,4
+            b.rot=math.atan2(b.travel_y,b.travel_x)*180/math.pi
+            count=count+1
+        end
     end
+    if count>0 then Stage12FireSound('tan01',0) end
     A.stats.release_count=count
 end
 local function context(o,t)
-    local ct=t%G.echo_period
-    local cycle=math.floor(t/G.echo_period)
+    -- BossCard1: movePosTime(60,4,0,144), then hold the emitter at the boss.
+    if t<60 then
+        local u=1-(1-(t+1)/60)^2
+        o.x=A.originX*(1-u);o.y=A.originY+(80-A.originY)*u
+    else o.x,o.y=0,80 end
+    A.emitterX,A.emitterY=o.x,o.y
+    if t<G.echo_start then return end
+    local ct=(t-G.echo_start)%G.echo_period
+    local cycle=math.floor((t-G.echo_start)/G.echo_period)
     if ct==0 then
-        A.impacts={};A.carrier=G.carrier(player.x,player.y,cycle==0); A.stats.echo_cycles=A.stats.echo_cycles+1
+        A.impacts={};A.stats.echo_cycles=A.stats.echo_cycles+1
         print('ABYSS ECHO CYCLE '..cycle..' tick='..A.tick)
     end
-    local dx,dy=G.advance(A.carrier,t)
-    for b in pairs(A.owned) do
-        if valid(b) and b.mode=='echo' then b.x,b.y=b.x+dx,b.y+dy end
-    end
-    for _,p in ipairs(A.impacts) do p.x,p.y=p.x+dx,p.y+dy end
-    if setting.stage12_test then
-        local r=field(t)
-        assert(r.l>=-192-0.001 and r.r<=192+0.001 and r.b>=-224-0.001 and r.t<=224+0.001,'moving context escaped playfield')
-    end
-    local r=field(t)
-    o.x=math.max(r.l+8,math.min(r.r-8,A.originX+A.carrier.x))
-    o.y=math.max(r.b+8,math.min(r.t-8,A.originY+A.carrier.y))
-    A.emitterX,A.emitterY=o.x,o.y
     for i=#A.impacts,1,-1 do if t-A.impacts[i].t>16 then table.remove(A.impacts,i) end end
     if ct>=40 and ct<=220 and (ct-40)%30==0 then
         local wave=(ct-40)/30
@@ -116,19 +108,20 @@ local function context(o,t)
         print('ABYSS ECHO ARC cycle='..cycle..' wave='..wave..' count='..G.echo_count..' tick='..A.tick)
     end
     if ct==G.echo_capture then
-        release_evenly(field(t))
+        release(field(t))
         A.stats.echo_releases=A.stats.echo_releases+1
         print('ABYSS ECHO RELEASE cycle='..cycle..' tick='..A.tick)
     end
 end
 local function render_context()
-    if A.phase~=3 then return end
-    local ct=A.local_tick%G.echo_period
+    if A.phase~=3 or A.local_tick<G.echo_start then return end
+    local ct=(A.local_tick-G.echo_start)%G.echo_period
+    if ct>=G.echo_capture then return end
     local r=field(A.local_tick)
     local u=math.min(ct/G.echo_capture,1)
-    local alpha=ct<G.echo_capture and 155 or math.floor(155*(400-ct)/80)
+    local alpha=255
     local function border(p,a,thickness)
-        SetImageState('abyss.context.line','',Color(a,65+math.floor(70*u),170-math.floor(65*u),255))
+        SetImageState('abyss.context.line','',Color(a,185,245,255))
         RenderRect('abyss.context.line',p.l-thickness,p.r+thickness,p.b-thickness,p.b+thickness)
         RenderRect('abyss.context.line',p.l-thickness,p.r+thickness,p.t-thickness,p.t+thickness)
         RenderRect('abyss.context.line',p.l-thickness,p.l+thickness,p.b,p.t)
@@ -136,7 +129,8 @@ local function render_context()
     end
     -- Two faint data rails are decoration; only the central edge reflects shots.
     for _,offset in ipairs({6,12}) do border({l=r.l-offset,r=r.r+offset,b=r.b-offset,t=r.t+offset},math.floor(alpha*0.22),0.55) end
-    border(r,alpha,1.1)
+    border(r,80,5.5) -- Soft outer glow, without changing collision bounds.
+    border(r,alpha,2.8) -- Bright core, 5.6 pixels thick.
     SetImageState('abyss.context.line','',Color(alpha,120,220,255))
     for _,x in ipairs({r.l,r.r}) do
         for _,y in ipairs({r.b,r.t}) do
@@ -162,6 +156,7 @@ end
 Stage1Context={Shot=Shot,clean=function() clear();A.phase=0;A.impacts={} end,render=render_context,state=A}
 function Stage1Context.card()
  local c=boss.card.New('长上下文结界',1,2,40,1000,{5,5,0},false)
+ c.stage12TransitionY=80
  c.init=function(o)
   th14.clean_bullets();th14.clean_actors();reset();o.stage12ContextReward=false;A.originX,A.originY=o.x,o.y;th14.stats.phases=th14.stats.phases+1
   th14.label='Long Context Barrier';o.th14_phase='context'

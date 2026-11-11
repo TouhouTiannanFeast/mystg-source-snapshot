@@ -1,4 +1,14 @@
 local T=th14
+-- Wait for the preceding road objects to leave, then a two-second empty gap.
+local function wait_road_exit(delay)
+    while true do
+        local active=false
+        for o in pairs(T.owned) do if IsValid(o) then active=true;break end end
+        if not active then break end
+        task.Wait(1)
+    end
+    task.Wait(delay or 120)
+end
 local function sub00(s)
     task.New(s,function()
         task.Wait(120)
@@ -73,10 +83,11 @@ stage.group.DefStageFunc('Misty Lake@Normal','init',function(s)
             while IsValid(b) do task.Wait(1) end
         else
             Stage12Music.play('s1.route');task.Wait(60); if setting.stage12_entry~='s1-momiji' then front(s) end
+            if setting.stage12_entry~='s1-momiji' then wait_road_exit(60) end
             local mb=New(Stage1Momiji.Boss);T.midboss=mb
             task.Wait(160); latter(s,mb); task.Wait(600)
+            wait_road_exit()
             T.clean_actors(); T.clean_bullets(); T.label='Wakasagihime'
-            task.Wait(120) -- Brief replacement for the omitted dialogue.
             Stage12Music.play('s1.boss')
             local b=New(T.Wakasagi,false)
             while IsValid(b) do task.Wait(1) end

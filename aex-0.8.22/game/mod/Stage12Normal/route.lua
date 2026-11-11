@@ -45,7 +45,7 @@ function Shot:frame()
 end
 function Shot:del() R.owned[self]=nil;bullet.del(self) end
 function Shot:kill() R.owned[self]=nil;bullet.kill(self) end
-local function shot(x,y,speed,angle,img,opt) return New(Shot,x,y,speed,angle,img,opt) end
+local function shot(x,y,speed,angle,img,opt) Stage12FireSound('tan00',x);return New(Shot,x,y,speed,angle,img,opt) end
 -- Damage() dispatches through class.base.take_damage; use enemy's damage hook.
 local Enemy=Class(enemy)
 function Enemy:init(e)

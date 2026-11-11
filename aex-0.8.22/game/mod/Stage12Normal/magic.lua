@@ -2,6 +2,7 @@
 Stage2Magic={}
 local Laser=Class(object)
 function Laser:init(x,y,angle)
+    Stage12FireSound('lazer00',x)
     self.originX,self.originY=x,y;self.x,self.y=x,y;self.angle=angle
     self.age=0;self.group=GROUP_ENEMY_BULLET;self.layer=LAYER_ENEMY_BULLET
     self.bound=false;self.vx,self.vy=0,0;self.img='s2.magic.laser'

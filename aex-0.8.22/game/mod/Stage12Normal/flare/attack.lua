@@ -23,6 +23,7 @@ local function clean()
 end
 local Shot=Class(bullet)
 function Shot:init(x,y,speed,angle,acc,color,source)
+    Stage12FireSound('tan00',x)
     speed,acc=speed*FLIGHT_SCALE,acc*FLIGHT_SCALE
     bullet.init(self,Fire,color,false,true)
     bullet.skip_fade_in(self)
@@ -177,7 +178,7 @@ card.del=function(o)
 end
 local Patchouli=Class(boss)
 function Patchouli:init()
-    boss.init(self,0,134,'Patchouli Knowledge',{card},nil,'Extra')
+    boss.init(self,0,288,'Patchouli Knowledge',Stage12BossEntrance({card},0,134),nil,'Extra')
     self.A,self.B=12,18;self.a,self.b=12,18
 end
 function Patchouli:render()

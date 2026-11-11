@@ -136,6 +136,7 @@ function T.card(id)
     local hp=({mid=500,non1=700,tail=240,non2=700,scale=800})[id]
     local seconds=id=='mid' and 24 or (spell and 40 or 30)
     local card=boss.card.New(spell and names[id] or '',id=='non2' and 2 or 1,2,seconds,hp,{5,5,0},false)
+    card.stage12TransitionY=96
     card.init=function(o)
         T.clean_bullets(); T.clean_actors()
         T.label=names[id]; T.stats.phases=T.stats.phases+1
@@ -174,7 +175,7 @@ function T.Wakasagi:init(is_mid,practice,continue_route)
     elseif practice then cards={practice=='context' and Stage1Context.card() or T.card(practice)}
     else cards={T.card('non1'),Stage1Context.card(),T.card('non2'),T.card('scale')} end
     local x,y=T.g.position(is_mid and -192 or 0,is_mid and -64 or 128)
-    boss.init(self,x,y,'Wakasagihime',cards,nil,'Normal')
+    boss.init(self,x,288,'Wakasagihime',Stage12BossEntrance(cards,x,y),nil,'Normal')
     self.a,self.b=20,20
     self.fxr,self.fxg,self.fxb=80,180,255
 end

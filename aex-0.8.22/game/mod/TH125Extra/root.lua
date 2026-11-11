@@ -3,7 +3,8 @@ Include('player.lua');Include('power-lock.lua')
 Include('pool.lua');Include('runtime.lua');Include('projectiles.lua');Include('programs.lua');Include('assets.lua');Include('sound.lua')
 local R,P,A=DSExtraRuntime,DSExtraPool,DSExtraArt
 local S={owned={},finished=false};DSExtraState=S
-R.onSound=function(id)DSExtraSound(id,R.boss and R.boss.x or 0)end
+R.onSound=function(id)DSExtraSound(id,R.boss and R.boss.x or 0);S.soundCalls=(S.soundCalls or 0)+1 end
+R.onShake=function(t,x,y)if S.current==8 then misc.ShakeScreen(t,math.max(x,y));S.shakeCalls=(S.shakeCalls or 0)+1;S.ownsShake=true end end
 for _,art in pairs(A)do
  if not CheckRes('img',art.image)then
   LoadTexture(art.image,art.path);LoadImage(art.image,art.image,0,0,art.w,art.h)
@@ -11,6 +12,7 @@ for _,art in pairs(A)do
 end
 local function own(o)S.owned[o]=true;return o end
 local function clean()
+ if S.ownsShake and lstg.tmpvar._G_shaker then Del(lstg.tmpvar._G_shaker)end;S.ownsShake=false
  R.clearHazards(false)
  for _,a in ipairs(R.actors or{})do a.dead=true end
  for o in pairs(S.owned)do if IsValid(o)then Del(o)end end
@@ -55,7 +57,7 @@ function Actor:init(a)
  enemybase.init(self,a.hp or 1)
  self.data=a;self.bound=false;self.colli=true;self.group=GROUP_NONTJT
  self.layer=LAYER_ENEMY_BULLET-1;self.vx,self.vy=0,0;own(self)
- if a.name=='Boss1Spark'then New(ActorHit,a)end
+ if a.name=='Boss1Spark'then self.colli=false;self.homingExcluded=true;self.x,self.y=a.x,224-a.y;self.rot=-(a.angle or 0)*180/math.pi;New(ActorHit,a)end
 end
 function Actor:frame()
  local a=self.data;if a.dead then Del(self);return end
@@ -63,7 +65,9 @@ function Actor:frame()
  self.x,self.y,self.vx,self.vy=a.x,224-a.y,0,0
  self.rot=-(a.angle or 0)*180/math.pi
  self.rect=true;self.a,self.b=(a.hurtW or 0)/2,(a.hurtH or 0)/2
- self.colli=a.hurtW~=nil
+ -- These are photo targets in DS, not ordinary HP1 shooting enemies.
+ -- Keep player contact in ActorHit; shooting must not punch holes in the beam.
+ self.colli=a.name~='Boss1Spark' and a.hurtW~=nil
 end
 function Actor:render()
  local a=self.data
@@ -75,7 +79,8 @@ function Actor:render()
  elseif a.name=='Boss1Spark'then
   local img=A['enm27:29'].image;local k=2.5*math.min(1,a.age/8)
   SetImageState(img,'mul+add',Color(255,255,255,255))
-  Render(img,self.x,self.y,self.rot,k,k)
+  -- Source coordinates avoid stale/newly reused host slots flashing at origin.
+  Render(img,a.x,224-a.y,-(a.angle or 0)*180/math.pi,k,k)
  end
 end
 function Actor:del()S.owned[self]=nil end
@@ -92,9 +97,9 @@ function Background:render()
  Render(glow,0,0,S.current==7 and -self.timer*0.45 or 0,2.3046875,2.3046875)
 end
 local function card(spec)
- local c=boss.card.New(spec.name,0,0,200,spec.hp,{0,0,0},true);c.t3=spec.frames
+ local c=boss.card.New(spec.name,0,0,spec.frames/60,spec.hp,{0,0,0},true);c.t3=spec.frames
  c.init=function(o)
-  clean();S.current=spec.id;S.damaged=false;S.actorKills=0;S.bossProbe=false;S.interactionActor=nil
+  clean();S.current=spec.id;S.damaged=false;S.actorKills=0;S.bossProbe=false;S.interactionActor=nil;S.soundCalls=0;S.shakeCalls=0
   R.start(spec,tonumber(setting.ds_extra_seed)or 20261103)
   print('DS EXTRA PHASE '..spec.id..' hp='..spec.hp..' frames='..spec.frames)
   task.New(o,function()
@@ -123,10 +128,11 @@ local function card(spec)
      if R.tick>=(tonumber(setting.ds_extra_test_frames)or 780)then
       assert(R.stats.bullets>0,'source emitted no bullets')
       if spec.id==2 then assert(#R.actors>=33,'32 orbit emitters missing')end
-      if spec.id==8 then assert(#R.actors>45,'spark actors missing')end
+      if spec.id==8 then assert(#R.actors>45,'spark actors missing');assert(S.shakeCalls>=2 and S.soundCalls>=3,'source audio/shake callbacks missing');print('DS EXTRA EFFECTS PASS shake='..S.shakeCalls..' sounds='..S.soundCalls)end
       if setting.ds_extra_test_interactions then
        assert(S.damaged,'ordinary shot did not damage Boss')
-       if spec.id~=7 then assert(S.interactionActor.dead and S.actorKills>0,'ordinary shot did not clear photo target')end
+       if spec.id==2 then assert(S.interactionActor.dead and S.actorKills>0,'ordinary shot did not clear orbit emitter')end
+       if spec.id==8 then assert(S.actorKills==0,'ordinary shots cleared spark segments')end
        print('DS EXTRA SHOOT PASS card='..spec.id..' actorKills='..S.actorKills)
       end
       print('DS EXTRA NATIVE PASS card='..spec.id..' tick='..R.tick..' bullets='..R.stats.bullets..' actors='..#R.actors..' damaged='..tostring(S.damaged))

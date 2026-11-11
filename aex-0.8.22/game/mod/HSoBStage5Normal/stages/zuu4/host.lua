@@ -60,7 +60,10 @@ function Shot:frame()
  end
  local fixedNote=R.id=='final' and b.id>=353 and b.id<=360
  local offset=art.offset or {0,0};local a=fixedNote and 0 or b.angle+90
- local dx=offset[1]*R.cos(a)-offset[2]*R.sin(a);local dy=offset[1]*R.sin(a)+offset[2]*R.cos(a)
+ -- Native StgNormalShotObject collision uses -circle.GetY() before rotation.
+ -- Apply that source convention to the fixed-angle notes only.
+ local ox,oy=offset[1],fixedNote and -offset[2] or offset[2]
+ local dx=ox*R.cos(a)-oy*R.sin(a);local dy=ox*R.sin(a)+oy*R.cos(a)
  self.x,self.y,self.vx,self.vy=b.x+dx-192,224-b.y-dy,0,0
  self.a,self.b,self.rect=b.radius,b.radius,false
  self.colli=b.age>=b.delay;self.heading=fixedNote and 0 or -b.angle-90;self.rot=0

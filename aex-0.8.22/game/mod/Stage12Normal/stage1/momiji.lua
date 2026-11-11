@@ -14,6 +14,7 @@ LoadTexture('momiji.th10.medium','art/momiji-medium-th10.png')
 LoadImage('momiji.th10.medium','momiji.th10.medium',0,0,32,32,8,8)
 local Shot=Class(bullet)
 function Shot:init(x,y,angle,kind,speed,color,ox,oy,center,medium)
+    Stage12FireSound('tan00',x)
     bullet.init(self,kind=='rice' and grain_a or ball_mid,color or COLOR_BLUE,false,true)
     bullet.skip_fade_in(self)
     if kind=='scale' and medium then
@@ -149,7 +150,7 @@ card.del=function(o)
     print(string.format('MOMIJI CLEANUP PASS tick=%d gun=%d scale=%d rounds=%d bounces=%d',D.tick,D.gun,D.scale,D.rounds,D.bounces))
 end
 local Momiji=Class(boss)
-function Momiji:init() boss.init(self,0,72,'Inubashiri Momiji',{card},nil,'Normal');self.a,self.b=16,16 end
+function Momiji:init() boss.init(self,0,288,'Inubashiri Momiji',Stage12BossEntrance({card},0,72),nil,'Normal');self.a,self.b=16,16 end
 function Momiji:render() self._bosssys:render();Render('momiji.'..math.floor(self.ani/8)%4,self.x,self.y) end
 
 Stage1Momiji={Shot=Shot,Laser=Laser,Boss=Momiji,clean=clean,state=D}

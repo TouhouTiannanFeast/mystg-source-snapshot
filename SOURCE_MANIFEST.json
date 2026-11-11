@@ -46,8 +46,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/host.lua",
-    "bytes": 10251,
-    "sha256": "ee87854c2a1d7292ebd732cef580e445b2965f7bb7f88afe0a64b180c6d511fb"
+    "bytes": 11197,
+    "sha256": "03ea6c5c0a6b5285a8a6ea23c0403b90c9df89e66b8d54d83597bdb1c63e9c72"
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/player-config.lua",
@@ -81,8 +81,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/runtime.lua",
-    "bytes": 16539,
-    "sha256": "99fd3c4b8bad29db8830a5c7ff0426902e1aba1eca9e74946473ffbb595f4ee6"
+    "bytes": 16633,
+    "sha256": "a119ecd1aa33eb65410978a81651847e9b940a40a4850936311e1374badaf25f"
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/sound-data.lua",
@@ -111,8 +111,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/stages/zuu4/audio.lua",
-    "bytes": 3005,
-    "sha256": "da8662cd1f9ae09446712aeb09198e273a926cf83760acaa0cf242dbfea545b9"
+    "bytes": 3023,
+    "sha256": "c39890e2d6d14b8f543fe02a19debccc5c060beca890ddbac03800079e06d219"
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/stages/zuu4/delay-art.lua",
@@ -136,8 +136,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/stages/zuu4/host.lua",
-    "bytes": 18026,
-    "sha256": "762525a680c7c0ed1c909e46fd5758d7815994ced22ae828fe7343feec5f65d5"
+    "bytes": 18204,
+    "sha256": "0bcdc60683363966393f6e425c02088bcddbd6226247592d1df4d47675a692f1"
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/stages/zuu4/patterns.lua",
@@ -156,13 +156,13 @@
   },
   {
     "path": "aex-0.8.22/game/mod/HSoBStage5Normal/stages/zuu4/th20.lua",
-    "bytes": 5978,
-    "sha256": "f56510c7e22cf80451ce59ef663652f61b187ef9796b2c65e0a90cd8fc360265"
+    "bytes": 6148,
+    "sha256": "1e53417e99a2c8f64c87cb70e144ec4bab486feff9ae88174e351356cc7bcff0"
   },
   {
     "path": "aex-0.8.22/game/mod/Le03Stage4Normal/README.md",
-    "bytes": 19472,
-    "sha256": "52b42d48a183449ba85cf1a8cbd5bba176af8af420a54fe912afe2691e4474f4"
+    "bytes": 20982,
+    "sha256": "c7aba78e8a9e30545351275b2bd20ccd09a4607ce7d082172afbfe33dfc8e29d"
   },
   {
     "path": "aex-0.8.22/game/mod/Le03Stage4Normal/bullet-style.lua",
@@ -191,8 +191,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Le03Stage4Normal/host.lua",
-    "bytes": 7089,
-    "sha256": "3184a7382cf72f8f4c4ddf69222b630aacd4e6406acff65b973e1e603fddb044"
+    "bytes": 7275,
+    "sha256": "ff5842119cf6a8f6916d1f5c2af06371f74b789895f9eab675e79d038643b99c"
   },
   {
     "path": "aex-0.8.22/game/mod/Le03Stage4Normal/movement.lua",
@@ -221,13 +221,13 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Le03Stage4Normal/runtime.lua",
-    "bytes": 10308,
-    "sha256": "efb451c2701ef2a5671d69a5c253fef948ce4c319f90d91871bde5d72e6c41e2"
+    "bytes": 10703,
+    "sha256": "4c2312466a5a6c29d25e05a1cd11417669e17595ccfd59d958978a3c7b908ea9"
   },
   {
     "path": "aex-0.8.22/game/mod/Le03Stage4Normal/schedule.lua",
-    "bytes": 10200,
-    "sha256": "3d7b4dda71761a835f9202c288c24d1f59982b5f79752e728cbcba80aec9476c"
+    "bytes": 9816,
+    "sha256": "99c041a9e9bfc7cbdb4e8d11796461b9e7fb8bb720a02d982f78c5fb0495aa29"
   },
   {
     "path": "aex-0.8.22/game/mod/MamizouStage2/assets.lua",
@@ -243,6 +243,221 @@
     "path": "aex-0.8.22/game/mod/MamizouStage2/root.lua",
     "bytes": 12611,
     "sha256": "3f58a0824ac30adbcda79d17da66a5977ad595bc3fd90c46f01d28cbba7b8cdd"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/art.lua",
+    "bytes": 7486,
+    "sha256": "354ea42c22199f5b9af8cde1cde567d446a79e2c3ac10a6553f7f89657e203c6"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/audio14.lua",
+    "bytes": 1677,
+    "sha256": "58c07d6797a60ac68f914354eec6e474dd9fdb691b0407934919ae364eda1a06"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ds/assets.lua",
+    "bytes": 3411,
+    "sha256": "5bee2e794f0cc71fcb5f9a5c2d422236152a4efbcfa34bcc0af2384ab3d5c177"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ds/host.lua",
+    "bytes": 6763,
+    "sha256": "d788542709082f66c3c6391ed855e1e5db2c13f9cd1a107588073295be502d1a"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ds/pool.lua",
+    "bytes": 766,
+    "sha256": "843600a8cf6f825d09ed3d910f121bf76173b9af8d26ac059968abb0f0c0fbd9"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ds/programs.lua",
+    "bytes": 19732,
+    "sha256": "3aca3d00bd80ddd2e764e02e42db6721a1f6e8a69b6bf7b251d0809e2293e71e"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ds/projectiles.lua",
+    "bytes": 9793,
+    "sha256": "ecfb8621a5fa48084c30f3cadf8fe95c6269f3a1fa8c286c6933246f14022cfb"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ds/runtime.lua",
+    "bytes": 13283,
+    "sha256": "93955a73a385c07c77218480b8f233a1821ce07694f6c685e53ab472eaa35663"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ds/sound.lua",
+    "bytes": 247,
+    "sha256": "acc4cd1b8fa5a568f6a97423afb5e4c8a7873b403d541e6b6aa82816987426da"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/player-config.lua",
+    "bytes": 193,
+    "sha256": "be3908129356cb78e7911ffe830021247d1625f87fba53bce1f1b29a25385c69"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/player-data.lua",
+    "bytes": 2106,
+    "sha256": "4525ed616ddb76ee490069a4668a15c160ad95bac864b427c8f7c3acf35a6f09"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/player.lua",
+    "bytes": 8868,
+    "sha256": "6272d32f343ee17fced18afc2c579b5583ce7847522e42ee86b4c55f43b73598"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/power-lock.lua",
+    "bytes": 1594,
+    "sha256": "97ffa8ca7314d303d1710d27deec34534ce89c87686daafafdb335b6c08e683b"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/rabbit/feedback.lua",
+    "bytes": 703,
+    "sha256": "3c46994c2a3a2e14bc6f9ae263678dfa9bb4b3d88c775172e9ac2514071213de"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/rabbit/host.lua",
+    "bytes": 13773,
+    "sha256": "f0f3596d093ee31bf12a8b8dd0921ecb23528d63d561c2334d3a6d69ab9f0527"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/rabbit/pattern.lua",
+    "bytes": 9014,
+    "sha256": "503b62580abfa29fcdaac824079e1b75c7aa1f252025e5d7a16f9bfc55382baf"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/rabbit/word-points.lua",
+    "bytes": 8004,
+    "sha256": "ddcd7528413ae7841689c9748b6bf4c9eaa461f326d28bce2bc0ed94fc0ad18b"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/anm.lua",
+    "bytes": 6535,
+    "sha256": "db126a06b0b2fff70dbcc1fa450f4bd101bfc677130afd05440f5c8e12fab746"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/background-native.hlsl",
+    "bytes": 7069,
+    "sha256": "c6ef5b52c4df4eb9873dd020951447425d5856f1844e3f8432bfcd9923eddb45"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/background-probe.lua",
+    "bytes": 2103,
+    "sha256": "61e2cff22ee0a27733f1ea433418ffda41fc16ca56123df32ad4b4d80811dc72"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/background.lua",
+    "bytes": 7251,
+    "sha256": "0f3da68eed03077dd2969fc772bfe893d5e46e04884b2dea9ef93724c4f869b6"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/collision-probe.lua",
+    "bytes": 1639,
+    "sha256": "c948e0ec6d8fb36ff3413c2f7672a78949b26bd125a69e865397820ed9e200f6"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/data.lua",
+    "bytes": 61758,
+    "sha256": "d005cc11e27be6b937d165c1b9e865b8afc78bc579554e65387e8fca62691cb3"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/host.lua",
+    "bytes": 8925,
+    "sha256": "184bbbe5a84bc0b44fa4a04a4ab9958a70dbe45a3aabdc75b491dc1ae6ecc384"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/pool.lua",
+    "bytes": 241,
+    "sha256": "ef91b846f04da78c07a418c751a894d0de08019f19c6e1168f8390a7b007f2ac"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/programs.lua",
+    "bytes": 48171,
+    "sha256": "f689b71de9474c110239220bab0dc75aacc0f90de3651bb913c0d2cbdae55e2a"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/projectiles.lua",
+    "bytes": 9554,
+    "sha256": "0e59c50460a01c5f4a171632378e0d4fa93be70d611f4eab12662d02c13f8356"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/route.lua",
+    "bytes": 7260,
+    "sha256": "c95aa63f151f02e5e21d22d2d146577f7e1445b43f6f0a864ba8d8e0b777c92a"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/runtime.lua",
+    "bytes": 12000,
+    "sha256": "3de8c4ab1ba4f375c65d4ab3e6c2841a3ae41636a884bcfe466c0a23ec174818"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/road/sections.lua",
+    "bytes": 1447,
+    "sha256": "5b3bab208ce9919f707fa0595d8e7d6459579bb2626b7258b30155b9bc851dfb"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/root.lua",
+    "bytes": 12157,
+    "sha256": "b65951b93fe8e81fac33d07d2c97884122909073b4e67eea1cb9619aca67b0df"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/selected05-art.lua",
+    "bytes": 724,
+    "sha256": "ba288ea2ef8e08cc2dc07dee07567b0f300c58a3ab43b1b529cb7691a2210279"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ssg-code.lua",
+    "bytes": 13594,
+    "sha256": "2873c093c4eb000e52f9620d415c44345df98e1e555dc59757ed7dade8edb695"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ssg-inspect04.lua",
+    "bytes": 2328,
+    "sha256": "2fa1d1e6593cb79d12c987caf2837fbd27acbffb749e0e2416b4a09430f8b340"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ssg-selected05.lua",
+    "bytes": 7787,
+    "sha256": "cf64c344f2ee0e4ce849a0b5892e8f5cbe57c8d9ccdd50c123c651e430233895"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/ssg.lua",
+    "bytes": 11715,
+    "sha256": "6b06d06b84768b8c7c2be743629b8a2ac490087063f9b3106e3921c455b59bdd"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/stage14.lua",
+    "bytes": 4342,
+    "sha256": "7988d779fa1efc751b535db23cfd45ddda338a0dbfb4a0c89100b3e556a754be"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/stardust03.lua",
+    "bytes": 2473,
+    "sha256": "dfce333e115847c1bc6d9c1b4ea1dfa499cbb95ff9e328f4ce4a822eee611a2d"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/th08-art02.lua",
+    "bytes": 1620,
+    "sha256": "e6963a49a4b2fa6c5943ca01dffb76d1dde58a080fd046a41d9203b84cf3dd1c"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/th08-visual02.lua",
+    "bytes": 1591,
+    "sha256": "4e0d75fd5f4cc5ae91451ada4cfca2d11a68b299dce104f8c164f2c527636308"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/th08/boss.lua",
+    "bytes": 11413,
+    "sha256": "4e700f763d77c7ae99865595c8501f64a63dc6fd4a929a5f13f9e648fa6db3a9"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/th08/host.lua",
+    "bytes": 7279,
+    "sha256": "484268340c5a27f3c2ee5f7883fa7b18d04b8f5f735dbf86eb60a2d9676578ae"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/MarisaMixed/visual.lua",
+    "bytes": 7840,
+    "sha256": "fbfdadbddaf910b7a1050af1c1546c16d628a6a2ed8d6d68196ea94a332914dd"
   },
   {
     "path": "aex-0.8.22/game/mod/MilkHoney/nonspell.lua",
@@ -826,8 +1041,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/NinaStage6Normal/root.lua",
-    "bytes": 24573,
-    "sha256": "ea8aa125c11db6a073abf9d5233945dfa4ddafb58320a1e393cfeed1d83f5a14"
+    "bytes": 24879,
+    "sha256": "31901974f409ab45aeab2d93461278359a60c4881b4fc1c2516d959e6a53b8ac"
   },
   {
     "path": "aex-0.8.22/game/mod/NinaStage6Normal/runtime.lua",
@@ -920,6 +1135,151 @@
     "sha256": "8e8ef186618903d6ddf5dec37eb2c4431265548577e72775c97f7fd951969bee"
   },
   {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/adapters.lua",
+    "bytes": 5897,
+    "sha256": "dd933de9e279577173d147dfbc822b1d47309b2d71df343cf650ea5c5c1f18a9"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/campaign.lua",
+    "bytes": 15903,
+    "sha256": "6a977738d191d6c7409839d89e2088a3dbee4acebf238127769138e3bf4b8ef1"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/combat-review.lua",
+    "bytes": 3748,
+    "sha256": "79c170cb0c1731e625aff0de9cf5f84128653d2c9583067277b34e317aa5513b"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue1.lua",
+    "bytes": 3425,
+    "sha256": "1400d3d4e284db434ce16fb7ff2022c697c6f33e54a39ec1623eb4c05903aafd"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue1/data.lua",
+    "bytes": 5503,
+    "sha256": "6d7ef23a8cf9984b4823b581edcc1c5faca622bbc02cca6a01e8a4aa38f6ee1f"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue1/probe.lua",
+    "bytes": 3093,
+    "sha256": "aea7d5a2d1d63a4483d0970556f9ffed417bc99ce2580079f3b0ad365f6abf2a"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue2.lua",
+    "bytes": 2667,
+    "sha256": "8411e6dcfa767c5942479d896de8c37b2cf28678e78abe190cee81e13d915301"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue2/data.lua",
+    "bytes": 10298,
+    "sha256": "c615bab94889cea8e2baeef12506f0297b9120066a86cb02699fa39f92b34ea2"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue2/probe.lua",
+    "bytes": 3553,
+    "sha256": "f17ffee52c8dd5dc3d3e28ddc2d58557aeb4a07824e3b8ccc50755ea2bc7d9f3"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue3.lua",
+    "bytes": 9690,
+    "sha256": "f5866f8b9d878cb5d732c85fe8b11d9f7e47892eebee875b171a134e2933facd"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue3/data.lua",
+    "bytes": 8287,
+    "sha256": "2d811412ac27492e39bd8d3deb950f13e754071125522cae34a6d48031532a01"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue46.lua",
+    "bytes": 5693,
+    "sha256": "c21211aaf4ebd3ac2ceaf3b67a4a36ca391bf2308af8d500a475e743b566e692"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue46/data.lua",
+    "bytes": 20825,
+    "sha256": "f89aae69197f9455bd158294f8e5cafea6f1a7df7c49416e77ea699ae847d901"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/dialogue46/probe.lua",
+    "bytes": 3690,
+    "sha256": "34d89f7c4c20608fae9921d63d26907dbbe1851e6fbe6f01184fb8542a177093"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/frontend/assets.lua",
+    "bytes": 2370,
+    "sha256": "76ea104ab19fb006e94f0f1e138063cc74da4541c0eec99e024ff6903564c5ba"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/frontend/loading.lua",
+    "bytes": 2411,
+    "sha256": "04fa5d15b7b5cff18b54bf2675bbebf741abb5cfdfbeef10fe3b94b1143957b7"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/frontend/menu.lua",
+    "bytes": 13359,
+    "sha256": "211a02bf4c425bb98b2bc1d806ed34344534aa11c3ff8a736e71fbb83e876343"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/frontend/test-animation.lua",
+    "bytes": 1506,
+    "sha256": "e51eb467dda3c856853e33821bf1da6adc0c1f9d79ecd445cf0d6d8c77272a87"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/frontend/test-native.lua",
+    "bytes": 3510,
+    "sha256": "9e1a0b965ad955b388c96e4cb7b4b64643492e2b61b1abd24162a2e55a633cfb"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/frontend/test-select-loading.lua",
+    "bytes": 2293,
+    "sha256": "8c994c04bb67bf2b010f22fc690f59b61bf8834d0d32416653e610a8ff7db343"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/hit-effect.lua",
+    "bytes": 8341,
+    "sha256": "a2f9eb0b16ba59e47af214952b99619af557cd6c1ff941c88ba0546573bbdd30"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/marisa-segments.lua",
+    "bytes": 2943,
+    "sha256": "e5f7547ecf2bd2a0c6a3e1d9cdf61bb1fff2806edcfc83952eca376dd2640e64"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/opening-anchor.lua",
+    "bytes": 2683,
+    "sha256": "d51729246c45913ad98d3c9e9f2bfe2679a9a9871132bf284ce1cb88abe9bbaa"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/probe-combat.lua",
+    "bytes": 4487,
+    "sha256": "15f6fcb1ff94b7ccfce6a66bb885b2bd46ad05f592027832fd98c42e8d046cf9"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/probe-dialogue3.lua",
+    "bytes": 2505,
+    "sha256": "242736c55785a619e81aa4d6ae514b8887c51c77967ac0d8fefc7c5e371cca45"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/probe-resources.lua",
+    "bytes": 2998,
+    "sha256": "a7e78793437ecfa06cb9ce99762747a6dc18afa2614874b809f0aa0acdb448a0"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/road-audio.lua",
+    "bytes": 2966,
+    "sha256": "23e8731c47b2e3260504afa2665bfc700608888e08b50ca72274ce9715b1da31"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/road-bonus.lua",
+    "bytes": 3156,
+    "sha256": "8268341702012a41892fab0622eae41fb2509e55c1403f0cb98fa12c1bbda209"
+  },
+  {
+    "path": "aex-0.8.22/game/mod/SixStageCampaign/root.lua",
+    "bytes": 1807,
+    "sha256": "de0391c0a37d8d565638c756896cba30f899bd03f78aa41b85a138fc48fd2d6f"
+  },
+  {
     "path": "aex-0.8.22/game/mod/Stage12Normal/animation-data.lua",
     "bytes": 3659,
     "sha256": "3fddc5510849237d974cdae47a389cca36a29defc028a38d9fcfc52985e68d02"
@@ -936,8 +1296,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/background-player.lua",
-    "bytes": 8648,
-    "sha256": "8343205a1596aef2a1ccc9863068e5729a05dc4eab6b5473733c620670e56987"
+    "bytes": 8961,
+    "sha256": "d344c43428f09eda21763a291c270c27a2723765d716d399e4935900dbee42cf"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/background-program.lua",
@@ -951,8 +1311,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/background.lua",
-    "bytes": 1649,
-    "sha256": "6f69130b49986c0c37a9b449ddfb56fbaa6b6539163c0fddc1c717dda78d8178"
+    "bytes": 1690,
+    "sha256": "d5e6cb6eb95c2ebb51f0dcceb8a5316c8e0617b1598d08c6f234291ed911e838"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/balance-probe.lua",
@@ -960,14 +1320,24 @@
     "sha256": "cf328fb33b97f88f8b3f45104cb093465396e4d1c33264d0cd02db7ff9601faf"
   },
   {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/boss-transition.lua",
+    "bytes": 800,
+    "sha256": "055ec1a71bf2ce21d00d66c11cf40b0e25061ba67ba8cfca5b27cca970ac4b4b"
+  },
+  {
     "path": "aex-0.8.22/game/mod/Stage12Normal/character-animation.lua",
     "bytes": 3081,
     "sha256": "f192a4f6ae5c816aa022e32516b7db97799765d36a852ce9c0709837a10032fd"
   },
   {
+    "path": "aex-0.8.22/game/mod/Stage12Normal/firing-audio.lua",
+    "bytes": 594,
+    "sha256": "f83ce7520817bbd5fe7d0870345ed568121e663888b8f24a25dda1731eb707fe"
+  },
+  {
     "path": "aex-0.8.22/game/mod/Stage12Normal/flare/attack.lua",
-    "bytes": 9744,
-    "sha256": "0716f4c8ec307c5718faf9c891fc14d2b4d7a3346c5e33c21373d72a1aa33f9f"
+    "bytes": 9804,
+    "sha256": "b2f249955c6d574fc83803dffdd9a9671944de2b7d26599bd54aa8fc023c2b18"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/magic-assets.lua",
@@ -976,18 +1346,18 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/magic.lua",
-    "bytes": 2284,
-    "sha256": "6ad01a2831193538d542fedec429adef9550b19387779afb0e4388a2636fd86d"
+    "bytes": 2319,
+    "sha256": "068596403b67f11d5d5d075a4a4c9e8306feb1e43acbbdbe1fd35585b28b99f4"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/mamizou/assets.lua",
-    "bytes": 4286,
-    "sha256": "62df2700180e2f30d237067a565a0aa2381aba26c5318309a8cb787f062dd2f3"
+    "bytes": 4759,
+    "sha256": "0235d14def066f870d4c1fac990ad78fa5ee6db1529e77f2e75fc467cdca0ea7"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/mamizou/attack.lua",
-    "bytes": 11290,
-    "sha256": "dce6ee0940b99a5e3a4a16c4ba6e83c0956effb355626eb77b8f79572aa4b946"
+    "bytes": 11433,
+    "sha256": "44deb9d9f8ebaceb4deddaec8e7ea74e30cc0df1165be634e5cc575b06ba8ef6"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/mamizou/pattern.lua",
@@ -1001,8 +1371,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/mystia/attack.lua",
-    "bytes": 6757,
-    "sha256": "3a8b5fa490fb0472ad0341d8cea599eae0c5259dd5a1900324dc1f6469429aa5"
+    "bytes": 6814,
+    "sha256": "3a4b73b3f04ff313a1466127ef2e5ef7e58b471e86fa558e0bf39a5c2f44159d"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/mystia/pattern.lua",
@@ -1041,13 +1411,13 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/root.lua",
-    "bytes": 3841,
-    "sha256": "e6b52dcc5c1fe9057807b6de7030d95f497ce1bc4b8858d3f93794ed83fe6585"
+    "bytes": 3902,
+    "sha256": "e795d1b39e9664dee52039c978db93cd1cbfe647c87cde53f918678e99d2ff8b"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/route.lua",
-    "bytes": 11478,
-    "sha256": "dbd8c35084372ed598887cd74a529a69f1c7ea9623aa5fd2897f458cfc2c61a1"
+    "bytes": 11506,
+    "sha256": "e37731f96952655035fa0f6e3702859d8aa655dfff2d64170a8a3ad6e16e5383"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/schedule.lua",
@@ -1061,23 +1431,23 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/anchor.lua",
-    "bytes": 9281,
-    "sha256": "10d3d50c9c9c285a1a2cc6fae85a4fee5b8af1ec3ef837643bbe5594261c8812"
+    "bytes": 9395,
+    "sha256": "3dc888be925f4382474b7d57f28e8ce2e8b00f7c501c1bb655e06c7865e0caa8"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/boss.lua",
-    "bytes": 7034,
-    "sha256": "91855ab271b4b22564c029b4596727b498a695b6a232826f30fafbaefd162b8d"
+    "bytes": 7093,
+    "sha256": "d5bdfddff065c1f462d79df1c7afef5b4c266fab6547a24c2692b74a0c68f14a"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/context-geometry.lua",
-    "bytes": 2690,
-    "sha256": "61a0d47fefb0557372ffbf88b8255feb8ecf95c47b86434c6a4e1749501c9b81"
+    "bytes": 1089,
+    "sha256": "f531a68cd108e72b4f2f52532082307c0bdda8a8fac1a1e82bfccef79c3845f3"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/context.lua",
-    "bytes": 9350,
-    "sha256": "b47a9d6b4b528ccabd4770a4fdfd425bd916deba13327216578c7dedb309c121"
+    "bytes": 8844,
+    "sha256": "1d775c15f357ba9265f29d70ac63fca5537514daff8fedd0c5a871b92f9f7887"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/enemies.lua",
@@ -1091,8 +1461,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/host.lua",
-    "bytes": 4680,
-    "sha256": "1a9fe487b3a8dd8e3bc255a8335971d844df06d4cad48844f072c51e74cf3578"
+    "bytes": 4715,
+    "sha256": "1aa52e532e30dee8cd5aa17bcec58746f742f2c112a4ba1b46da787b15832465"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/momiji-config.lua",
@@ -1106,18 +1476,18 @@
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/momiji.lua",
-    "bytes": 8712,
-    "sha256": "e273064dac5d7c89041e282a6c51c3e93aba48910552f1011bea3a550091b466"
+    "bytes": 8772,
+    "sha256": "4370d7249b310f8fcb97854afd47606a79631aa652e2a5b4644b11af774001cd"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage1/stage.lua",
-    "bytes": 4497,
-    "sha256": "6e2f8ff8f5c7b4778c93db15aa216d48317f60cd8ce34b09a3c3200205ba02bc"
+    "bytes": 4879,
+    "sha256": "e4088eb99472b9865bc51bf5b42128ea918fada9b4a3c63a495491323b9817f6"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/stage2-run.lua",
-    "bytes": 4963,
-    "sha256": "220dfef8a8a2b8ea11dcd8843348cbbd231ccb4616129e90360ba8bf77f5d546"
+    "bytes": 5417,
+    "sha256": "d8f3d26151baa05f40e3f0f3883075be8ee6fc15bfadaa9837e13bd4ce1b3d3c"
   },
   {
     "path": "aex-0.8.22/game/mod/Stage12Normal/tail-waves.lua",
@@ -1411,8 +1781,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/TH125Extra/pool.lua",
-    "bytes": 720,
-    "sha256": "abb1a1b80a87c6709b7435b32843e92c8668f275f613dda9f734872b08b0947d"
+    "bytes": 767,
+    "sha256": "7cbff52e2586cd196dc4efb752ce34fa2f643a7ff6a2ad9e96af911443446a00"
   },
   {
     "path": "aex-0.8.22/game/mod/TH125Extra/power-lock.lua",
@@ -1431,8 +1801,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/TH125Extra/root.lua",
-    "bytes": 8359,
-    "sha256": "02f26ed65b20b436ded6a410e3bade917069ead9e05f46a5cef4a8891337f99b"
+    "bytes": 9514,
+    "sha256": "c27e9fea3f017232907b3067e64589f19788f80da019888e947ce17aff50721f"
   },
   {
     "path": "aex-0.8.22/game/mod/TH125Extra/runtime.lua",
@@ -1531,8 +1901,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/YuyukoStage3/README.md",
-    "bytes": 20336,
-    "sha256": "1eb2539a93b55dd93c7d1b76fea3a39db8ab9f61dea8e68bddb30b54033579f3"
+    "bytes": 21789,
+    "sha256": "b3eede401b6f64ab24f179724f4cdf502a97e8e4d4f2a19ebe8c4a404db87905"
   },
   {
     "path": "aex-0.8.22/game/mod/YuyukoStage3/background-native.hlsl",
@@ -1581,8 +1951,8 @@
   },
   {
     "path": "aex-0.8.22/game/mod/YuyukoStage3/player.lua",
-    "bytes": 5467,
-    "sha256": "d1fd18f5b6f6551bd3047b4ad6ea7474108ff50a72d36e4e3ef836e5d3eafd9f"
+    "bytes": 9481,
+    "sha256": "3ecab29ded26624cbd889082e14150689120086d2d6aaa5837ce9582fc9eb29b"
   },
   {
     "path": "aex-0.8.22/game/mod/YuyukoStage3/road/constants.lua",
@@ -1616,13 +1986,13 @@
   },
   {
     "path": "aex-0.8.22/game/mod/YuyukoStage3/root.lua",
-    "bytes": 12641,
-    "sha256": "de97792774f70283f1a58a49b4d78f6ea643de9382c5ba7a0bd244387f57e52f"
+    "bytes": 13251,
+    "sha256": "ad39f9e64820c7ff654bad70ac7afd262dba9a61c9d7c8f593e3b763fb690258"
   },
   {
     "path": "aex-0.8.22/game/mod/YuyukoStage3/runtime.lua",
-    "bytes": 7154,
-    "sha256": "74febd60086b03dd17490d49e6e71dc5554a78bfefa346e097b8d70ec5b9df2f"
+    "bytes": 7285,
+    "sha256": "c526c0e986842538b02995bf8778897fb1bf9c9c7c6e43201e0913aec884dced"
   },
   {
     "path": "aex-0.8.22/game/mod/YuyukoStage3/th07.lua",
@@ -1673,6 +2043,156 @@
     "path": "scripts/mamizou-stage2/verify.py",
     "bytes": 5316,
     "sha256": "b5effee089cf424f8e2a5abcadf19788f3a8b89fb6bc9a768f640673be743999"
+  },
+  {
+    "path": "scripts/marisa-mixed/assets02.py",
+    "bytes": 3194,
+    "sha256": "74fb9cd002dc2991dad617d3bd7a5401ce7680ba0340ab0769e4c692b036246f"
+  },
+  {
+    "path": "scripts/marisa-mixed/assets05.py",
+    "bytes": 2209,
+    "sha256": "baac1961f08024a40d7ad6c42d48e2b26fe672fccc93f100ec7b17523ba58935"
+  },
+  {
+    "path": "scripts/marisa-mixed/assets11.py",
+    "bytes": 1420,
+    "sha256": "fb6df40cee380a5845cd6289bf6b65d0581066e557da0b32ef4ea5bedb2cd9ec"
+  },
+  {
+    "path": "scripts/marisa-mixed/build.py",
+    "bytes": 4262,
+    "sha256": "b14b9481a0721590eb7c3314d0f7df0ba222fdde9f4762fb3a8435732b2158b2"
+  },
+  {
+    "path": "scripts/marisa-mixed/build14.py",
+    "bytes": 2835,
+    "sha256": "82782dc3741bd07dfa9add86c5b090aa77390371b7443337132d71cbd4f449a3"
+  },
+  {
+    "path": "scripts/marisa-mixed/entries04.py",
+    "bytes": 2961,
+    "sha256": "1c5038b0af01a0ad6ae6d4b301e1704acf917b541dcb553a86e96c9c9fa1e8fd"
+  },
+  {
+    "path": "scripts/marisa-mixed/inspect02.py",
+    "bytes": 881,
+    "sha256": "5f8195299398cca1935c9865e7b8b110692adf4824a1797e33614e7d841b56cc"
+  },
+  {
+    "path": "scripts/marisa-mixed/integrate02.py",
+    "bytes": 1076,
+    "sha256": "d4da59ecdf56fd3c7de671515ae9f24f699f22f71d3551e98862f10a2711e332"
+  },
+  {
+    "path": "scripts/marisa-mixed/integrate03.py",
+    "bytes": 205,
+    "sha256": "4afb86a96afc3e8c13c0b04a51cafc705334cb033dc42c083f4bb00c8b8dd1dd"
+  },
+  {
+    "path": "scripts/marisa-mixed/source03.py",
+    "bytes": 2064,
+    "sha256": "e7db93658522ec5f264fd378bd348fa130f2594068898bb4354b2cd4e1941da9"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify-native.ps1",
+    "bytes": 2094,
+    "sha256": "1036e6e85551562a3a5eee16e5c531d52ac6f3a6d215d103a41f4ea45de342f2"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify-native04.ps1",
+    "bytes": 1762,
+    "sha256": "259b7e04ab4cb5ded199fe279ea1437a0ac021865a75a3e315ae0253dbd6911e"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify-native14.ps1",
+    "bytes": 2704,
+    "sha256": "ff574e722cf524988013fa066eeda10054019fdab07cfade809d016db359caf0"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify-stage14.py",
+    "bytes": 3730,
+    "sha256": "e53feb61632406e8cc5ddf4944baf4e3ec4e3d6a308342dc9f61a61be33a1ed5"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify.py",
+    "bytes": 3375,
+    "sha256": "9855e413d8ede2b08ef625fdbeaba987d8f7cbe03d866d2124e2bc8dd6f84065"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify02.py",
+    "bytes": 5058,
+    "sha256": "bf6975c90f8de4b43189cb15303d235a6e4f1b12c51d894c5e981cc25a401a61"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify03.py",
+    "bytes": 4979,
+    "sha256": "5176177ca763b708298a3e9c86c6f5a82468d218adfbb6551f5298641a4d6bb2"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify04.py",
+    "bytes": 2204,
+    "sha256": "945e99ea2e38cd8d7e092d887acc467bc2b085236748f20cbf46820ec7bf3a36"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify05.py",
+    "bytes": 4524,
+    "sha256": "eff3da4b5098ae82bd2729449d48a2fc3248868188e67d28172ff946e9b79d2a"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify07.py",
+    "bytes": 2576,
+    "sha256": "2e788165bfb3c8e0ebe9d895be98e478b19de9e4c7c375034a4f758456929720"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify08.py",
+    "bytes": 2443,
+    "sha256": "4d668a50997f39c6d6f81c90c7a25506232cc3804f2b28b3c4bdc397cf26e7d3"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify09.py",
+    "bytes": 2512,
+    "sha256": "43f0987b987a1be4c7e4f842324cdd9f53d38a3272d5938106bad0ba721aa998"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify10.py",
+    "bytes": 3500,
+    "sha256": "15ef0ad52fc3ee1a5a57adb3cc0f5882a9fe5b85fcab62d4f5efc1ef5169fe3d"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify11.py",
+    "bytes": 2533,
+    "sha256": "17f056ee3bb7751783c90fbd326efd566f532fe2292f9c9c149e7b62b53e0363"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify12.py",
+    "bytes": 4309,
+    "sha256": "4cbbbff2dc6a3c353a0e0f0e2ff7b80f405617e02144143a675ee5301c410248"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify13.py",
+    "bytes": 3086,
+    "sha256": "11598a4fa9e597cfe27b959157adfb3929891b6c0dfa047f187da154946b5ec2"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify14.py",
+    "bytes": 3806,
+    "sha256": "387ce94fcf0e08486857743fe0d9b99edddbabab01eafe92e1920284d16a0126"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify15.py",
+    "bytes": 3118,
+    "sha256": "6f0bb37b4619ba003ca407df3e9267f8777c254456e0956fd7c421ac14631275"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify16.py",
+    "bytes": 2499,
+    "sha256": "d37f0b27bb45ef0e0672dcf4ebf47823bbdedcb1107b1c77390aa021e8090ea2"
+  },
+  {
+    "path": "scripts/marisa-mixed/verify17.py",
+    "bytes": 1678,
+    "sha256": "16b0314af1b23b49021dae9f9bd3b350a9043a8db3812865efcf6c3cb7577cac"
   },
   {
     "path": "scripts/milk-honey/deps/capstone/__init__.py",
@@ -2011,8 +2531,8 @@
   },
   {
     "path": "scripts/nina-stage6/package.py",
-    "bytes": 6731,
-    "sha256": "bf451a82b5dadcbec29f85593ed77189d75dbaefa741d645ec49cf4492501018"
+    "bytes": 6889,
+    "sha256": "ad9d88d4513c2a60c2efe845b59c346eb3d24e4a543d3d26cbc731402eea9a13"
   },
   {
     "path": "scripts/nina-stage6/scenery/verify-scenery.py",
@@ -2208,6 +2728,136 @@
     "path": "scripts/royal-flare/verify-native.ps1",
     "bytes": 4608,
     "sha256": "9ccdad7c713c21bc8f110d6a26af049d33e7e5d0f9f8c629b343fd32f08c2c0d"
+  },
+  {
+    "path": "scripts/six-stages/audit-boundaries.py",
+    "bytes": 3467,
+    "sha256": "2aa0d1ae7c26262951de889f3b1cd709036554a98b7fccba126d27862da1a62c"
+  },
+  {
+    "path": "scripts/six-stages/native-combat-review.ps1",
+    "bytes": 2414,
+    "sha256": "7cdb6da2327f943b9c51fda1ef3f604f00faeb1db3d94ec0b1dba44322fbb45b"
+  },
+  {
+    "path": "scripts/six-stages/native-dialogue1.ps1",
+    "bytes": 1927,
+    "sha256": "737e551921c391af55c8226129d8524573e5b6eeacef5d2d1f5e88011022598d"
+  },
+  {
+    "path": "scripts/six-stages/native-dialogue2.ps1",
+    "bytes": 2028,
+    "sha256": "36e793afc2e7a0ca8688d757719e86891b2be2fd9d438171067d961b2c4b90ed"
+  },
+  {
+    "path": "scripts/six-stages/native-dialogue3.ps1",
+    "bytes": 1915,
+    "sha256": "1f66d5d333762fd85103a884872ea38fc6d7ededbd45b060cc31ce226b0d6036"
+  },
+  {
+    "path": "scripts/six-stages/native-dialogue46.ps1",
+    "bytes": 2206,
+    "sha256": "04709b5aba6e7bf3f6c0e2d268de30de71fab1ff62becab10083e099497d2c4d"
+  },
+  {
+    "path": "scripts/six-stages/native-resource-rewrite.ps1",
+    "bytes": 2265,
+    "sha256": "6535e46192be03649f1ade6ff05c548e185193455cf8e14f97478f576da8ef26"
+  },
+  {
+    "path": "scripts/six-stages/native.ps1",
+    "bytes": 1846,
+    "sha256": "758e7fadab37424c2485b78e4463b68bf5b3216b2e3494ae4245f5d7af8ee1e3"
+  },
+  {
+    "path": "scripts/six-stages/prepare-dialogue1.py",
+    "bytes": 3924,
+    "sha256": "56b340eb40764ce26dc9da46070e05cc8d11b58fe2a4949dd94a7d3531da706d"
+  },
+  {
+    "path": "scripts/six-stages/prepare-dialogue2.py",
+    "bytes": 5340,
+    "sha256": "eaa62cbdd451357c6ec9b050e894f5f0e1243cf1b82ad4457713223e6cd23437"
+  },
+  {
+    "path": "scripts/six-stages/prepare-dialogue3.py",
+    "bytes": 8188,
+    "sha256": "f0b0ed4db38462d6c98869867686b32cec2062bbae97104c43a3c919859b38e0"
+  },
+  {
+    "path": "scripts/six-stages/prepare-dialogue46.py",
+    "bytes": 10226,
+    "sha256": "7e8960e44c62abac21fb1ffbd00239833cef8fb40f829b3236d4430f4d289a83"
+  },
+  {
+    "path": "scripts/six-stages/verify-boundary-guard.py",
+    "bytes": 4260,
+    "sha256": "379d5a8c6de5fbaf46a008c4822501efbdd7b65117eb65de9f112c4605c88cdd"
+  },
+  {
+    "path": "scripts/six-stages/verify-combat-review.py",
+    "bytes": 8008,
+    "sha256": "113d874311c71198bdb70e303a0acd89eb9027c9467229b5a161a762bdb55cd9"
+  },
+  {
+    "path": "scripts/six-stages/verify-comet-survival.py",
+    "bytes": 652,
+    "sha256": "20a606cc30f9e74921aff47a8312e24c1717aacbafa50f645669ab7a58c46367"
+  },
+  {
+    "path": "scripts/six-stages/verify-dialogue1.py",
+    "bytes": 4255,
+    "sha256": "4d405b203cd3b0c7b410178c3915d501bf88a46148413dee4b56d4cf6d998af3"
+  },
+  {
+    "path": "scripts/six-stages/verify-dialogue2.py",
+    "bytes": 3800,
+    "sha256": "e757f2145d5550cd229630b4c45d9f426c5da3cafb5cf88755d50560c88ba4b3"
+  },
+  {
+    "path": "scripts/six-stages/verify-dialogue3.py",
+    "bytes": 5465,
+    "sha256": "7931614851c56b5755ddb77765557eb5f15c901f4256e090b58cbcb2fdc2f5fd"
+  },
+  {
+    "path": "scripts/six-stages/verify-dialogue46.py",
+    "bytes": 4311,
+    "sha256": "15ba96c970f659452b72e075d444de988c10c3b2cf0c0f0728aaadb8ce35489d"
+  },
+  {
+    "path": "scripts/six-stages/verify-hit.py",
+    "bytes": 9685,
+    "sha256": "a371dca534664621939a28c8ccd50c2009745bd023fb9163e90cf66ff5cdc5bb"
+  },
+  {
+    "path": "scripts/six-stages/verify-marisa-segments.py",
+    "bytes": 4208,
+    "sha256": "6bc7a877ab6e53f38bf611cf91800fef6c3f74ebbf38058d2a02b6ab83199e45"
+  },
+  {
+    "path": "scripts/six-stages/verify-resource-rewrite.py",
+    "bytes": 8269,
+    "sha256": "c5125eb4cd9b547b9ff237f3bab4967d6649f596282267209d755cb67eb078d5"
+  },
+  {
+    "path": "scripts/six-stages/verify-return.py",
+    "bytes": 2485,
+    "sha256": "e5b3e3f1ac8356ee0ff1ad4486bd1842bf43194facaaf23b38d118ea7908506b"
+  },
+  {
+    "path": "scripts/six-stages/verify-revision.py",
+    "bytes": 6399,
+    "sha256": "ba871fe4a75ce3d18acf7229aac69a3ad9c78d5e1a88820d08fd4a6f8c238104"
+  },
+  {
+    "path": "scripts/six-stages/verify-road-bonus.py",
+    "bytes": 3415,
+    "sha256": "10404be7c8f7e9614e231a9bbae5f91ea758f4e2de256e986273c225e863b7cf"
+  },
+  {
+    "path": "scripts/six-stages/verify.py",
+    "bytes": 7425,
+    "sha256": "ee7149bf92eb202cbf58dc94511e4b72d78629b6649fc17548ee9bd22e9dcd92"
   },
   {
     "path": "scripts/stage12/audit-source.py",
@@ -2691,13 +3341,18 @@
   },
   {
     "path": "scripts/th125-extra/build.py",
-    "bytes": 10299,
-    "sha256": "419f52876a08d47d137f245bd4e68f2d6c8240bf807d5dfdd8f235f0175be28f"
+    "bytes": 10576,
+    "sha256": "de6c96515977c6137599d043345fae98061f45fcb6b0708d61c083e9a74de51f"
   },
   {
     "path": "scripts/th125-extra/inspect-native.py",
     "bytes": 1187,
     "sha256": "783ba35f10f192ec7138ab748e7e9ae438c5285af2f49041d955f8e4d3033111"
+  },
+  {
+    "path": "scripts/th125-extra/retime03.py",
+    "bytes": 121,
+    "sha256": "09a550a88fdf8adc05b80bd50ecc40f057014b98208ab322cf5258333603e525"
   },
   {
     "path": "scripts/th125-extra/verify-native.ps1",
@@ -2706,8 +3361,13 @@
   },
   {
     "path": "scripts/th125-extra/verify.py",
-    "bytes": 5378,
-    "sha256": "9483f83543c991397e0565f58999b991b1ccc1e0863b51b8f64cbab1c81bcef4"
+    "bytes": 5475,
+    "sha256": "0faf44fe86677ef1517159ef455c6d17c68c090ed1de960ff2bb6cbc56b3e7e8"
+  },
+  {
+    "path": "scripts/th125-extra/verify05.py",
+    "bytes": 2277,
+    "sha256": "85c2c8c376e93511511f7a6ebdb57c5819c67cb0d0c21d1df211a602854c322b"
   },
   {
     "path": "scripts/th13-seiga4/build.py",

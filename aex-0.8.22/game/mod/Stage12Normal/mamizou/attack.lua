@@ -18,6 +18,7 @@ local function image(o,name,radius)
     o.img='mz.'..name;o.a=radius;o.b=radius;o.rect=false
 end
 function Shot:init(x,y,speed,angle,kind,color,extra)
+    Stage12FireSound('tan00',x)
     bullet.init(self,Native,COLOR_RED,false,true);bullet.skip_fade_in(self)
     self.bound=false;self.age=0;self.kind=kind;self.speed=speed;self.direction=angle;self.color=color;self.extra=extra or {}
     self.originX,self.originY=x,y;self.baseX,self.baseY=x,y
@@ -59,9 +60,9 @@ function Shot:frame()
             assert(math.abs((self.x-self.originX)-self.ux*2/3)<1e-7,'ring x scale')
             assert(math.abs((self.y-self.originY)-self.uy*2/3)<1e-7,'ring y scale');count('radiusChecks')
         end
-        if self.extra.frog and a==210 then self.kind='finalfrog';self.age=0;self.fade=0;image(self,'th13-21',5.5);count('finalfrog') end
+        if self.extra.frog and a==210 then self.kind='finalfrog';self.age=0;self.fade=0;image(self,'yellow-frog21',5.5);count('finalfrog') end
     elseif self.kind=='finalfrog' or self.kind=='frog' then
-        image(self,'th13-'..({21,22,23,22})[math.floor(a/10)%4+1],self.kind=='finalfrog' and 5.5 or 6.5)
+        image(self,'yellow-frog'..({21,22,23,22})[math.floor(a/10)%4+1],self.kind=='finalfrog' and 5.5 or 6.5)
         if a==210 then frog_rice(self,self.kind=='finalfrog');Del(self);return end
     elseif self.kind=='bird' then
         local jitter=self.extra.jitter
@@ -86,7 +87,7 @@ function Shot:frame()
         end
         speed=speed*(a<self.fade and 0.5 or 1)
         self.x=self.x+speed*cos(self.direction);self.y=self.y+speed*sin(self.direction)
-        if self.kind=='frogseed' and a==33 then self.kind='frog';self.age=0;self.fade=0;image(self,'th13-21',6.5);count('frog') end
+        if self.kind=='frogseed' and a==33 then self.kind='frog';self.age=0;self.fade=0;image(self,'yellow-frog21',6.5);count('frog') end
     end
     -- Humanoids stay upright, feet down, regardless of their flight heading.
     self.rot=(self.kind=='market' and a>=80) and 0 or self.direction+90
@@ -195,6 +196,7 @@ for phase=1,5 do
         if test and id==5 then assert(s.radiusChecks and s.radiusChecks>1000,'radius coverage') end
         print(string.format('MAMIZOU PHASE CLEANUP %d tick=%d shots=%d rings=%d radius=%d random=%d kept=%d removed=%d',id,D.tick,s.shots or 0,s.rings or 0,s.radiusChecks or 0,s.randomCandidates or 0,s.randomKept or 0,s.randomDeleted or 0))
     end
+    card.stage12TransitionY=id==2 and 32 or id==1 and 112 or 96
     cards[id]=card
 end
 local Mamizou=Class(boss)
@@ -202,7 +204,7 @@ function Mamizou:init(start_card)
     local selected=cards
     if start_card then selected={};for i=start_card,#cards do selected[#selected+1]=cards[i] end
     elseif setting.mamizou_phase then selected={cards[setting.mamizou_phase]} end
-    boss.init(self,0,112,'Futatsuiwa Mamizou',selected,nil,'Normal');self.A,self.B=24,24;self.a,self.b=24,24
+    boss.init(self,0,288,'Futatsuiwa Mamizou',Stage12BossEntrance(selected,0,112),nil,'Normal');self.A,self.B=24,24;self.a,self.b=24,24
 end
 function Mamizou:render()
     self._bosssys:render()

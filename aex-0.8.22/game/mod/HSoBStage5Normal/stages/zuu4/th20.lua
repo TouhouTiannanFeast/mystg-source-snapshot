@@ -41,6 +41,7 @@ P.non3=function(o)
    randomMove(o,60,0,0.8,128,96,280)
    for _,color in ipairs({3,1,2,4})do
     ring(o,11,R.rand(-180,180),5*0.4,color)
+    R.sound('shot2')
     wait(20)
    end
   end
@@ -55,6 +56,7 @@ P.non3=function(o)
      fan(o,1,angle,0.09424778*degrees,1*0.4,3,0,0,32,function(b)
       b.profile={hold=60+i*2,initial=1*0.4,n1=60,s1=0.2*0.4,n2=60,s2=3*0.4}
      end)
+     if i%5==0 then R.sound('shot2')end
      angle=angle-0.10472*degrees*direction;wait(2)
     end
    end
@@ -74,6 +76,7 @@ local function layer(o,phase)
   fan(o,7,angle,0.436332*degrees,1.5,4,ox,oy,0,function(b)
    b.profile={hold=0,initial=1.5,n1=120,s1=0.5};b.wraps=1;b.wrapMask=3;b.wrapPadding=32;b.noCull=true;b.drawLayer=0
   end,function(i)return i~=3 and i~=4 end)
+  R.sound('shot2')
   wait(({20,24,28,28})[phase+1])
  end
 end
@@ -85,6 +88,7 @@ local function ringLayer(o,phase)
   ring(o,32,angle,1.8,3,r*R.cos(base),r*R.sin(base),0,function(b)
    b.profile={hold=0,initial=1.8,n1=80,s1=0.8};b.noCull=true;b.drawLayer=0
   end,function(i)return i%4~=3 end)
+  R.sound('shot2')
   base=base+3.883222*degrees;wait(120)
  end
 end
@@ -96,6 +100,7 @@ local function tripleLayer(o,phase,final)
    -- Native etEx25 writes +0x44, used by the six render-list buckets (47d85b).
    b.profile={hold=0,initial=3.8,n1=60,s1=final and 2.2 or 1.2};b.drawLayer=3;b.noCull=true
   end)
+  R.sound('shot2')
   base=base+3.883222*degrees;wait(final and 10 or 17)
  end
 end
@@ -121,7 +126,7 @@ P.stone=function(o)
  end
  for phase=1,3 do
   local cap=({38000,24500,11000})[phase]
-  R.sound('th20.27')
+  -- User request: no countdown cue on Stone Goddess phase changes.
   R.hp=cap;if R.setHostHP then R.setHostHP(cap)end
   R.clearBullets();launchLayers(o,phase)
   if phase<3 then

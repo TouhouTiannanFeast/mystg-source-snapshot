@@ -82,7 +82,7 @@ function Shot:render()
  SetImageState(self.img,b.typ==10 and 'mul+add' or '',Color(math.max(0,math.min(255,alpha)),255,255,255))
  Render(self.img,self.x,self.y,self.heading,self.hscale,self.vscale)
 end
-function Shot:del()self.data.dead=true;S.owned[self]=nil;bullet.del(self)end
+function Shot:del()self.data.dead=true;S.owned[self]=nil;if not self.data.offscreenRemoval then bullet.del(self)end end
 function Shot:kill()self.data.dead=true;S.owned[self]=nil;bullet.kill(self)end
 local soundTick=-1
 local function shotSound(b)
@@ -221,10 +221,21 @@ end
 function Yuyuko:render()
  self._bosssys:render()
  local moving=R.motion and math.abs(R.motion.dx)>0.1
- local frame=moving and math.min(2,math.floor(self.ani/3)%3)or 0
+ local frame=0
+ if moving then
+  -- Move frames are a transition into the held flight pose, not a 9-frame loop.
+  local m=R.motion
+  frame=math.min(2,math.floor(m.t/8),math.floor(math.max(0,m.n-m.t)/4))
+ end
  local image='y3.'..(moving and 'move' or 'idle')..frame
  Render(image,self.x,self.y+4*sin(self.ani*4),0,moving and(R.motion.dx<0 and -1 or 1)or 1,1)
 end
+local Entrance=Class(object)
+function Entrance:init()
+ self.group,self.layer,self.bound,self.colli=GROUP_GHOST,LAYER_ENEMY,false,false
+ self.x,self.y=0,280
+end
+function Entrance:render()Render('y3.idle0',self.x,self.y,0,1,1)end
 local Hud=Class(object)
 function Hud:init()self.group,self.layer,self.bound,self.colli=GROUP_GHOST,LAYER_TOP,false,false end
 function Hud:render()
@@ -253,6 +264,14 @@ stage.group.DefStageFunc('Yuyuko Stage3@Normal','init',function(s)
    local entry=setting.y3_entry or 'full'
    if entry=='full' or entry:match('^road%-%d+$')then
     Y3Road.run(tonumber(entry:match('^road%-(%d+)$'))or 0)
+    task.Wait(90)
+    local entrance=New(Entrance)
+    for t=1,60 do
+     local u=t/60;u=u*u*(3-2*u)
+     entrance.y=280+(112-280)*u
+     task.Wait(1)
+    end
+    Del(entrance)
    else assert(R.specs[entry],'Unknown Stage3 entry')end
   end
   if setting.y3_test_player then Y3Player.probe()end

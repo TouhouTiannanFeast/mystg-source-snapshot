@@ -1,4 +1,6 @@
 Include('THlib.lua')
+Include('firing-audio.lua')
+Include('boss-transition.lua')
 Include('player.lua')
 Include('music.lua')
 Include('unified-assets.lua')

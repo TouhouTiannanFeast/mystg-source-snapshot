@@ -62,6 +62,7 @@ end
 function Shot:del() D.owned[self]=nil;bullet.del(self) end
 function Shot:kill() D.owned[self]=nil;bullet.kill(self) end
 local function emitRing(x,y,speed,angle,color,noteColor)
+ Stage12FireSound('tan00',x)
  D.shots=D.shots+1;D[color]=D[color]+1
  for k=0,noteCount-1 do New(Shot,x,y,speed,angle,noteColor or color,k) end
 end
@@ -121,7 +122,7 @@ card.del=function()
 end
 local Mystia=Class(boss)
 function Mystia:init()
-    boss.init(self,0,112,'Mystia Lorelei',{card},nil,'Normal')
+    boss.init(self,0,288,'Mystia Lorelei',Stage12BossEntrance({card},0,112),nil,'Normal')
     self.A,self.B=16,16;self.a,self.b=16,16
 end
 function Mystia:render()

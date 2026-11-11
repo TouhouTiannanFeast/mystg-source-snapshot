@@ -20,7 +20,8 @@ function BG:frame()
   local phase=_boss and IsValid(_boss) and _boss.th14_phase
   local first=self.stageIndex==1 and (phase=='non1' or phase=='context' or phase=='non2' or phase=='scale')
   local second=self.stageIndex==2 and Stage2Route and Stage2Route.phase=='Mamizou'
-  if first or second then S.interrupt(self.playback,1);self.bossEntered=true;print('STAGE12 BACKGROUND BOSS INTERRUPT stage='..self.stageIndex)end
+  -- Keep the live road camera, sky and cloud clocks across boss changes.
+  if first or second then self.bossEntered=true;print('STAGE12 BACKGROUND CONTINUED stage='..self.stageIndex)end
  end
 end
 function BG:render()S.render(self.playback)end

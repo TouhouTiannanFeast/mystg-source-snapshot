@@ -1,6 +1,6 @@
 """Build the NinaStage6Normal portable package (bundled LuaSTG runtime)."""
 from pathlib import Path
-import datetime, hashlib, json, shutil, subprocess, time, uuid, zipfile
+import datetime, hashlib, json, os, shutil, subprocess, time, uuid, zipfile
 
 R = Path('G:/MySTG')
 src = R / 'aex-0.8.22/game'
@@ -102,7 +102,10 @@ for rel, h in manifest.items():
 smoke = {'ran': False}
 exe = qa / name / 'game' / 'LuaSTGSub.exe'
 log = qa / name / 'game' / 'engine.log'
-try:
+if os.environ.get('NINA_PKG_SKIP_SMOKE') == '1':
+    smoke = {'skipped': True, 'reason': 'NINA_PKG_SKIP_SMOKE=1 (a game instance was running)'}
+else:
+  try:
     proc = subprocess.Popen([str(exe), "setting.mod='NinaStage6Normal'; setting.nina_phase='non1'; setting.nina_seed=20261104; "
                                         "setting.nina_test=false; setting.nina_invincible=true; setting.windowed=true; start_game=true"],
                             cwd=str(exe.parent))
@@ -116,7 +119,7 @@ try:
     smoke = {'ran': True, 'phase_seen': 'NINA PHASE non1' in text, 'log_bytes': len(text),
              'error_seen': any(s in text for s in ('[E]', 'Error', 'Lua Error'))}
     assert smoke['phase_seen'], 'portable smoke test: phase did not start'
-except Exception as e:
+  except Exception as e:
     smoke['error'] = str(e)
 
 report = dict(archive=str(archive), folder=str(dest), extracted=str(qa / name),

@@ -48,7 +48,7 @@ function PlaySound(name,...)
  -- Native boss emits cat00 at card construction; source spells announce later.
  if R.audioActive and name=='cat00'then return end
  if R.audioActive then
-  if R.id=='stone' and (name=='timeout' or name=='timeout2')then return end
+  if (R.id=='stone' or R.id=='non3') and (name=='timeout' or name=='timeout2')then return end
   local alias=({cardget='capture',fault='fail',timeout='timer1',timeout2='timer2'})[name]
   if alias then return R.sound(alias)end
  end

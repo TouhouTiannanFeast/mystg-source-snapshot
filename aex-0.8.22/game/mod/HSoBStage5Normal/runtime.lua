@@ -247,12 +247,14 @@ function R.endSection()
   R.events[#R.events+1]={kind='drained',section=2,tick=R.tick}
   return
  end
- R.award(R.section);R.threads={};R.cancelAt=R.tick
- R.events[#R.events+1]={kind='clear',section=R.section,tick=R.tick}
+ local section=R.section;R.threads={};R.cancelAt=R.tick
+ R.events[#R.events+1]={kind='clear',section=section,tick=R.tick}
  for _,o in ipairs(R.objects)do
   if o.kind=='enemy'then o.hp=0;o.killed=true;o.dead=true;R.enemyKilled(o)else o.collidable=false end
  end
- if R.section<3 then R.nextAt=R.tick+120 else R.finishAt=R.tick+56 end
+ -- Drop/pickup reward starts only after the last section enemy is gone.
+ R.award(section)
+ if section<3 then R.nextAt=R.tick+120 else R.finishAt=R.tick+56 end
 end
 function R.step(px,py)
  if R.finished then return end

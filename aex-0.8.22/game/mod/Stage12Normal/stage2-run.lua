@@ -8,6 +8,16 @@ Include('schedule.lua')
 Include('route.lua')
 Include('tail-waves.lua')
 local R=Stage2Route
+-- Wait for the preceding road objects to leave, then a two-second empty gap.
+local function wait_road_exit()
+    while true do
+        local active=false
+        for o in pairs(R.owned) do if IsValid(o) then active=true;break end end
+        if not active then break end
+        task.Wait(1)
+    end
+    task.Wait(120)
+end
 local function clean()
     Stage12Music.stop()
     R.clean();Stage2Mamizou.clean();Stage2Flare.clean();Stage2Mystia.clean()
@@ -57,6 +67,7 @@ function Stage2FullRun(s)
         elseif e.name=='Girl02' then
             -- Keep the fourteen prior sunflowers intact until they leave.
             while next(R.enemies) do task.Wait(1) end
+            if entry~='s2-mystia' then wait_road_exit() end
             R.clean();phase('Mystia');Stage2Mystia.reset()
             mystiaBoss=New(Stage2Mystia.Boss)
             Stage12Tail.run(mystiaBoss,R.spawn,IsValid,function(n) for _=1,n do R.tick=R.tick+1;task.Wait(1) end end,R)
@@ -66,6 +77,7 @@ function Stage2FullRun(s)
         elseif e.name=='Boss' then
             while IsValid(mystiaBoss) do task.Wait(1) end
             while next(R.enemies) do task.Wait(1) end
+            if not mamizouStart then wait_road_exit() end
             R.clean();phase('Mamizou');Stage2Mamizou.reset();Stage12Music.play('s2.boss')
             local b=New(Stage2Mamizou.Boss,mamizouStart)
             while IsValid(b) do task.Wait(1) end

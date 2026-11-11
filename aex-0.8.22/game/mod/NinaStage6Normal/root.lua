@@ -308,6 +308,12 @@ function Boss:init(list,kanako)
  self.kanako=kanako;boss.init(self,0,128,kanako and 'Yasaka Kanako'or'Watari Nina',cards,nil,'Normal');self.bound=false
  if cards[#cards]and not cards[#cards].is_combat then self.last_card=#cards;self.is_final=false end
 end
+function Boss:frame()
+ boss.frame(self)
+ -- The host computes dmg_factor after card tasks. Reapply MBoss's source
+ -- entry protection here so sustained fire cannot erase non2 before it fires.
+ if S.current=='non2'and not self.__is_waiting and(S.runtime.invuln or 0)>0 then self.dmg_factor=0 end
+end
 function Boss:render()
  self._bosssys:render();if S.runtime and S.runtime.boss then body(S.runtime.boss,self.kanako and'kanako'or'nina')end
 end

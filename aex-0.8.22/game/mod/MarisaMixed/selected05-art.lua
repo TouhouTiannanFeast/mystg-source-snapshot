@@ -1,0 +1,3 @@
+SSGSelectedArt05={["glow0"]={["path"]="art/selected05/glow-0.png",["w"]=30,["h"]=30},["glow1"]={["path"]="art/selected05/glow-1.png",["w"]=30,["h"]=30},["glow2"]={["path"]="art/selected05/glow-2.png",["w"]=30,["h"]=30},["glow3"]={["path"]="art/selected05/glow-3.png",["w"]=30,["h"]=30},["glow4"]={["path"]="art/selected05/glow-4.png",["w"]=30,["h"]=30},["glow5"]={["path"]="art/selected05/glow-5.png",["w"]=30,["h"]=30},["yellowdot"]={["path"]="art/selected05/yellow-dot.png",["w"]=8,["h"]=8},["laser"]={["path"]="art/selected05/th08-blue-laser.png",["w"]=16,["h"]=128}}
+SSGSelectedArt05.laser11={path="art/selected05/laser11.png",w=16,h=14}
+SSGSelectedArt05.laser11glow={path="art/selected05/laser11glow.png",w=30,h=30}

@@ -14,6 +14,7 @@ local function forget(o) A.owned[o]=nil;th14.owned[o]=nil end
 local function clean() for o in pairs(A.owned) do if IsValid(o) then Del(o) end end;A.owned={} end
 local Medium=Class(bullet)
 function Medium:init(x,y,angle,speed,accel,burst)
+ if not burst then Stage12FireSound('tan00',x) end
  bullet.init(self,ball_mid,COLOR_BLUE,false,true);bullet.skip_fade_in(self)
  self.x,self.y,self.angle,self.initial,self.accel=x-4*speed*cos(angle),y-4*speed*sin(angle),angle,speed,accel
  self.colli=false
@@ -51,6 +52,7 @@ local function emit_medium(x,y,v)
 end
 local Anchor=Class(object)
 function Anchor:init(owner,angle)
+ Stage12FireSound('tan01',owner.x)
  self.x,self.y=owner.x,owner.y;self.owner,self.angle=owner,angle
  self.group,self.layer,self.bound,self.colli=GROUP_ENEMY,LAYER_ENEMY_BULLET,false,true
  self.a,self.b,self.rect=48,48,true;self.age,self.state=0,'outbound';self.rot=0;self.render_angle=angle
@@ -137,6 +139,7 @@ local function move(o)
 end
 function Stage1Anchor.card()
  local c=boss.card.New('倾覆「同路人之锚」',1,2,25,540,{5,5,0},false)
+ c.stage12TransitionY=80
  c.init=function(o)
   th14.clean_bullets();th14.clean_actors();clean();A.candidate=0;A.lastHit=nil;A.tick=0
   A.stats={anchors=0,impacts=0,faded=0,completed=0,medium=0,burst=0,candidates=0,peak=0,launch_ticks={}}

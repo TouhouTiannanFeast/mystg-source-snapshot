@@ -84,3 +84,11 @@ MamizouArt['th185-16']={w=32,h=32,radius=6.5}
 LoadTexture('mz.th185-17','mamizou/art/th185-17.png')
 LoadImage('mz.th185-17','mz.th185-17',0,0,32,32,6.5,6.5)
 MamizouArt['th185-17']={w=32,h=32,radius=6.5}
+
+-- User-authored yellow frog frames; only the animation images change.
+LoadTexture('mz.yellow-frog21','mamizou/art/yellow-frog21.png')
+LoadImage('mz.yellow-frog21','mz.yellow-frog21',0,0,32,32,6.5,6.5)
+LoadTexture('mz.yellow-frog22','mamizou/art/yellow-frog22.png')
+LoadImage('mz.yellow-frog22','mz.yellow-frog22',0,0,32,32,6.5,6.5)
+LoadTexture('mz.yellow-frog23','mamizou/art/yellow-frog23.png')
+LoadImage('mz.yellow-frog23','mz.yellow-frog23',0,0,32,32,6.5,6.5)

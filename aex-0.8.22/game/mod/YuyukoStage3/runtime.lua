@@ -93,6 +93,7 @@ local function displace(b,vx,vy)
    vx,vy=vx*scale,vy*scale
   end
  end
+ if R.id=='spell3' and b.typ==8 and b.col==1 then vx,vy=vx*2/3,vy*2/3 end
  b.x=b.x+vx;b.y=b.y+vy
 end
 local function stepBullet(b)
@@ -125,7 +126,8 @@ local function stepBullet(b)
   displace(b,b.vx,b.vy)
  end
  b.age=b.age+1
- if b.alpha<=0 or(b.age>b.cullDelay and(b.x< -64 or b.x>448 or b.y< -64 or b.y>512))then b.dead=true end
+ local out=b.age>b.cullDelay and(b.x< -64 or b.x>448 or b.y< -64 or b.y>512)
+ if b.alpha<=0 or out then b.dead=true;if out then b.offscreenRemoval=true end end
 end
 function R.step(px,py)
  R.px,R.py=px,py

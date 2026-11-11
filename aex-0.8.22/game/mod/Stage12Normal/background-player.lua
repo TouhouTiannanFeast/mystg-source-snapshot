@@ -136,7 +136,11 @@ function S.render(state)
  local camera=state.std.values;local eye,face,up=camera.pos,camera.facing,camera.up;local fog=camera.fog
  Set3D('eye',eye[1]/128,eye[2]/128,eye[3]/128);Set3D('at',(eye[1]+face[1])/128,(eye[2]+face[2])/128,(eye[3]+face[3])/128)
  Set3D('up',up[1],up[2],up[3]);Set3D('fovy',camera.fov[1]);Set3D('z',30/128,8000/128)
- Set3D('fog',fog[4]/128,fog[5]/128,Color(255,math.floor(fog[1]),math.floor(fog[2]),math.floor(fog[3])))
+ -- Preserve the source fog color; push only stage2's late blue fog farther out.
+ -- Weight follows the original434f fog tween, so the change has no hard onset.
+ local farWeight=state.stage==2 and math.max(0,math.min(1,(1700-fog[5])/400)) or 0
+ local fogNear,fogFar=fog[4]+400*farWeight,fog[5]+900*farWeight
+ Set3D('fog',fogNear/128,fogFar/128,Color(255,math.floor(fog[1]),math.floor(fog[2]),math.floor(fog[3])))
  SetViewMode('3d');RenderClearViewMode(Color(255,math.floor(state.clear/65536)%256,math.floor(state.clear/256)%256,state.clear%256))
  -- STD entry field is the drawing layer: lake bed(0), water(1..3), plants(4..5), mist(6).
  -- All no-write planes in these sources are closer than the depth-writing planes.

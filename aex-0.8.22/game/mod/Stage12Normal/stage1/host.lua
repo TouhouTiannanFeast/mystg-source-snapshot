@@ -70,6 +70,7 @@ end
 function T.Bullet:del() T.owned[self]=nil; bullet.del(self) end
 function T.Bullet:kill() T.owned[self]=nil; bullet.kill(self) end
 function T.emit(o,speed,angle,typ,color,opt,dist)
+    Stage12FireSound('tan00',o.x)
     dist=dist or 0
     return New(T.Bullet,o.x+dist*cos(angle),o.y+dist*sin(angle),speed,angle,typ,color,opt)
 end

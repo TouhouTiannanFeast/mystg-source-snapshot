@@ -24,8 +24,8 @@ function R.start(seed)
  R.post24Delay=0;R.gate24Released=false
  R.rewarded={}
  R.px,R.py=192,400
- assert(Le03Schedule and #Le03Schedule==122,'LE03 source schedule not loaded')
- for i,c in ipairs(Le03Schedule)do local e=M.create(c);e.sourceHP=e.hp;if Le03EnemyHealth then e.hp=Le03EnemyHealth.value(e)end;e.survival=e.appear==9500 and e.shot==60;if e.survival then e.invincible=1 end;e.spawnTick=R.spawnTick(e.appear);e.active=false;e.sourceIndex=i;R.enemies[i]=e end
+ assert(Le03Schedule and #Le03Schedule==117,'LE03 filtered schedule not loaded')
+ for i,c in ipairs(Le03Schedule)do local e=M.create(c);e.sourceHP=e.hp;if Le03EnemyHealth then e.hp=Le03EnemyHealth.value(e)end;e.survival=e.appear==9500 and e.shot==60;if e.survival then e.invincible=1 end;e.firstVolleyRequired=e.appear>=7300 and e.appear<=7700 and e.shot==54;if e.firstVolleyRequired then e.invincible=1 end;e.spawnTick=R.spawnTick(e.appear);e.active=false;e.sourceIndex=i+(e.appear>=8300 and 5 or 0);R.enemies[i]=e end
 end
 local function fillRandom()
  -- Supplemental spawns must not consume the original patterns' random stream.
@@ -85,6 +85,7 @@ function R.randomInt(n)
 end
 function R.aim(x,y)return math.atan2(R.py-y,R.px-x)end
 function R.shot(e,x,y,speed,angle,behavior)
+ if e.firstVolleyRequired then e.firstVolleyFired=true;e.invincible=0 end
  local b={x=f(x),y=f(y),speed=f(speed),angle=angle,behavior=behavior or 0,
   typ=e.bulletKind or e.typ or 3,col=e.color or e.col or 0,scale=1,age=0,
   vx=0,vy=0,state=0,p1=0,p2=0,active=true,cullDelay=0,alpha=255,birth=0}
@@ -153,9 +154,14 @@ function R.step(px,py)
  R.px,R.py=px or R.px,py or R.py
  for _,e in ipairs(R.enemies)do
   if e.active then
-   if e.appear==9500 and R.tick-e.spawnTick>=720 then
-    e.active=false;e.timedOut=true -- Forced exit, never counted as a defeat.
-    if e.survival then reward('finalLife','life',e)end
+   if e.appear==9500 and R.tick-e.spawnTick>=1020 then
+    if not e.exiting then
+     e.exiting=true;e.timedOut=true
+     if e.survival then reward('finalLife','life',e)end
+    end
+    -- Bypass the movement/fire callback throughout the exit flight.
+    e.y=e.y-3;e.pose=1;e.age=e.age+1
+    if e.y < -48 then e.active=false end
    elseif e.supplement then supplementStep(e)else M.step(e,function(o)Le03Firing.fire(R,o)end,inside)end
    if e.appear==2220 and not e.active then reward('wave21Life','life',{x=192,y=80})end
    if not e.supplement and e.appear==4700 and not e.active then reward('wave30Life','life',{x=192,y=80})end
@@ -181,7 +187,7 @@ function R.step(px,py)
    local travel=b.roadSpeedMultiplier or 1
    if travel~=1 then b.x=f(b.previousX+travel*(b.x-b.previousX));b.y=f(b.previousY+travel*(b.y-b.previousY))end
    b.age=b.age+1
-   if b.age>=b.cullDelay and not bulletInside(b)then b.active=false end
+   if b.age>=b.cullDelay and not bulletInside(b)then b.offscreenRemoval=true;b.active=false end
   end
   if b.active and not b._host and R.onShot then R.onShot(b)end
  end

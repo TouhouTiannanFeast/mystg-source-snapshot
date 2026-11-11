@@ -75,7 +75,7 @@ for card in [2,7,8]:
   for cycle in range(7):
    t=63+150*cycle
    if t>=1000:break
-   phase=min(3,(t-60)//120)
+   phase=0 if t<1800 else 1
    for shot in range(8):
     if t+10*shot<1000:assert counts[t+10*shot,23,3]==8+8*phase
   assert [x['t']for x in births[:45]]==list(range(62,152,2))

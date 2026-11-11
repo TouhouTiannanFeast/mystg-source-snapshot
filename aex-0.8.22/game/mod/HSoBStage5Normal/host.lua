@@ -196,10 +196,37 @@ R.onShot=function(o)New(Shot,o)end
 R.onShotDisabled=function(o)if IsValid(o.native)then o.native.group=GROUP_GHOST end end
 R.onBeam=function(o)New(Beam,o)end
 R.getLife=function()return lstg.var.lifeleft end
+-- Section reward: a visible drop at the top centre, then real THlib items.
+-- No life/bomb counter is changed here; the player must pick the items up.
+local RewardDrop=Class(object)
+function RewardDrop:init(section)
+ self.section=section;self.x=192;self.y=-24
+ self.group,self.layer,self.bound,self.colli=GROUP_GHOST,LAYER_ITEM+20,false,false
+end
+function RewardDrop:frame()
+ self.y=math.min(32,self.y+2)
+ if self.timer>=30 then
+  New(item_extend,self.x-16,self.y)
+  New(item_bomb,self.x+16,self.y)
+  Del(self)
+ end
+end
+function RewardDrop:render()
+ local u=math.min(1,self.timer/30)
+ local scale=0.6+0.4*(1-(1-u)^2)
+ local alpha=math.min(255,self.timer*12)
+ for i,img in ipairs({'item7','item10'})do
+  local x=self.x+(i==1 and -16 or 16)
+  SetImageState(img,'',Color(alpha,255,255,255))
+  Render(img,x,self.y,self.timer*(i==1 and 8 or -8),scale,scale)
+ end
+ SetImageState('item7','',Color(255,255,255,255))
+ SetImageState('item10','',Color(255,255,255,255))
+end
 R.onReward=function(n)
- lstg.var.lifeleft=lstg.var.lifeleft+1;lstg.var.bomb=lstg.var.bomb+1
  E.CallSound(E.snd1UP);E.CallSound(E.sndExtSpell)
- print('HSOB5 REWARD section='..n..' tick='..R.tick..' life='..lstg.var.lifeleft..' bomb='..lstg.var.bomb)
+ New(RewardDrop,n)
+ print('HSOB5 REWARD DROP section='..n..' tick='..R.tick..' life='..lstg.var.lifeleft..' bomb='..lstg.var.bomb)
 end
 R.protect=function(n)if IsValid(player)then player.protect=math.max(player.protect or 0,n)end end
 R.collect=function(n)if not IsValid(player)then return end;for _,o in ObjList(GROUP_ITEM)do o.target=player;o.attract=8 end end

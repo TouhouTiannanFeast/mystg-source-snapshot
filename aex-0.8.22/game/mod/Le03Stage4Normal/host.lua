@@ -45,7 +45,7 @@ function Shot:render()
    Render('le03.th.b.birth',self.x,self.y,0,pulse,pulse)
   end
 end
-function Shot:del() self.data.active=false;owned[self]=nil;bullet.del(self) end
+function Shot:del() self.data.active=false;owned[self]=nil;if not self.data.offscreenRemoval then bullet.del(self)end end
 function Shot:kill() self.data.active=false;owned[self]=nil;bullet.kill(self) end
 local soundTick=-1
 local function shotSound(b)
@@ -87,7 +87,7 @@ local E=Class(EnemyDamage)
 function E:init(e)
   enemy.init(self,1,e.hp or 1,false,false,false)
   self.death_ef=self.death_ef or 1
-  self.protect=e.survival or false
+  self.protect=e.survival or (e.firstVolleyRequired and not e.firstVolleyFired) or false
   self.x,self.y=e.x-192,224-e.y
   self.data=e;self.hostHp=self.hp;self.bound=false;self.a,self.b=5,5;self.colli=true;own(self)
 end
@@ -98,6 +98,7 @@ function E:frame()
    owned[self]=nil;return
   end
   self.x=e.x-192;self.y=224-e.y
+  self.protect=e.survival or (e.firstVolleyRequired and not e.firstVolleyFired) or false
   -- enemybase:init leaves engine collision off until its frame sync. This
   -- source-driven host replaces that frame, so perform the same sync here.
   SetAttr(self,'colli',BoxCheck(self,lstg.world.boundl,lstg.world.boundr,lstg.world.boundb,lstg.world.boundt) and self._colli)
