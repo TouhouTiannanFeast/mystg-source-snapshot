@@ -16,12 +16,15 @@
 
 请自行通过 LuaSTG 加载对应模组。注意，scripts/ 下部分验证脚本保留 G:\MySTG 的本地路径。
 
-## 署名与开发中用到的AI辅助工具
+## 署名与代码开发中用到的AI辅助工具
 
 - [SecretRenko](https://github.com/SecretRenko)
 - ChatGPT（OpenAI）
 - DeepSeek 
 - 托管组织：东方天南宴（TouhouTiannanFeast）。
+
+注意，本作品使用的**美术素材**非AI开发，均为**人工制作**。
+AI工具仅用于在**代码开发过程**中用于辅助调试与debug。
 
 ## 致谢
 
