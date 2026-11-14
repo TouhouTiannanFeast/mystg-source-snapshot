@@ -114,3 +114,5 @@ Include('mod/SixStageCampaign/result-skin.lua')
 Include('mod/SixStageCampaign/continue-replay.lua')
 
 Include('mod/SixStageCampaign/dialogue-emotions.lua')
+
+Include('mod/SixStageCampaign/replay-sync.lua')
