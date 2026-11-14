@@ -23,6 +23,8 @@ function S.randomLaugh()
 end
 function S.play(key)
  if S.played[key]then return end
+ local rows=data.scenes[key]
+ if rows and #rows==0 then S.played[key]=true;return end
  if data.voiceOnly[key]then
   S.played[key]=true;S.randomLaugh()
   print('SIX STORY VOICE ONLY '..key);return

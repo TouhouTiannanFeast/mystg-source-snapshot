@@ -2,6 +2,12 @@
 local C=SixStageCampaign
 local function marisa(classes)
  local T=th08s4
+ -- Measured source -4.3LUFS; -2.9dB playback gain targets about -7.2LUFS.
+ local music=PlayMusic
+ PlayMusic=function(name,volume,...)
+  if name=='mm.marisa.music'then volume=(volume or 1)*10^(-2.9/20)end
+  return music(name,volume,...)
+ end
  T.phase_specs.milky.hp=12000
  for _,class in ipairs(classes)do
   local info=class.frame and debug.getinfo(class.frame,'S')
@@ -10,14 +16,14 @@ local function marisa(classes)
    class.init=function(o,...)
     init(o,...)
     for _,card in ipairs(o.cards)do
-     if card.name=='Love Sign / Master Spark'then card.hp=12000 end
-     if card.name=='彗星「Blazing Star」'then card.t1=card.t3;card.t2=card.t3 end
+     if (card.name=='Love Sign / Master Spark'or card.name=='恋符「マスタースパーク」')then card.hp=12000 end
+     if (card.name=='彗星「Blazing Star」'or card.name=='彗星「ブレイジングスター」')then card.t1=card.t3;card.t2=card.t3 end
     end
     -- Direct Milky practice uses the common entry card's landing position.
     -- Return there after Stardust, before the adjacent nonspell is initialized.
     local entry=o.cards[1]
     for j,card in ipairs(o.cards)do
-     if j>=4 and card.name=='Magic Sign / Milky Way'then
+     if j>=4 and (card.name=='Magic Sign / Milky Way'or card.name=='魔符「ミルキーウェイ」')then
       local previous=o.cards[j-2]
       previous.after=function()task.MoveTo(entry.x,entry.y,entry.t,entry.m)end
      end
@@ -100,7 +106,7 @@ end
 local install=C.install
 function C.install(i,classes)
  install(i,classes)
- if i==4 then marisa(classes)end
+ if i==4 then marisa(classes);C.installRoad4Audio()end
  if i==5 then horou();C.installRoadAudio()end
 end
 Include('mod/SixStageCampaign/road-audio.lua')

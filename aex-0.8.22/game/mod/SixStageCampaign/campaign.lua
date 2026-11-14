@@ -133,8 +133,9 @@ function C.go(i,entry)
  end
  C.target=math.max(1,math.min(6,i));C.entry=entry or'full'
  if C.index==2 and C.target==3 and not C.reward then
-  -- TH185 turtrial.msg notice: freeze stage, slide30, wait for confirmation.
-  C.reward={age=0,blocked=GetKeyState(KEY.Z)}
+  -- TH18 notice.anm: slide30, wait for fresh confirmation, exit30.
+  C.reward={age=0,blocked=GetKeyState(KEY.Z)or GetKeyState(KEY.ENTER)}
+  PlaySound('six.notice.appear',1,0,true)
   print('SIX CARD NOTICE enter yinyang presentation-only')
   return
  end
@@ -234,11 +235,11 @@ FrameFunc=function(...)
  if C.dialogueActive then C.updateDialogue();return frame(...)end
  if C.reward then
   local r=C.reward;r.age=r.age+1
-  local down=GetKeyState(KEY.Z)
+  local down=GetKeyState(KEY.Z)or GetKeyState(KEY.ENTER)
   if not down then r.blocked=false end
   if setting.six_probe and r.age==70 then C.snapshot='six-yinyang-card'end
   if not r.exit and r.age>=30 and((down and not r.blocked)or(setting.six_probe and r.age==100))then
-   r.exit=0;print('SIX CARD NOTICE confirmed')
+   r.exit=0;PlaySound('six.notice.confirm',1,0,true);print('SIX CARD NOTICE confirmed')
   end
   if r.exit then
    r.exit=r.exit+1
@@ -297,26 +298,33 @@ RenderFunc=function(...)
  render(...)
  lstg.BeginScene()
  SetViewMode('ui')
- if stage.current_stage.stage_name~='SixStageGap'and stage.current_stage.stage_name~='menu'and stage.current_stage.stage_name~='SixStageLoading'and not C.reward and not C.dialogueActive then
+ if stage.current_stage.stage_name~='SixStageResult'and stage.current_stage.stage_name~='SixStageGap'and stage.current_stage.stage_name~='menu'and stage.current_stage.stage_name~='SixStageLoading'and not C.reward and not C.dialogueActive then
   RenderText('menu','F5 STAGE  /  F6 GOD '..(C.god and'ON'or'OFF')..'  /  F7 SPEED '..C.speed..'x',320,466,0.3,'centerpoint')
  end
  if C.reward then
   local r=C.reward
-  -- notice.anm scripts1..4: native1280x960 -> AEX640x480.
+  -- Original notice.anm scripts1..4, all native coordinates divided by2.
+  -- Anchor switches from left on entry to right on exit; only the leading
+  -- feather is visible, not two permanent decorative end pieces.
   local u=math.min(1,(r.exit or r.age)/30)
   local textEase=1-(1-u)^2
-  local bandX=r.exit and(-768*u*u)or(768*(1-u*u))
+  local bandEdge=r.exit and(640.5-769*u*u)or(767.5-768*u*u)
+  local left=r.exit and bandEdge-648 or bandEdge
   local textX=r.exit and(-640*textEase)or(768*(1-textEase))
   local alpha=r.exit and math.floor(255*(1-u))or 255
-  SetImageState('white','',Color(192,0,0,0));RenderRect('white',bandX,bandX+640,176,304)
+  SetImageState('white','',Color(192,0,0,0));RenderRect('white',left,left+648,176,304)
   SetImageState('white','',Color(255,255,255,255))
-  SetImageState('six.notice.left','',Color(192,255,255,255))
-  SetImageState('six.notice.right','',Color(192,255,255,255))
-  Render('six.notice.left',bandX,240,0,0.5,0.5)
-  Render('six.notice.right',bandX+640,240,0,0.5,0.5)
-  RenderTTF('six.card.font','获得了能力卡牌「阴阳玉」。',textX+64,textX+520,278,242,Color(alpha,255,255,255),'left','vcenter')
-  RenderTTF('six.card.font','按 Z 键继续',textX+64,textX+520,230,198,Color(alpha,255,255,255),'left','vcenter')
-  SetImageState('six.yinyang','',Color(alpha,255,255,255));Render('six.yinyang',textX+566,240,0,0.85,0.85)
+  if r.exit then
+   SetImageState('six.notice.right','',Color(192,255,255,255))
+   Render('six.notice.right',640-768*u*u,240,0,0.5,0.5)
+  else
+   SetImageState('six.notice.left','',Color(192,255,255,255))
+   Render('six.notice.left',768*(1-u*u),240,0,0.5,0.5)
+  end
+  SetImageState('six.notice.cardcount','',Color(alpha,255,255,255))
+  SixStageTypography.draw('获得了能力卡牌「阴阳玉」。',textX+64,250,alpha,'body',true)
+  SixStageTypography.draw('按 Z 键继续',textX+64,212,alpha,'body')
+  SetImageState('six.cards18.orb','',Color(alpha,255,255,255));Render('six.cards18.orb',textX+566,240,0,1,1)
  end
  if C.select then
   SetImageState('white','',Color(240,12,18,36))

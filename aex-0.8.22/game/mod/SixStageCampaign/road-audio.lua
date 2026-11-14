@@ -1,5 +1,13 @@
 -- Original TH10 PCM, extracted without processing from the user's th10.dat.
 local C=SixStageCampaign
+-- Common THlib correction; requested ordinary road firing gain is0.22.
+local volumeDefaults={
+ enep01=.6,cat00=.55,cardget=.8,invalid=.8,timeout=.6,timeout2=.7,
+ item00=.32,tan00=.22,power0=.7,enep00=.35,gun00=.6,power1=.6,
+ tan01=.22,tan02=.22,lazer00=.35,lazer01=.35,kira00=.33,extend=.6,
+ powerup=.6,slash=.75,plst00=.27,graze=.4,pldead00=.7,
+ select00=.4,cancel00=.4,ok00=.4,pause=.5,
+}
 local files={
  ['BossEnd_Begin.wav']='enep01',['BossEnd_End.wav']='enep01',
  ['spellcard.wav']='cat00',['getspellcard.wav']='cardget',['Failed.wav']='invalid',
@@ -29,6 +37,24 @@ for _,name in pairs(files)do
  end
 end
 C.roadAudioFiles=files
+function C.installRoad4Audio()
+ local H,R=Th18Stage5Host,Th18Stage5Runtime
+ if not H then return end -- Boss-only practice does not import the road.
+ local begin=H.begin
+ H.begin=function(...)
+  local result=begin(...)
+  local shot=R.onShot
+  local lastTick
+  R.onShot=function(b,...)
+   if lastTick~=R.tick then
+    lastTick=R.tick
+    lstg.PlaySound('six.th10.tan00',.22,math.max(-1,math.min(1,(b.x or 0)/192)))
+   end
+   return shot(b,...)
+  end
+  return result
+ end
+end
 function C.installRoadAudio()
  local R=HSoB5
  local source=R.playSource
@@ -40,7 +66,7 @@ function C.installRoadAudio()
   local tick=stage.current_stage and stage.current_stage.timer or R.tick
   if ticks[file]==tick then return end;ticks[file]=tick
   R.soundCount=(R.soundCount or 0)+1
-  return lstg.PlaySound('six.th10.'..name,volume or 1,pan or 0)
+  return lstg.PlaySound('six.th10.'..name,volumeDefaults[name]or volume or 1,pan or 0)
  end
  local reset=R.resetSound
  R.resetSound=function(...)ticks={};return reset(...)end
@@ -49,8 +75,11 @@ function C.installRoadAudio()
   powerup1='powerup',extend='extend',cardget='cardget',power1='power1',cat00='cat00',
   nep00='enep01',slash='slash',explode='enep01',enep00='enep00',
   select00='select00',cancel00='cancel00',ok00='ok00',pause='pause'}
- PlaySound=function(name,volume,pan,...)
-  if road()and aliases[name]then return lstg.PlaySound('six.th10.'..aliases[name],volume or 1,pan or 0)end
-  return play(name,volume,pan,...)
+ PlaySound=function(name,volume,pan,sndflag,...)
+  if road()and aliases[name]then
+   local gain=not sndflag and volumeDefaults[aliases[name]]or nil
+   return lstg.PlaySound('six.th10.'..aliases[name],gain or volume or 1,pan or 0)
+  end
+  return play(name,volume,pan,sndflag,...)
  end
 end

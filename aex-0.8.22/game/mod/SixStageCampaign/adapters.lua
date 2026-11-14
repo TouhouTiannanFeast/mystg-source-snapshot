@@ -14,9 +14,25 @@ RenderText=function(font,value,x,y,scale,...)
  return text(font,value,x,y,scale,...)
 end
 local render=Render
-Render=function(img,...)
+Render=function(img,x,y,...)
  if view=='ui'and type(img)=='string'and(img=='hint.power'or img=='hint.point'or img=='hint.Cnumber'or img:match('^lifechip')or img:match('^bombchip'))then return end
- return render(img,...)
+ if view=='ui'then
+  if img=='hint.life'or img=='hint.bomb'then
+   render(img,x,y-11,...)
+   y=y+5
+  elseif img=='hint.lifeleft'or img=='hint.bombleft'then
+   local i=math.floor((x-89-lstg.world.scrr)/13+.5)
+   if i>16 then
+    if i==17 then
+     local count=img=='hint.lifeleft'and lstg.var.lifeleft or lstg.var.bomb
+     text('score3','+'..(count-16),lstg.world.scrr+215,y-11,.25,'right')
+    end
+    return
+   end
+   if i>8 then x=x-104;y=y-11 else y=y+5 end
+  end
+ end
+ return render(img,x,y,...)
 end
 local score=RenderScore
 RenderScore=function(font,value,x,y,...)

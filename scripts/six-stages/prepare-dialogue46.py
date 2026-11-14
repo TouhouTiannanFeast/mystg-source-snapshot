@@ -99,7 +99,7 @@ kaguya|果然是你这讨人嫌的家伙……霸山占林又妄图侵占山下�
 kaguya|就让我来惩治你！
 kanako|我劝你不要不识好歹。
 kanako|妨碍我收集信仰的家伙，我会一个一个地连根拔起！"""}
-names={'kaguya':'辉夜','ringo':'铃瑚','seiran':'清兰','rabbit':'月兔','marisa':'魔理沙','suwako':'诹访子（奶蛙）','sanae':'早苗','fakesanae':'“早苗”','kanako':'神奈子'}
+names={'kaguya':'辉夜','ringo':'铃瑚','seiran':'清兰','rabbit':'月兔','marisa':'魔理沙','suwako':'诹访子','sanae':'早苗','fakesanae':'“早苗”','kanako':'神奈子'}
 scenes={};texts={};portraits={};files={}
 def asset(rel,name=None):
  dest=M/'art'/(name or Path(rel).name)

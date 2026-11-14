@@ -129,4 +129,8 @@ provenance={'shion_identity':'LE03 stage6 talk speaker6 named シオン -> img/t
  'fallback_glyphs':sorted(fallback),'font_evidence':'G:/Modified_STG/work/six-th10-menu/font-evidence/font-evidence.json; registry FontLink/SystemLink/MS Gothic',
  'assets':records,'user_lines':{'pre':len(pre),'post':len(post)},'layout_pages':{'pre':len(data['pre']),'post':len(data['post'])}}
 (M/'source.json').write_text(json.dumps(provenance,ensure_ascii=False,indent=2),encoding='utf8')
+# Preserve the user's later no-hyphen replacement portraits when regenerating.
+__import__('runpy').run_path(str(R/'scripts/six-stages/replace-shion-portraits.py'))
+# Preserve the user's bald Kaguya portraits when regenerating.
+__import__('runpy').run_path(str(R/'scripts/six-stages/replace-kaguya-portraits.py'))
 print(json.dumps({'lines':provenance['user_lines'],'pages':provenance['layout_pages'],'assets':len(records),'fallback_glyphs':len(fallback)}))

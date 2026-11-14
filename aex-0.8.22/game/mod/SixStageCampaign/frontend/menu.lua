@@ -69,7 +69,16 @@ function M.open(page)
  if page=='replay'then
   M.replays=New(replay_loader,function(filename,stageName)
    if not filename then
-    M.replays.locked=true;menu.FlyOut(M.replays,'right');M.replays=nil;M.switch('title')
+    local loader=M.replays
+    if not loader then return end
+    -- FlyOut ignores locked objects. Own this short exit task so input is
+    -- blocked immediately and the replay loader is deleted after sliding out.
+    loader.locked=true;task.Clear(loader)
+    task.New(loader,function()
+     task.MoveTo(screen.width*1.5,loader.y,30,1)
+     Del(loader)
+    end)
+    M.replays=nil;M.switch('title')
    else
     M.replays.locked=true
     M.switch('launch',function()
