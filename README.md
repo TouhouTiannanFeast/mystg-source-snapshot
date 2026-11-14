@@ -19,8 +19,9 @@
 ## 署名与代码开发中用到的AI辅助工具
 
 - [SecretRenko](https://github.com/SecretRenko)
-- ChatGPT（OpenAI）
-- DeepSeek 
+- ChatGPT
+- DeepSeek
+- Claude 
 - 托管组织：东方天南宴（TouhouTiannanFeast）。
 
 注意，本作品使用的**美术素材**非AI开发，均为**人工制作**。
